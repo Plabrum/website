@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<title>{% block title %}{% endblock %}</title>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial">
+
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="shortcut icon" href="static/favicon-32x32.png">
+    {% block head %}
+    {% endblock %}
+  </head>
+
+<body>
+  <div class="top-box backimage">
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="#">Phil Labrum</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link nav-link-fade-up" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-fade-up" href="/portfolio">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-fade-up" href="#">Experience</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-fade-up" href="#">Blog</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-fade-up" href="#">Contact</a></li>
+      </ul>
+    </div>
+
+  </nav>
+    {% block headline %}{% endblock %}
+  </div>
+
+</div>
+  <div id="content">{% block content %}{% endblock %}</div>
+  <div id="footer">{% block footer %}{% endblock %}</div>
+  <div class="container" style="height: 600">
+    <div style="text-align:center">
+      <h2>Contact Me!</h2>
+      <p>Swing by for a cup of coffee, or leave us a message:</p>
+    </div>
+    <form action="/contact">
+      <div class="row">
+        <div class="col">
+          <a name="contact"></a>
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="firstname" placeholder="John">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lastname" placeholder="Doe">
+          <label for="Email">Email</label>
+          <input type="text" id="email" name="email" placeholder="john@mail.com">
+        </div>
+        <div class="col">
+          <label for="subject">Subject</label>
+          <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
+          <input type="submit" value="Submit">
+        </div>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

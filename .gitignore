@@ -1,2 +1,9 @@
 __pycache__/
 .DS_Store
+
+kanboard.md
+logo.ai
+models.py
+database.py
+templates/portfolio.html
+
