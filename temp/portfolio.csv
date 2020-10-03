@@ -1,0 +1,3 @@
+title,date,image_loc,description,github
+Quantum Machine Learning,May 2019,static/images/projects/quantum_ml.png,We produced a distance based classifier based of a design from a Maria Schuld paper. We tested the classifier on the iris datasdet on both simulated and real quantum hardware. ,https://github.com/plabrum/qml
+HCP Project,Ongoing,static/images/projects/hcp.png,Description of hcp project,https://github.com/plabrum/qml

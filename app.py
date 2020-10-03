@@ -1,10 +1,28 @@
 from flask import Flask, render_template
+import pandas as pd 
+import random as rand 
 
 app = Flask(__name__)
 
+# TEMP
+# def read_in(filename):
+# 	reader = csv.DictReader(open('temp/'+str(filename), mode='r'))
+# 	dictlist = []
+# 	for line in reader:
+# 		dictlist.append(line)
+# 	return dictlist
+
+def read_in(filename):
+	data = pd.read_csv('temp/'+str(filename))
+	df = pd.DataFrame(data)
+	return list(df.to_dict("index").values())
+
 @app.route('/')
 def index():
-    return render_template("home.html")
+	projects = read_in("portfolio.csv")
+	experiences = read_in("experience.csv")
+	spotlight = rand.choice(projects)
+	return render_template("home.html", projects=projects, experiences=experiences, spotlight=spotlight)
 
 
 # TODO:
@@ -38,7 +56,7 @@ def blog():
 		# raise error that theres no post with that name, try search
 		return render_template("blog_listing.html", error=("no_slug", "b_slug"))
 '''
-        
+		
 if __name__ == '__main__':
 	app.run(debug=True)
 
