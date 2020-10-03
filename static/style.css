@@ -1,7 +1,7 @@
 .navbar-custom a{
   height: 5vh;
   color: white;
-  font-family: Arial;
+  font: Arial;
   text-transform: uppercase;
   background-color: transparent !important;
 }
@@ -28,18 +28,19 @@
   border-bottom: transparent solid 2px;
 }
 
-.icon-bar li {
-  font-size: 50px;
-  padding-left:30px;
-  padding-right:30px;
+.icon-bar li i {
+  font-size: 30px;
+  margin: 15px;
+  color: white;
+  opacity: 70%;
 }
-.icon-bar {
-  text-align: center;
+.icon-bar li i:hover {
+  opacity: 100%;
 }
 
 .icon-row {
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  border-radius: 10px;
 }
 
 .nav-link:hover {
@@ -47,35 +48,95 @@
   border-bottom: white solid 2px;
 }
 body {
-  background-color: black;
-  color: white;
-
-}
-.top-box{
-  position: relative;
+  background-image: url("images/michael-benz-unsplash-water.jpg");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  width: 100%;
-  height: 80vh;
+  color: white;
+
 }
 
-.backimage{
-  background-image: url("images/michael-benz-unsplash-water.jpg");
+.col-centered{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.darken{
+  background-color: rgba(0,0,0,0.8);
 }
 
 .headline-box{
-  background-color: rgba(0,0,0,0.8);
-  text-align: center;
+  border-radius: 10px;
+  position: relative;
+  margin-top: 40vh;
+  margin-bottom: 30vh;
+  animation: fadein 2s;
+  animation-fill-mode: forwards; 
 }
+
+@keyframes fadein{
+  from {opacity: 0%;}
+  to {opacity: 100%;}
+}
+
+/*.headline-box:not(:hover){
+  animation-name: out;
+  animation-duration: 1s;
+  animation-fill-mode: forwards; 
+}
+
+
+.headline-box:hover{
+  animation-name: in;
+  animation-duration: 1s;
+  animation-fill-mode: forwards; 
+}
+
+.headline-box:hover > headline-message{
+  display: none;
+}*/
+
+@keyframes in{
+  from {padding: 0px;}
+  to {padding: 200px;}
+}
+
+@keyframes out{
+  from {padding: 200px;}
+  to {padding: 0px;}
+}
+
 .headline-message{
+  text-align: center;
+  margin: 20px;
+  margin-left: 24px;
   letter-spacing: 4px;
-  font-size: 5vh;
-  opacity: 100%;
+  font-size: 30px;
   color: white;
-  letter-spacing: 8px;
+  font: Arial;
+  text-transform: uppercase;
 }
+
+.headline-box > img{
+  position: absolute;
+  display: none;
+  filter: grayscale(100%);
+  width: 300px;
+}
+
+
+/*.headline-box > headline-message{
+  display: none;
+}*/
+.spotlight-title{
+  display: none;
+}
+
+/*.headline-message:hover{
+  text-decoration: none;
+  color: white;
+}*/
 
 
 input[type=text], select, textarea {
@@ -88,3 +149,51 @@ input[type=text], select, textarea {
   font: Arial;
 }
 
+.headshot{
+  margin: 30px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 60% 0;
+}
+
+.project-image{
+  width: 300px;
+  border-radius: 20%;
+}
+
+.section-title-block{
+  margin-top: 80px;
+  margin-bottom: 80px;
+  border-radius: 10px;
+}
+
+.section-title{
+  margin: 15px;
+  font-size: 20px;
+  text-align: center;
+  font: Arial;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+}
+
+.site-block{
+  background-color: black;
+  padding: 50px;
+}
+
+.cards{
+  background-color: black;
+  border-radius: 30px;
+  margin: 10px;
+}
+
+.cards:hover{
+  transition:all 0.3s ease;
+  background-color: #0f0f0f;
+}
+
+.contact-box{
+  padding: 50px;
+}
