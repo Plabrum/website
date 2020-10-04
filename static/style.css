@@ -75,7 +75,7 @@ body {
   border-radius: 10px;
   position: relative;
   margin-top: 40vh;
-  margin-bottom: 30vh;
+  margin-bottom: 40vh;
   animation: fadein 2s;
   animation-fill-mode: forwards; 
 }
@@ -212,7 +212,7 @@ input[type=text], select, textarea {
 .exp-image{
   width: 200px;
   height: 200px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 20px;
 }
 
