@@ -1,6 +1,8 @@
+# must import this to avoid numpy using thread limit on shared server
+import os
+os.environ['OPENBLAS_NUM_THREADS'] = '1'
+
 from flask import Flask, render_template
-import datetime
-import numpy
 import pandas as pd 
 import random as rand 
 
