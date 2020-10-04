@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+import datetime
+import numpy
 import pandas as pd 
 import random as rand 
 
