@@ -22,7 +22,8 @@ def index():
 	projects = read_in("portfolio.csv")
 	experiences = read_in("experience.csv")
 	spotlight = rand.choice(projects)
-	return render_template("home.html", projects=projects, experiences=experiences, spotlight=spotlight)
+	about_me = open('temp/about_me.txt', 'r').read()
+	return render_template("home.html", projects=projects, experiences=experiences, spotlight=spotlight, about_me=about_me)
 
 
 # TODO:
