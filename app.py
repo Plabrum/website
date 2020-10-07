@@ -8,6 +8,8 @@ import random as rand
 
 app = Flask(__name__)
 
+coming_soon = True
+
 # TEMP
 # def read_in(filename):
 # 	reader = csv.DictReader(open('temp/'+str(filename), mode='r'))
@@ -23,6 +25,8 @@ def read_in(filename):
 
 @app.route('/')
 def index():
+	if coming_soon and (os.environ["FLASK_ENV"] == "production"):
+		return render_template("coming_soon.html")
 	projects = read_in("portfolio.csv")
 	experiences = read_in("experience.csv")
 	spotlight = rand.choice(projects)
