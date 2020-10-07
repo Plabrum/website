@@ -1,3 +1,4 @@
-title,date,image_loc,description
-Shepherd Therapeutics,June 2019 - August 2019,static/images/experiences/shepherd.png,Biotech company
-RP International,June 2018 - August 2018,static/images/experiences/rpi.png,Description of RP International
+company,date,job_title,image_loc,description
+Qubit By Qubit,October 2020 - Present,Teaching Fellow,static/images/experiences/qxq.png,"Qubit by Qubit is an IBM sponsored quantum computing course taught through The Coding School. As a Teaching Fellow, I'm responsible for creating course content, teach lab lessons to students, and answering student questions."
+Shepherd Therapeutics,June 2019 - August 2019,Computational Research Consultant,static/images/experiences/shepherd.png,Shepherd Therapeutics is 
+RP International,June 2018 - August 2018,Researcher,static/images/experiences/rpi.png,Description of RP International
