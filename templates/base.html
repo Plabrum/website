@@ -44,6 +44,15 @@
 
     </nav>
     <!-- headline for main page -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <!-- Do something with the message -->
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     {% block headline %}{% endblock %}
   </div>
 </div>
@@ -56,26 +65,39 @@
 <div class="row"><div class="col-centered section-title-block darken"><H1 class="section-title">Contact Me</H1></div></div>
 
 <div class="container-fluid darken" style="height: 600">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <span style="text-align: center">{{ message }}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+  {% endwith %}
   <div class="container contact-box">
-  <form action="/contact">
+  <form method="post">
     <div class="row">
       <div class="col">
-        <label for="fname">First Name</label>
-        <input type="text" id="fname" name="firstname" placeholder="John">
-        <label for="lname">Last Name</label>
-        <input type="text" id="lname" name="lastname" placeholder="Doe">
-        <label for="Email">Email</label>
-        <input type="text" id="email" name="email" placeholder="john@mail.com">
+        {{ form.csrf_token }}
+        {{ form.firstname(class="form-box", placeholder="First Name") }}
+        {{ form.lastname(class="form-box", placeholder="Last Name") }}
+        {{ form.email(class="form-box", placeholder="Email") }}
       </div>
       <div class="col">
-        <label for="subject">Subject</label>
-        <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
-        <input type="submit" value="Submit">
+        {{ form.body(class="form-box form-msg", placeholder="Write your message here!") }}
+        <div class="row">
+            <div class="captcha">{{ form.recaptcha }}</div>
+            {{ form.submit(class="btn btn-dark contact-btn")}}
+        </div>
       </div>
       </div>
   </form>
   </div>
 </div>
+
 
 </body>
 </html>

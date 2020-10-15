@@ -1,3 +1,7 @@
-title,date,image_loc,description,github
-Quantum Machine Learning,May 2019,static/images/projects/quantum_ml.png,We produced a distance based classifier based of a design from a Maria Schuld paper. We tested the classifier on the iris datasdet on both simulated and real quantum hardware. ,https://github.com/plabrum/qml
-HCP Project,Ongoing,static/images/projects/hcp.png,Description of hcp project,https://github.com/plabrum/qml
+title,date,image_loc,description,github,hidden
+HCP Project,Ongoing,static/images/projects/hcp.png,For my thesis I will be using the Human connectome project dataset and ,https://github.com/plabrum/qml,0
+Quantum Machine Learning,May-19,static/images/projects/quantum_ml.png,As oart of the Engineering Quantum Mechanics (ES170) final project my team built a distanced based classifer for the iris dataset. I built a module that inherited both the qiskit (IBM) and pyquil (Rigetti) circuit construction methods and returned the test results in a unified format. This allowed us to compare the results and runtimes across /the quantum hardware.,https://github.com/plabrum/qml,0
+Personal Website,Sep-20,static/images/projects/quantum_ml.png,This website was made using a Flask backend with a React JS and bootstrap frontend. ,https://github.com/plabrum/website,0
+Quantum Computing Notes,Sep-20,static/images/projects/quantum_ml.png,"Not really a project, but more just interesting material",https://github.com/plabrum/qca_intro,0
+Runebot,June-December 2020,static/images/projects/quantum_ml.png,Has Issues!,https://github.com/plabrum/runebot,1
+Finance,October,,Finance project! Doesnot actually do anything,,1
