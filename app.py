@@ -1,39 +1,65 @@
 # must import this to avoid numpy using thread limit on shared server
 import os
 os.environ['OPENBLAS_NUM_THREADS'] = '1'
-
-from flask import Flask, render_template
-import pandas as pd 
-import random as rand 
+from flask import Flask, render_template, request, flash, redirect
+from config import *
 
 app = Flask(__name__)
+app.config.from_object('config')
+import pandas as pd 
+import random as rand
+from models import *
+from emails import send_email
+from forms import ContactForm
 
 coming_soon = True
-
-# TEMP
-# def read_in(filename):
-# 	reader = csv.DictReader(open('temp/'+str(filename), mode='r'))
-# 	dictlist = []
-# 	for line in reader:
-# 		dictlist.append(line)
-# 	return dictlist
 
 def read_in(filename):
 	data = pd.read_csv('temp/'+str(filename))
 	df = pd.DataFrame(data)
 	return list(df.to_dict("index").values())
 
-@app.route('/')
+@app.route("/", methods=('GET', 'POST'))
 def index():
+	# Show a coming soon screen on the server
 	if coming_soon and (os.environ["FLASK_ENV"] == "production"):
 		return render_template("coming_soon.html")
+
+	# Pull models in (currently from csv)
 	projects = read_in("portfolio.csv")
 	experiences = read_in("experience.csv")
 	spotlight = rand.choice(projects)
 	about_me = open('temp/about_me.txt', 'r').read()
-	return render_template("home.html", projects=projects, experiences=experiences, spotlight=spotlight, about_me=about_me)
 
+	# Prepare contact form
+	form = ContactForm()
 
+	if form.validate_on_submit() == True:
+		flash("Thanks for contacting me!")
+		print("success")
+		fname, lname, email, body = form.firstname.data, form.lastname.data, form.email.data, form.body.data
+		send_email(subject="Thank You for Contacting!", sender="hello@plabrum.com", 
+			recipients=[email], text_body=("This is what you sent: \n" + body))
+		send_email(subject="Message from Website", sender=("hello@plabrum.com"), 
+			recipients=["philip.labrum@gmail.com"], text_body=(fname+" "+lname+ " from "+email+" sent the following: "+body))
+		return redirect("/#contact")
+
+	return render_template("home.html", projects=projects, experiences=experiences, 
+		spotlight=spotlight, about_me=about_me, form=form)
+
+# @app.route("/admin")
+# def admin():
+# 	if logged_in:
+# 		return render_template("admin_dashboard")
+# 	else:
+# 		return render_template("login.html")
+
+# @app.route('/submit', methods=('GET', 'POST'))
+# def submit():
+#     form = MyForm()
+#     if form.validate_on_submit():
+#         return redirect('/success')
+#     return render_template('submit.html', form=form)
 # TODO:
 # Put portfolio info on a second page
 '''

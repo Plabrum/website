@@ -226,4 +226,21 @@ input[type=text], select, textarea {
   padding: 50px;
 }
 
+.form-box{
+  border-radius: 10px;
+  background-color: transparent;
+  color: white;
+}
 
+.form-msg{
+  height: 100px;
+}
+
+.contact-btn{
+  margin: auto;
+  margin-left: 30px;
+}
+.captcha{
+  padding-left: 30px;
+
+}

@@ -1,9 +1,10 @@
 __pycache__/
 .DS_Store
-
+.ipynb_checkpoints/
 kanboard.md
 logo.ai
 models.py
 database.py
 templates/portfolio.html
-
+config.py
+database_helper.ipynb
