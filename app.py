@@ -9,7 +9,7 @@ app.config.from_object('config')
 import pandas as pd 
 import random as rand
 from models import *
-from emails import send_email
+from emails import send_contact_email, send_emails
 from forms import ContactForm
 
 coming_soon = True
@@ -22,7 +22,7 @@ def read_in(filename):
 @app.route("/", methods=('GET', 'POST'))
 def index():
 	# Show a coming soon screen on the server
-	if coming_soon and (os.environ["FLASK_ENV"] == "production"):
+	if coming_soon and (FLASK_ENV == "production"):
 		return render_template("coming_soon.html")
 
 	# Pull models in (currently from csv)
@@ -37,15 +37,17 @@ def index():
 	if form.validate_on_submit() == True:
 		flash("Thanks for contacting me!")
 		print("success")
-		fname, lname, email, body = form.firstname.data, form.lastname.data, form.email.data, form.body.data
-		send_email(subject="Thank You for Contacting!", sender="hello@plabrum.com", 
-			recipients=[email], text_body=("This is what you sent: \n" + body))
-		send_email(subject="Message from Website", sender=("hello@plabrum.com"), 
-			recipients=["philip.labrum@gmail.com"], text_body=(fname+" "+lname+ " from "+email+" sent the following: "+body))
+		send_contact_email(form.firstname.data, form.lastname.data, form.email.data, form.body.data)
 		return redirect("/#contact")
 
 	return render_template("home.html", projects=projects, experiences=experiences, 
 		spotlight=spotlight, about_me=about_me, form=form)
+
+
+# @app.route("/simple")
+# def simple():
+#     email_data = {"fname":"Phil", "body":"Hi Phil, how are you?"}
+#     return render_template("mail/simple.html", email_data=email_data)
 
 # @app.route("/admin")
 # def admin():
