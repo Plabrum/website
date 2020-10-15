@@ -8,7 +8,6 @@ app = Flask(__name__)
 app.config.from_object('config')
 import pandas as pd 
 import random as rand
-from models import *
 from emails import send_contact_email, send_emails
 from forms import ContactForm
 
