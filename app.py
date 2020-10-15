@@ -20,18 +20,18 @@ def read_in(filename):
 
 @app.route("/", methods=('GET', 'POST'))
 def index():
+	# Prepare contact form
+	form = ContactForm()
+
 	# Show a coming soon screen on the server
 	if coming_soon and (FLASK_ENV == "production"):
-		return render_template("coming_soon.html")
+		return render_template("coming_soon.html", form=form)
 
 	# Pull models in (currently from csv)
 	projects = read_in("portfolio.csv")
 	experiences = read_in("experience.csv")
 	spotlight = rand.choice(projects)
 	about_me = open('temp/about_me.txt', 'r').read()
-
-	# Prepare contact form
-	form = ContactForm()
 
 	if form.validate_on_submit() == True:
 		flash("Thanks for contacting me!")
