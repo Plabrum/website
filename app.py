@@ -38,7 +38,9 @@ def index():
 		print("success")
 		send_contact_email(form.firstname.data, form.lastname.data, form.email.data, form.body.data)
 		return redirect("/#contact")
-
+	elif request.method == "POST":
+		flash("Error submitting contact form")
+		return redirect("/#contact")
 	return render_template("home.html", projects=projects, experiences=experiences, 
 		spotlight=spotlight, about_me=about_me, form=form)
 
