@@ -7,6 +7,7 @@ app.config.update(
     MAIL_SERVER='mail.plabrum.com',
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
+    MAIL_SUPPRESS_SEND= True,
     MAIL_USERNAME = MAIL_USR,
     MAIL_PASSWORD = MAIL_PSW
     )
