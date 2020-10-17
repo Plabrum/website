@@ -13,15 +13,6 @@ from forms import ContactForm
 
 coming_soon = True
 
-import logging
-
-hdlr = logging.FileHandler("myapp.log")
-formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-hdlr.setFormatter(formatter)
-hdlr.setLevel(logging.DEBUG)
-app.logger.addHandler(hdlr)
-
-
 def read_in(filename):
 	data = pd.read_csv('temp/'+str(filename))
 	df = pd.DataFrame(data)
@@ -31,6 +22,12 @@ def read_in(filename):
 def index():
 	# Prepare contact form
 	form = ContactForm()
+
+	if form.validate_on_submit() == True:
+		flash("Thanks for contacting me!")
+		app.logger.info('submit successfully')
+		send_contact_email(form.firstname.data, form.lastname.data, form.email.data, form.body.data)
+		return redirect("/#contact")
 
 	# Show a coming soon screen on the server
 	if coming_soon and (FLASK_ENV == "production"):
@@ -42,20 +39,6 @@ def index():
 	spotlight = rand.choice(projects)
 	about_me = open('temp/about_me.txt', 'r').read()
 
-	if request.method == "GET":
-		app.logger.info('GET request')
-		return redirect("/#contact")
-
-	elif request.method == "POST":
-		app.logger.info('POST request')
-
-		if form.validate_on_submit() == True:
-			flash("Thanks for contacting me!")
-			app.logger.info('submit successfully')
-			send_contact_email(form.firstname.data, form.lastname.data, form.email.data, form.body.data)
-			return redirect("/#contact")
-
-		
 	return render_template("home.html", projects=projects, experiences=experiences, 
 		spotlight=spotlight, about_me=about_me, form=form)
 
