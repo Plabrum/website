@@ -7,5 +7,10 @@ class ContactForm(FlaskForm):
 	lastname = StringField('Last Name', validators=[validators.DataRequired()])
 	email = StringField('Email Address', validators=[validators.DataRequired()])
 	body = TextField('Message', validators=[validators.DataRequired()])
-	recaptcha = RecaptchaField()
+	recaptcha = RecaptchaField(validators=[validators.InputRequired(message="Please Sign the ReCaptcha")])
 	submit = SubmitField('Submit')
+
+class LoginForm(FlaskForm):
+	username = StringField("Username", validators=[validators.DataRequired()])
+	password = StringField("Password", validators=[validators.DataRequired()])
+	submit = SubmitField('Login')

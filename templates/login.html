@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+{% block head %}
+{% endblock %}
+
+{% block headline %}
+  <div class="row">
+    <div class="col-centered headline-box darken">
+        <h1 class="headline-message">Login Page</h1>
+        <br>
+        <div class="container">
+          <form method="post">
+            <div class="row">
+              <div class="col">
+                {{ login_form.csrf_token }}
+                {{ login_form.username(class="form-box", placeholder="Username") }}
+                {{ login_form.password(class="form-box", placeholder="Password") }}
+                {{ login_form.submit(class="btn btn-dark contact-btn")}}
+              </div>
+            </div>
+          </form>
+        </div>
+
+    </div>
+  </div>
+ 
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
