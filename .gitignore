@@ -10,3 +10,4 @@ config.py
 database_helper.ipynb
 Artboard\ 1.png
 myapp.log
+migrations/
