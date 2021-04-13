@@ -118,6 +118,11 @@ def logout():
 #     return render_template('submit.html', form=form)
 # TODO:
 # Put portfolio info on a second page
+
+@app.route("/experience")
+def experience():
+	return redirect("static/data/resume.pdf")
+
 '''
 
 @app.route('/portfolio')
