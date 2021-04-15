@@ -54,7 +54,8 @@ def index():
 		return redirect("/#contact")
 		
 	# Show a coming soon screen on the server
-	if coming_soon and (FLASK_ENV == "production"):
+	print(app.config['ENV'])
+	if coming_soon and (app.config['ENV'] == "production"):
 		return render_template("coming_soon.html", form=form)
 
 	# Pull models in (currently from csv)
