@@ -11,12 +11,12 @@ from werkzeug.urls import url_parse
 
 app = Flask(__name__)
 app.config.from_object('config')
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+# db = SQLAlchemy(app)
+# migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 
-import emails, models
+import emails
 import pandas as pd 
 import random as rand
 
@@ -33,10 +33,6 @@ def read_in(filename):
 	data = pd.read_csv('temp/'+str(filename))
 	df = pd.DataFrame(data)
 	return list(df.to_dict("index").values())
-
-# @app.route("/kpa")
-# def kpa():
-# 	return render_template("kp-fellow.html")
 
 @app.route("/", methods=('GET', 'POST'))
 def index():
@@ -66,8 +62,6 @@ def index():
 
 	return render_template("index.html", projects=projects, experiences=experiences, 
 		spotlight=spotlight, about_me=about_me, form=form)
-
-
 
 @app.route('/admin')
 @login_required
@@ -99,60 +93,9 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-# @app.route("/simple")
-# def simple():
-#     email_data = {"fname":"Phil", "body":"Hi Phil, how are you?"}
-#     return render_template("mail/simple.html", email_data=email_data)
-
-# @app.route("/admin")
-# def admin():
-# 	if logged_in:
-# 		return render_template("admin_dashboard")
-# 	else:
-# 		return render_template("login.html")
-
-# @app.route('/submit', methods=('GET', 'POST'))
-# def submit():
-#     form = MyForm()
-#     if form.validate_on_submit():
-#         return redirect('/success')
-#     return render_template('submit.html', form=form)
-# TODO:
-# Put portfolio info on a second page
-
 @app.route("/experience")
 def experience():
 	return redirect("static/data/resume.pdf")
-
-'''
-
-@app.route('/portfolio')
-def portfolio():
-	project_list = get_projects()
-	return render_template("portfolio.html", project_list)
-
-'''
-
-# TODO:
-# Ad blog functionality, database, users
-
-'''
-
-@app.route('/blog/<b_slug>')
-def blog():
-	post_slugs = post_slugs_list()
-	if 'b_slug' == "":
-		# serve the listing page if the b_slug is empty (i.e. just clicked the blog page)
-		post_list = post_shortlist()
-		return render_template("blog_listing.html")
-	else if "b_slug" in post_list:
-		# check if slug is the post lists, if yes then show that post
-		post = get_post(b_slug)
-		return render_template("post.html", post)
-	else:
-		# raise error that theres no post with that name, try search
-		return render_template("blog_listing.html", error=("no_slug", "b_slug"))
-'''
 		
 if __name__ == '__main__':
 	app.run(debug=True)
