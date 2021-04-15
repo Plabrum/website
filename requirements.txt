@@ -1,7 +1,9 @@
 flask==1.1.2
 numpy==1.19.2
 pandas==1.1.2
-sqlalchemy
-wtforms
+flask-sqlalchemy
+flask-migrate
+flask-login
 flask-mail
 flask-wtf
+# wtforms
