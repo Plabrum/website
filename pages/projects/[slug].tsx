@@ -6,12 +6,12 @@ import { GetStaticProps } from "next";
 import { groq } from "next-sanity";
 import Head from "next/head";
 import Link from "next/link";
-import { projectType } from "schemas/schema_types";
+import { ProjectType } from "schemas/schema_types";
 
 export default function ProjectSlugRoute({
   project,
 }: {
-  project: projectType;
+  project: ProjectType;
 }) {
   const {
     _id,
