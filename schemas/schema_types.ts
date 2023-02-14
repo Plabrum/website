@@ -1,6 +1,6 @@
 import type { Image, PortableTextBlock } from "sanity";
 
-export interface projectType {
+export interface ProjectType {
   _id: string;
   title: string;
   _createdAt: string;
@@ -14,10 +14,10 @@ export interface projectType {
   description?: PortableTextBlock[];
   repo_url?: string;
   demo_url?: string;
-  technologies?: technologyType[];
+  technologies?: TechnologyType[];
 }
 
-export interface technologyType {
+export interface TechnologyType {
   _id?: string;
   name: string;
   description?: string;

@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { technologyType } from "schemas/schema_types";
+import { TechnologyType } from "schemas/schema_types";
 import SanityImage from "./SanityImage";
 
 export default function TechLogo({
   name,
   logo_image,
   tech_page,
-}: technologyType) {
+}: TechnologyType) {
   return (
     <div>
       <Link href={tech_page}>
