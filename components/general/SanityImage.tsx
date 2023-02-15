@@ -1,4 +1,4 @@
-import fallbackImage from "../public/fallback.jpg";
+import fallbackImage from "../../public/fallback.jpg";
 import React, { useEffect, useState } from "react";
 import Image, { ImageProps } from "next/image";
 import type { Image as SanityImageType } from "sanity";
@@ -9,6 +9,7 @@ interface SanityImageProps {
   width: number;
   height: number;
   alt: string;
+  className?: string;
 }
 
 export default function SanityImage({

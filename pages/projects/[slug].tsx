@@ -1,6 +1,6 @@
 import { PortableText, toPlainText } from "@portabletext/react";
-import SanityImage from "components/SanityImage";
-import TechLogo from "components/TechLogo";
+import SanityImage from "components/general/SanityImage";
+import TechLogo from "components/general/TechLogo";
 import { client } from "lib/sanity.client";
 import { GetStaticProps } from "next";
 import { groq } from "next-sanity";
@@ -8,11 +8,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { ProjectType } from "schemas/schema_types";
 
-export default function ProjectSlugRoute({
-  project,
-}: {
-  project: ProjectType;
-}) {
+export default function ProjectSlugRoute(project: ProjectType) {
   const {
     _id,
     title,

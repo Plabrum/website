@@ -6,6 +6,7 @@ import tech from "./general/tech";
 import post from "./blog/post";
 import experience from "./experience";
 import project from "./project";
+import about from "./about";
 
 export const schemaTypes = [
   post,
@@ -15,4 +16,5 @@ export const schemaTypes = [
   duration,
   tech,
   project,
+  about,
 ];
