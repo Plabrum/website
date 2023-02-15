@@ -2,6 +2,7 @@ import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import ThemeSwitch from "components/general/ThemeSwitch";
 
 type Props = {};
 
@@ -35,6 +36,12 @@ function Header({}: Props) {
           fgColor="gray"
           bgColor="transparent"
         />
+        <SocialIcon
+          className="cursor-pointer"
+          network="email"
+          fgColor="gray"
+          bgColor="transparent"
+        />
       </motion.div>
 
       <motion.div
@@ -53,7 +60,8 @@ function Header({}: Props) {
           duration: 1.5,
         }}
       >
-        <SocialIcon
+        <ThemeSwitch />
+        {/* <SocialIcon
           className="cursor-pointer"
           network="email"
           fgColor="gray"
@@ -62,7 +70,7 @@ function Header({}: Props) {
 
         <p className="uppercase hidden md:inline-flex text-sm text-gray-400">
           Get in Touch
-        </p>
+        </p> */}
       </motion.div>
     </header>
   );
