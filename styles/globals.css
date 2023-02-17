@@ -4,18 +4,34 @@
 
 @layer components {
   .heroButton {
-    @apply px-6 py-2 border border-[#242424] rounded-full
-       uppercase text-xs tracking-widest text-gray-500 transition-all
-        hover:border-[#F7AB0A]/40 hover:text-[#F7AB0A]/40;
+    @apply px-6 py-2 m-2 border border-custom-t2 rounded-full
+       uppercase text-xs tracking-widest text-custom-t2 transition-all
+        hover:bg-custom-t2 hover:text-custom-t3;
   }
   .contactInput {
-    @apply outline-none bg-slate-400/10 rounded-sm border-b px-6 py-4 border-[#242424] text-gray-500 placeholder-gray-500 transition-all focus:border-orange-400/40 focus:text-orange-400/40 hover:border-orange-400/40;
+    @apply outline-none bg-slate-400/10 rounded-sm border-b px-6 py-4 border-custom-t2 text-gray-500 placeholder-gray-500 transition-all focus:border-orange-400/40 focus:text-orange-400/40 hover:border-orange-400/40;
   }
+}
+
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 :root {
   /* Your default theme */
-  --bg1: #ffebcd;
+  --bg1: #f0ddbe;
   --t1: #121212;
+  --t2: rgb(45, 102, 155); /* used for buttons, icons, etc */
+  --t3: rgb(228, 238, 255); /*light text */
+  --t4: rgb(108, 161, 248);
+  --t5: rgb(108, 161, 248);
+  --t6: rgb(108, 161, 248);
   --accent: #fba92c;
   --active: #60a5fa;
   --inactive: #1f2937;
@@ -24,4 +40,9 @@
 [data-theme="dark"] {
   --bg1: rgb(36, 36, 36);
   --t1: #ffffff;
+  --t2: rgb(200, 202, 189); /* used for buttons, icons, etc */
+  --t3: rgb(15, 15, 15); /*dark text */
+  --t4: rgb(108, 161, 248);
+  --t5: rgb(108, 161, 248);
+  --t6: rgb(108, 161, 248);
 }

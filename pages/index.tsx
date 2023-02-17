@@ -19,41 +19,30 @@ type Props = {
 };
 
 function Index({ abouts, projects, experiences }: Props) {
-  // const about: AboutType = abouts[0];
-  // console.log("about", about);
   return (
-    <div
-      className="
-    bg-custom-bg1 text-custom-t1  h-screen 
-    snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 "
-    >
+    <div className="">
       {/* Header */}
       <Header />
       {/* Hero */}
-      <section id="hero" className="snap-start">
+      <section id="hero" className="">
         <Hero abouts={abouts} />
       </section>
       {/* About */}
-      <section id="about" className="snap-center">
+      <section id="about" className="">
         <About abouts={abouts} />
       </section>
       {/* Experiences */}
-      {/* <section id="experience" className="snap-center">
+      {/* <section id="experience" className="">
         <Experiences experiences={experiences} />
       </section> */}
-      {/* Skills */}
-      {/* <section id="skills" className="snap-center">
-        <Skills />
-      </section> */}
 
-      <section id="projects" className="snap-center">
+      {/* <section id="projects" className="">
         <Projects projects={projects} />
-      </section>
-
+      </section> */}
       {/* Contact Me */}
-      <section id="contact" className="snap-center">
+      {/* <section id="contact" className="">
         <Contact />
-      </section>
+      </section> */}
     </div>
   );
 }
@@ -72,7 +61,6 @@ export async function getStaticProps() {
     description,
     }`
   );
-  console.log("abouts", abouts);
   // console.log("tags", about.taglines);
   const projects: ProjectType[] = await client.fetch(groq`
   *[_type == "project" && !(_id in path('drafts.**'))]{

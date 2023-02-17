@@ -14,6 +14,11 @@ module.exports = {
         custom: {
           bg1: "var(--bg1)",
           t1: "var(--t1)",
+          t2: "var(--t2)",
+          t3: "var(--t3)",
+          t4: "var(--t4)",
+          t5: "var(--t5)",
+          t6: "var(--t6)",
           accent: "var(--accent)",
           active: "var(--active)",
           inactive: "var(--inactive)",
