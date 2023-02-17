@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 // import { MdAutoFixHigh } from "react-icons/md";
 import { SunIcon, MoonIcon, SparklesIcon } from "@heroicons/react/24/solid";
 
-export default function ThemeSwitch() {
+export default function ThemeSwitch({ className }: { className: string }) {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme, systemTheme } = useTheme();
 
@@ -18,31 +18,30 @@ export default function ThemeSwitch() {
   }
 
   const isDefault: boolean = theme === "system";
-
-  function MoonSun({ active }: { active?: string }) {
-    const isDark: boolean = active === "dark";
-
-    return (
-      <button onClick={() => setTheme(isDark ? "light" : "dark")}>
-        {isDark ? (
-          <SunIcon
-            title="Use Light Mode"
-            className={"text-yellow-200 h-7 w-7"}
-          />
-        ) : (
-          <MoonIcon title="Use Dark Mode" className={"text-blue-900 h-7 w-7"} />
-        )}
-      </button>
-    );
-  }
-
+  const isDark: boolean =
+    theme === "dark" || (isDefault && systemTheme === "dark");
+  // console.log(
+  //   "systemtheme",
+  //   systemTheme,
+  //   "isdefault",
+  //   isDefault,
+  //   "isDark",
+  //   isDark
+  // );
   return (
-    <div className="grid items-center grid-cols-2 gap-0">
-      {/* <MoonIcon className="text-white h-7 w-7" /> */}
-      <div>
-        <MoonSun active={theme} />
-      </div>
-    </div>
+    <button onClick={() => setTheme(isDark ? "light" : "dark")}>
+      {isDark ? (
+        <SunIcon
+          title="Use Light Mode"
+          className={"text-yellow-200 " + className}
+        />
+      ) : (
+        <MoonIcon
+          title="Use Dark Mode"
+          className={"text-blue-900 " + className}
+        />
+      )}
+    </button>
   );
 }
 

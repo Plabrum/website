@@ -18,15 +18,13 @@ function Contact({}: Props) {
   };
 
   return (
-    <div className="h-screen relative flex flex-col text-center md:flex-row max-w-7xl justify-evenly mx-auto items-center">
-      <h3 className="absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl">
+    <div className="h-screen min-h-300 relative flex flex-col text-center md:flex-row max-w-7xl justify-evenly mx-auto items-center">
+      <h3 className="absolute top-24 uppercase tracking-[20px] text-custom-t2 text-2xl">
         Contact
       </h3>
 
       <div className="flex flex-col space-y-10">
-        <h4 className="text-4xl font-semibold text-center">
-          Let`&apos;`s Talk
-        </h4>
+        <h4 className="text-4xl font-semibold text-center">Let&apos;s Talk</h4>
         <div>
           <div className="flex items-center space-x-5 justify-center">
             <PhoneIcon className="text-orange-400 h-7 w-7 animate-pulse" />
