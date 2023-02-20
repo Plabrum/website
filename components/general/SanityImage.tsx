@@ -2,35 +2,40 @@ import fallbackImage from "../../public/fallback.jpg";
 import React, { useEffect, useState } from "react";
 import Image, { ImageProps } from "next/image";
 import type { Image as SanityImageType } from "sanity";
-import { urlForImage } from "lib/sanity.client";
+import { imageBuilder } from "lib/sanity.client";
 
-interface SanityImageProps {
+type SanityImageProps = Omit<ImageProps, "src"> & {
   sanitySrc: SanityImageType;
-  width: number;
-  height: number;
   alt: string;
+  height?: number;
+  width?: number;
   className?: string;
+};
+
+// type UiUser = Omit<DbUser, 'id' | 'employer_id'> & {
+//   id: string;
+//   employer_id: string;
+// }
+
+export function urlForImage(source: SanityImageType) {
+  // Ensure that source image contains a valid reference
+  if (!source?.asset?._ref) {
+    return "";
+  }
+
+  return imageBuilder?.image(source).url();
 }
 
 export default function SanityImage({
   sanitySrc,
-  height,
-  width,
   alt,
   ...props
 }: SanityImageProps) {
   //   console.log("h", height);
+  // Could use passed in height and width to pull only necessary images sizes
   const imgSrc = urlForImage(sanitySrc);
 
-  return (
-    <ImageWithFallback
-      alt={alt}
-      src={imgSrc}
-      height={height}
-      width={width}
-      {...props}
-    />
-  );
+  return <ImageWithFallback alt={alt} src={imgSrc} {...props} />;
 }
 
 interface ImageWithFallbackProps extends ImageProps {
@@ -41,8 +46,6 @@ export const ImageWithFallback = ({
   fallback = fallbackImage,
   alt,
   src,
-  height,
-  width,
   ...props
 }: ImageWithFallbackProps) => {
   const [error, setError] = useState<React.SyntheticEvent<
@@ -58,8 +61,6 @@ export const ImageWithFallback = ({
       alt={alt}
       onError={setError}
       src={error ? fallbackImage : src}
-      height={height}
-      width={width}
       {...props}
     />
   );

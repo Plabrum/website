@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { RefObject } from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 import BackgroundCircles from "./BackgroundCircles";
 import SanityImage from "../general/SanityImage";
@@ -22,10 +22,7 @@ export default function Hero({ abouts }: { abouts: AboutType[] }) {
     delaySpeed: 2000,
   });
   return (
-    <div
-      className="h-screen flex flex-col space-y-8 justify-center 
-    text-center overflow-hidden"
-    >
+    <div className=" space-y-8 text-center overflow-hidden">
       {/* <BackgroundCircles /> */}
       {/* <img
         className="relative rounded-full h-32 w-32 mx-auto object-cover"
@@ -39,7 +36,7 @@ export default function Hero({ abouts }: { abouts: AboutType[] }) {
         height={200}
         className="relative rounded-full h-32 w-32 mx-auto object-cover"
       />
-      <div className="z-5">
+      <div className="">
         <h2 className="text-sm uppercase text-custom-t2 pb-2 tracking-[15px]">
           {job_title}
         </h2>

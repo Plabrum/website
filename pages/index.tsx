@@ -11,6 +11,9 @@ import Hero from "../components/homepage/Hero";
 import Projects from "../components/homepage/Projects";
 import Skills from "../components/homepage/Skills";
 import Experiences from "../components/homepage/Experiences";
+import { useEffect, useRef, useState } from "react";
+import { useIntersectionObserver } from "lib/Intersection";
+import Section from "components/homepage/Section";
 
 type Props = {
   abouts: AboutType[];
@@ -19,30 +22,41 @@ type Props = {
 };
 
 function Index({ abouts, projects, experiences }: Props) {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const showNav = useIntersectionObserver(heroRef);
+
   return (
-    <div className="">
+    <div className="snap-y snap-proximity h-screen overflow-y-scroll scrollbar-diss">
       {/* Header */}
-      <Header />
+      <Header showNav={showNav} />
+
       {/* Hero */}
-      <section id="hero" className="">
-        <Hero abouts={abouts} />
+      <section id="hero" className="h-screen flex items-center snap-top">
+        <div ref={heroRef} className="justify-self-center mx-auto mb-20">
+          <Hero abouts={abouts} />
+        </div>
       </section>
       {/* About */}
-      <section id="about" className="">
+      {/* <section id="about" className="snap-center">
         <About abouts={abouts} />
-      </section>
+      </section> */}
+
+      <Section idName="about" titleName="About">
+        <About abouts={abouts} />
+      </Section>
       {/* Experiences */}
       {/* <section id="experience" className="">
         <Experiences experiences={experiences} />
       </section> */}
 
-      {/* <section id="projects" className="">
+      <Section idName="projects" titleName="Projects">
         <Projects projects={projects} />
-      </section> */}
+      </Section>
       {/* Contact Me */}
-      {/* <section id="contact" className="">
+      <Section idName="contact" titleName="Contact">
         <Contact />
-      </section> */}
+      </Section>
+      <div className="h-[4000px]"></div>
     </div>
   );
 }
@@ -69,7 +83,9 @@ export async function getStaticProps() {
     'slug': slug.current,
     coverImage,
     overview,
-    duration
+    duration,
+    repo_url,
+    demo_url,
     }
     | order(duration.start asc)`);
 
