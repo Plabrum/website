@@ -4,7 +4,9 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className="bg-custom-bg1 w-full text-custom-t1 z-0 scrollbar-hide">
+      {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
+
+      <body className="bg-custom-bg1 text-custom-t1">
         <Main />
         <NextScript />
       </body>

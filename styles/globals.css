@@ -23,9 +23,21 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.scrollbar-show::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-cov::-webkit-scrollbar {
+  visibility: hidden;
+}
+
 :root {
   /* Your default theme */
   --bg1: #f0ddbe;
+  --bg2: #f4ecdf;
+  --bg3: #5d6b75;
   --t1: #121212;
   --t2: rgb(45, 102, 155); /* used for buttons, icons, etc */
   --t3: rgb(228, 238, 255); /*light text */
@@ -39,6 +51,8 @@
 
 [data-theme="dark"] {
   --bg1: rgb(36, 36, 36);
+  --bg2: #403f3c;
+  --bg3: #d6d1ca;
   --t1: #ffffff;
   --t2: rgb(200, 202, 189); /* used for buttons, icons, etc */
   --t3: rgb(15, 15, 15); /*dark text */

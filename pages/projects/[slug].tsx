@@ -94,7 +94,7 @@ export const getStaticPaths = async () => {
 *[_type == "project" && slug.current != null].slug.current
 `);
   const full_paths = paths?.map((slug) => "/projects/" + slug) || [];
-
+  console.log("paths", paths);
   return {
     paths: full_paths,
     fallback: false,

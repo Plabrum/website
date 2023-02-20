@@ -1,97 +1,48 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ProjectType } from "schemas/schema_types";
-import Link from "next/link";
-import SanityImage from "components/general/SanityImage";
-import { PortableText } from "@portabletext/react";
+
+import ProjectCard from "./ProjectCard";
 
 type Props = {
   projects: ProjectType[];
 };
 
-function Projects({ projects }: Props) {
+export default function Projects({ projects }: Props) {
   // const projects = [1, 2, 3, 4, 5];
   return (
-    <div className="h-screen relative flex overflow-hidden flex-col text-left md:flex-row max-w-full justify-evenly mx-auto items-center z-0">
-      <h3 className="absolute top-24 uppercase tracking-[20px] text-custom-t2 text-2xl">
-        Projects
-      </h3>
-      {projects.map(({ _id, title, slug, coverImage, overview }) => (
-        <div key={_id} className="w-screen border border-white">
-          <Link href={"/projects/" + slug}>
-            <h3 className="text-4xl font-semibold text-center">{title}</h3>
-
-            <SanityImage
-              sanitySrc={coverImage}
-              width={200}
-              height={200}
-              alt="cover image"
-              className="w-50 h-50"
+    <div
+      className=" mt-6 grid sm:grid-rows-2 sm:grid-flow-col  mx-auto
+      border border-blue-500
+      sm:w-[83vw] w-5/6 h-3/4 gap-6 overflow-x-scroll scrollbar-hide "
+    >
+      {projects.map(
+        ({
+          _id,
+          title,
+          slug,
+          coverImage,
+          overview,
+          duration,
+          repo_url,
+          demo_url,
+        }) => (
+          <div key={_id} className="sm:w-[40vw]">
+            <ProjectCard
+              title={title}
+              slug={slug}
+              coverImage={coverImage}
+              overview={overview}
+              duration={duration}
+              repo_url={repo_url}
+              demo_url={demo_url}
             />
-          </Link>
-          <PortableText value={overview} />
-        </div>
-      ))}
-
-      {/* <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20 mt-4"></div> */}
-      {/* <div className="w-full absolute top-[30%] bg-[#7FAB0A]/10 left-0 h-[500px] -skew-y-12"></div> */}
+          </div>
+        )
+      )}
     </div>
   );
 }
 
-export default Projects;
-
-// {projects.length > 0 &&
-//   projects.map(({ _id, title, slug, coverImage, overview }) => {
-//     return (
-//       <div key={_id}>
-//         <Link href={"/projects/" + slug}>
-//           <h2>{title}</h2>
-//           <SanityImage
-//             sanitySrc={coverImage}
-//             width={200}
-//             height={200}
-//             alt="cover image"
-//           />
-//         </Link>
-//         <PortableText value={overview} />
-//       </div>
-//     );
-//   })}
-
-// {
-//   projects.map((project, index) => (
-//     <div
-//       key={index}
-//       className="w-screen flex-shrink-0 snap-center-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen"
-//     >
-//       <motion.img
-//         initial={{
-//           opacity: 0,
-//         }}
-//         transition={{
-//           duration: 1.2,
-//         }}
-//         whileInView={{
-//           opacity: 1,
-//         }}
-//         viewport={{ once: true }}
-//         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgsvsoz_3LMuPGAlVl_o0RY3qtXIBSdTyjag&usqp=CAU"
-//       />
-//       <div className="space-y-10 px-0 md:px-10 max-w-6xl">
-//         <h4 className="text-4xl font-semibold text-center">{`Case Study ${
-//           index + 1
-//         } of ${projects.length}: Coding thing..`}</h4>
-//         <p className="text-lg text-center md:text-left">
-//           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-//           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-//           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-//           aliquip ex ea commodo consequat. Duis aute irure dolor in
-//           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-//           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-//           culpa qui officia deserunt mollit anim id est laborum.
-//         </p>
-//       </div>
-//     </div>
-//   ));
-// }
+//   className="sm:w-5/6 sm:h-3/4 w-full h-5/6 mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-8
+//  border-2 border-blue-500 "

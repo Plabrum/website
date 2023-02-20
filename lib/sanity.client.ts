@@ -21,17 +21,3 @@ export const imageBuilder = createImageUrlBuilder({
 // interface urlForImageProps {
 //   source: Image;
 // }
-
-export function urlForImage(source: Image) {
-  // Ensure that source image contains a valid reference
-  if (!source?.asset?._ref) {
-    return "";
-  }
-
-  return imageBuilder
-    ?.image(source)
-    .auto("format")
-    .fit("max")
-    .fit("crop")
-    .url();
-}
