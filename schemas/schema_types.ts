@@ -2,18 +2,18 @@ import type { Image, PortableTextBlock } from "sanity";
 
 export interface ProjectType {
   _id?: string;
-  title: string;
+  title?: string;
   _createdAt?: string;
-  slug: string;
-  overview: PortableTextBlock[];
-  coverImage: Image;
+  slug?: string;
+  overview?: PortableTextBlock[];
+  coverImage?: Image;
   duration?: {
     start?: string;
     end?: string;
   };
   description?: PortableTextBlock[];
-  repo_url: string;
-  demo_url: string;
+  repo_url?: string;
+  demo_url?: string;
   technologies?: TechnologyType[];
 }
 

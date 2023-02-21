@@ -34,7 +34,7 @@ export default function Header({ showNav }: Props) {
 
   return (
     <header
-      className={`fixed top-0 border-2 z-20 w-screen border-green-500 grid md:grid-cols-3 grid-cols-2 sm:p-4 p-3 items-center 
+      className={`fixed top-0 z-20 w-screen grid md:grid-cols-3 grid-cols-2 sm:p-4 p-3 items-center 
       backdrop-blur-sm ${showNav ? "backdrop-blur-lg transition-500" : ""}`}
     >
       {/* <h1>

@@ -40,7 +40,7 @@ export default function ProjectSlugRoute(project: ProjectType) {
         height={200}
         alt="cover image"
       />
-      <PortableText value={overview} />
+      {overview && <PortableText value={overview} />}
       {description && <PortableText value={description} />}
       {technologies &&
         technologies.map(({ _id, name, logo_image, tech_page }) => {

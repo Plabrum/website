@@ -5,8 +5,8 @@ import type { Image as SanityImageType } from "sanity";
 import { imageBuilder } from "lib/sanity.client";
 
 type SanityImageProps = Omit<ImageProps, "src"> & {
-  sanitySrc: SanityImageType;
-  alt: string;
+  sanitySrc?: SanityImageType;
+  alt?: string;
   height?: number;
   width?: number;
   className?: string;
@@ -33,7 +33,7 @@ export default function SanityImage({
 }: SanityImageProps) {
   //   console.log("h", height);
   // Could use passed in height and width to pull only necessary images sizes
-  const imgSrc = urlForImage(sanitySrc);
+  const imgSrc = sanitySrc ? urlForImage(sanitySrc) : "";
 
   return <ImageWithFallback alt={alt} src={imgSrc} {...props} />;
 }
