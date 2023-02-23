@@ -10,12 +10,12 @@ export default defineType({
     defineField({
       type: "string",
       name: "name",
-      title: "Company Name",
+      title: "Company or School Name",
       validation: (rule) => rule.required(),
     }),
     defineField({
       type: "string",
-      name: "description",
+      name: "company_description",
       title: "Description",
     }),
     defineField({
@@ -26,6 +26,7 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "company_page",

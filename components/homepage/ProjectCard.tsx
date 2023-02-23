@@ -96,7 +96,6 @@ export default function ProjectCard({ project }: ProjectCardProp) {
 
 /* <Link href={"/projects/" + slug}>
 <h3 className="text-4xl font-semibold text-center">{title}</h3>
-
 <SanityImage
   sanitySrc={coverImage}
   width={200}

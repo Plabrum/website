@@ -33,7 +33,6 @@ export default function DesktopProjects({ projects }: Props) {
     setOverflowRowWidth(overflowRowRef.current?.scrollWidth || 0);
   }
   useEffect(() => {
-    console.log("initial load");
     setWidth();
   }, []);
 
@@ -65,7 +64,7 @@ export default function DesktopProjects({ projects }: Props) {
   }
 
   return (
-    <div className="flex flex-row mt-6 h-3/4 justify-center">
+    <div className="flex flex-row mt-6 h-3/4 justify-center ">
       <button
         className="my-auto mr-4"
         onClick={() =>
@@ -74,9 +73,9 @@ export default function DesktopProjects({ projects }: Props) {
       >
         <ChevronLeftIcon className="h-16 text-custom-t2" />
       </button>
-      <div className="shrink-0  w-3/4 overflow-hidden">
+      <div className=" w-3/4 shrink-0 overflow-hidden snap-x snap-mandatory ">
         <motion.div
-          className=" flex flex-row h-full items-center"
+          className="flex flex-row h-full items-center "
           drag="x"
           dragConstraints={{ right: 0, left: -(overflowRowWidth - divWidth) }}
           animate={{ x: xTrans }}
@@ -84,7 +83,10 @@ export default function DesktopProjects({ projects }: Props) {
           ref={overflowRowRef}
         >
           {cardMat.map((value, index) => (
-            <div key={index} className="w-full shrink-0 items-center">
+            <div
+              key={index}
+              className="w-full shrink-0 items-center snap-center mr-2"
+            >
               <div key={index} className="grid grid-cols-2 gap-8 ">
                 {value.map((val, ind) => {
                   return (

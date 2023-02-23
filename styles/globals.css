@@ -8,9 +8,6 @@
        uppercase text-xs tracking-widest text-custom-t2 transition-all
         hover:bg-custom-t2 hover:text-custom-t3;
   }
-  .contactInput {
-    @apply outline-none bg-slate-400/10 rounded-sm border-b px-6 py-4 border-custom-t2 text-gray-500 placeholder-gray-500 transition-all focus:border-orange-400/40 focus:text-orange-400/40 hover:border-orange-400/40;
-  }
 }
 
 /* For Webkit-based browsers (Chrome, Safari and Opera) */
@@ -38,13 +35,14 @@
   --bg1: #f0ddbe;
   --bg2: #f4ecdf;
   --bg3: #5d6b75;
+  --bg4: #242424; /*used for footer */
   --t1: #121212;
   --t2: rgb(45, 102, 155); /* used for buttons, icons, etc */
   --t3: rgb(228, 238, 255); /*light text */
-  --t4: rgb(158, 158, 158);
+  --t4: rgb(158, 158, 158); /* used in footer text*/
   --t5: rgb(108, 161, 248);
   --t6: rgb(108, 161, 248);
-  --accent: #fba92c;
+  /* --accent: #fba92c; */
   --active: #60a5fa;
   --inactive: #1f2937;
 }
@@ -53,10 +51,11 @@
   --bg1: rgb(36, 36, 36);
   --bg2: #403f3c;
   --bg3: #d6d1ca;
+  --bg4: #1b1b1d; /*used for footer */
   --t1: #ffffff;
   --t2: rgb(200, 202, 189); /* used for buttons, icons, etc */
   --t3: rgb(15, 15, 15); /*dark text */
-  --t4: rgb(108, 161, 248);
+  --t4: rgb(87, 124, 183);
   --t5: rgb(108, 161, 248);
   --t6: rgb(108, 161, 248);
 }
