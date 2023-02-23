@@ -43,9 +43,17 @@ export interface HeroType {
   hero_photo: Image;
 }
 
+export interface CompanyType {
+  name: string;
+  company_description?: string;
+  logo_image: Image;
+  company_page?: string;
+}
+
 export interface ExperienceType {
   _id: string;
-  role?: string;
+  role: string;
+  company: CompanyType;
   overview?: PortableTextBlock[];
   duration?: {
     start?: string;

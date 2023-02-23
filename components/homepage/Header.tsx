@@ -122,7 +122,7 @@ export default function Header({ showNav }: Props) {
                 <Link href="https://www.linkedin.com/in/phil-labrum-profile/">
                   <FaGithub className={`text-custom-t2 h-8 w-8`} />
                 </Link>
-                <Link href="https://www.linkedin.com/in/phil-labrum-profile/">
+                <Link href="/#contact">
                   <FaEnvelope className={`text-custom-t2 h-8 w-8`} />
                 </Link>
               </div>
@@ -170,6 +170,9 @@ export default function Header({ showNav }: Props) {
         <Link href="/#projects">
           <button className={navbutton_style}>Projects</button>
         </Link>
+        <Link href="/#contact">
+          <button className={navbutton_style}>Contact</button>
+        </Link>
       </motion.div>
 
       <motion.div
@@ -188,12 +191,12 @@ export default function Header({ showNav }: Props) {
           duration: 1.5,
         }}
       >
-        <button
+        {/* <button
           onClick={log}
           className="mx-4 border border-black rounded-full px-2 text-sm uppercase tracking-wide"
         >
           debug
-        </button>
+        </button> */}
         <ThemeSwitch className={icon_size} />
       </motion.div>
     </header>

@@ -55,12 +55,17 @@ export const ImageWithFallback = ({
   useEffect(() => {
     setError(null);
   }, [src]);
+  const { height, width, fill } = props;
+  const default_height = fill ? height : height || 200;
+  const default_width = fill ? width : width || 200;
 
   return (
     <Image
       alt={alt}
       onError={setError}
       src={error ? fallbackImage : src}
+      width={default_width}
+      height={default_height}
       {...props}
     />
   );

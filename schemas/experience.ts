@@ -8,6 +8,13 @@ export default defineType({
   icon: OkHandIcon,
   fields: [
     defineField({
+      name: "company",
+      title: "Company/School",
+      type: "reference",
+      to: { type: "company" },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "role",
       description: "This field is the title of your role in the experience.",
       title: "Role Title",
@@ -52,7 +59,7 @@ export default defineType({
 
     defineField({
       name: "description",
-      title: "Project Description",
+      title: "Experience Description",
       type: "blockContent",
     }),
 

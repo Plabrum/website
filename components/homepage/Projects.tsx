@@ -4,6 +4,7 @@ import { ProjectType } from "schemas/schema_types";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 
 import ProjectCard from "./ProjectCard";
+
 import DesktopProjects from "./DesktopProjects";
 
 type Props = {
@@ -33,12 +34,16 @@ export default function Projects({ projects }: Props) {
   }, []);
 
   if (isDesktop) {
-    return <DesktopProjects projects={projects} />;
+    return (
+      <div className="h-full min-h-[750px]">
+        <DesktopProjects projects={projects} />
+      </div>
+    );
   } else {
     return (
       <div
-        className=" mt-6 grid mx-auto w-5/6 h-3/4 gap-6 overflow-x-scroll scrollbar-hide 
-                     border border-blue-500 "
+        className=" mt-6 grid mx-auto w-5/6 h-3/4 gap-6  overflow-y-scroll scrollbar-hide 
+      "
       >
         {projects.map((value, index) => (
           <div key={index} className="">

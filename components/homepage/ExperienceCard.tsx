@@ -1,44 +1,62 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { CompanyType, ExperienceType } from "schemas/schema_types";
+import { PortableText } from "@portabletext/react";
+import SanityImage from "components/general/SanityImage";
 
-type Props = {};
+type Props = { isLast: boolean; experience: ExperienceType };
 
-function ExperienceCard({}: Props) {
+function ExperienceCard({ isLast, experience }: Props) {
+  const { role, overview, duration, description, technologies, company } =
+    experience;
+  // const { name, comp_description, logo_image, company_page } = company;
+  const startTime = duration?.start ? new Date(duration.start) : "now";
+  const endTime = duration?.end ? new Date(duration.end) : "now";
+
+  const startString: string = startTime.toLocaleString("en-us", {
+    year: "numeric",
+    month: "short",
+  });
+  const endString: string = endTime.toLocaleString("en-us", {
+    year: "numeric",
+    month: "short",
+  });
+  console.log("company image source:", company.logo_image);
   return (
-    <article className="flex flex-col rounded-lg items-center space-y-7 flex-shrink-0 w-[500px] md:w-[600px] xl:w-[900px] snap-center bg-[#292929] p-10 hover:opacity-100 opacity-40 cursor-pointer transition-opacity duration-200 overflow-hidden">
-      <motion.img
-        initial={{ y: -100, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ once: true }}
-        className="w-32 h-32 rounded-full xl:w-[200px] xl:h-[200px] object-cover object-center"
-        src="https://the-cs.org/static/media/TCS-logo.6487b75be624f930573f.png"
-      />
-      <div className="px-0 md:px-10">
-        <h4 className="text-4xl font-light">Lead Course Developer</h4>
-        <p className="font-bold text-2xl mt-1">The Coding School</p>
-        <div className="flex space-x-2 my-4">
-          <img
-            className="h-10 rounded-full"
-            src="https://logos-world.net/wp-content/uploads/2021/10/Python-Symbol.png"
-          />
-          <img
-            className="h-10 rounded-full"
-            src="https://logos-world.net/wp-content/uploads/2021/10/Python-Symbol.png"
-          />
-          <img
-            className="h-10 rounded-full"
-            src="https://logos-world.net/wp-content/uploads/2021/10/Python-Symbol.png"
-          />
-        </div>
+    <div className="flex mt-4 grow md:min-h-[150px] sm:min-h-[100px]">
+      <div className="flex flex-col ">
+        <SanityImage
+          sanitySrc={company.logo_image}
+          alt="Company or school logo"
+          className="rounded-md object-contain sm:h-16 h-12"
+          height={100}
+          width={100}
+        />
+        {!isLast && <div className="mt-2 w-px grow self-center bg-custom-t2" />}
+        {/* <div className="mt-2 w-px grow self-center bg-white" /> */}
       </div>
-      <p>Started work .... - Ended</p>
-      <ul className="list-disc space-y-4 ml-5 text-lg">
-        <li>Summary Points Summary Points Summary Points Summary Points </li>
-        <li>Summary Points Summary Points Summary Points Summary Points </li>
-        <li>Summary Points Summary Points Summary Points Summary Points </li>
-        <li>Summary Points Summary Points Summary Points Summary Points </li>
-      </ul>
-    </article>
+      <div className="flex flex-col grow">
+        <h1 className="sm:text-2xl text-xl justify-self-start">{role}</h1>
+        <div className="text-custom-t2 text-xs">
+          <h2>
+            {startString} - {endString}
+          </h2>
+        </div>
+
+        <h2 className="font-bold sm:text-lg text-md">{company.name}</h2>
+        {/* {overview && (
+          <p className="text-sm text-custom-t1">
+            <PortableText value={overview} />
+          </p>
+        )} */}
+        {/* {description && <PortableText value={description} />} */}
+        {description && (
+          <h2 className="ml-4 text-sm text-custom-t1">
+            <PortableText value={description} />
+          </h2>
+        )}
+      </div>
+    </div>
   );
 }
 

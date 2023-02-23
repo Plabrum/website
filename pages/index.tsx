@@ -14,6 +14,7 @@ import Experiences from "../components/homepage/Experiences";
 import { useEffect, useRef, useState } from "react";
 import { useIntersectionObserver } from "lib/Intersection";
 import Section from "components/homepage/Section";
+import Footer from "components/homepage/Footer";
 
 type Props = {
   abouts: AboutType[];
@@ -44,19 +45,20 @@ function Index({ abouts, projects, experiences }: Props) {
       <Section idName="about" titleName="About">
         <About abouts={abouts} />
       </Section>
-      {/* Experiences */}
-      {/* <section id="experience" className="">
+
+      <Section idName="experience" titleName="Experiences">
         <Experiences experiences={experiences} />
-      </section> */}
+      </Section>
 
       <Section idName="projects" titleName="Projects">
         <Projects projects={projects} />
       </Section>
+
       {/* Contact Me */}
       <Section idName="contact" titleName="Contact">
         <Contact />
       </Section>
-      <div className="h-[4000px]"></div>
+      <Footer />
     </div>
   );
 }
@@ -97,8 +99,19 @@ export async function getStaticProps() {
     duration,
     description,
     technologies,
-    }
-    | order(duration.start asc)`);
+    company->{
+        name,
+        company_description,
+        logo_image,
+        company_page,
+    },
+  }
+  | order(duration.start desc)`);
+
+  // console.log(
+  //   "company from source",
+  //   experiences[0].company || "no comp found?"
+  // );
 
   return {
     props: {

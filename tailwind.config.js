@@ -20,6 +20,7 @@ module.exports = {
           bg1: "var(--bg1)",
           bg2: "var(--bg2)",
           bg3: "var(--bg3)",
+          bg4: "var(--bg4)",
           t1: "var(--t1)",
           t2: "var(--t2)",
           t3: "var(--t3)",

@@ -14,7 +14,7 @@ import SanityImage from "../general/SanityImage";
 function About({ abouts }: { abouts: AboutType[] }) {
   const { about_photo, desc_title, description } = abouts[0];
   return (
-    <div className="grid grid-cols-1  my-auto md:grid-cols-3 relative md:w-5/6 md:text-left mx-auto text-center items-center overflow-hidden">
+    <div className="grid grid-cols-1 sm:my-auto md:grid-cols-3 relative md:w-5/6 md:text-left mx-auto text-center items-center overflow-hidden">
       {/* <h3 className="col-span-3 mt-20 uppercase tracking-[20px] text-custom-t2 text-2xl text-center ">
         About
       </h3> */}
@@ -37,11 +37,11 @@ function About({ abouts }: { abouts: AboutType[] }) {
           alt="About section photo"
           width={200}
           height={200}
-          className=" w-56 h-56 rounded-full object-cover md:rounded-lg md:w-64 md:h-64 xl:w-[300px] xl:h-[300px]"
+          className=" w-48 h-48 rounded-full object-cover md:rounded-lg md:w-64 md:h-64 xl:w-[300px] xl:h-[300px]"
         />
       </motion.div>
       <div className="col-span-2 md:space-y-10 md:px-10 px-6 ">
-        <h4 className="text-4xl font-semibold max-md:my-8">{desc_title}</h4>
+        <h4 className="text-4xl font-semibold max-md:my-4">{desc_title}</h4>
         <div className="">
           <PortableText value={description} />
         </div>
