@@ -1,10 +1,19 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CompanyType, ExperienceType } from "schemas/schema_types";
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextComponents } from "@portabletext/react";
 import SanityImage from "components/general/SanityImage";
 
 type Props = { isLast: boolean; experience: ExperienceType };
+const components: PortableTextComponents = {
+  list: {
+    // Ex. 1: customizing common list types
+    bullet: ({ children }) => <ul className="mt-xl list-disc">{children}</ul>,
+    number: ({ children }) => (
+      <ol className="mt-lg list-decimal">{children}</ol>
+    ),
+  },
+};
 
 function ExperienceCard({ isLast, experience }: Props) {
   const { role, overview, duration, description, technologies, company } =
@@ -21,14 +30,14 @@ function ExperienceCard({ isLast, experience }: Props) {
     year: "numeric",
     month: "short",
   });
-  console.log("company image source:", company.logo_image);
+
   return (
-    <div className="flex mt-4 grow md:min-h-[150px] sm:min-h-[100px]">
-      <div className="flex flex-col ">
+    <div className="flex mt-4 grow sm:min-h-[100px]">
+      <div className="flex flex-col shrink-0 ">
         <SanityImage
           sanitySrc={company.logo_image}
           alt="Company or school logo"
-          className="rounded-md object-contain sm:h-16 h-12"
+          className="rounded-md object-contain sm:h-16 h-12 "
           height={100}
           width={100}
         />
@@ -51,9 +60,9 @@ function ExperienceCard({ isLast, experience }: Props) {
         )} */}
         {/* {description && <PortableText value={description} />} */}
         {description && (
-          <h2 className="ml-4 text-sm text-custom-t1">
-            <PortableText value={description} />
-          </h2>
+          <div className="ml-4 text-sm text-custom-t1">
+            <PortableText value={description} components={components} />
+          </div>
         )}
       </div>
     </div>
