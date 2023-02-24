@@ -10,7 +10,7 @@ function SocialRow({ className }: { className?: string }) {
       <Link href="https://www.linkedin.com/in/phil-labrum-profile/">
         <FaLinkedin className=" lg:h-7 lg:w-7 h-6 w-6" />
       </Link>
-      <Link href="https://www.https://github.com/Plabrum">
+      <Link href="https://github.com/Plabrum">
         <FaGithub className=" lg:h-7 lg:w-7 h-6 w-6" />
       </Link>
       <Link href="/#contact">

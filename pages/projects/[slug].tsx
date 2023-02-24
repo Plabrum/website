@@ -25,7 +25,7 @@ export default function ProjectSlugRoute({
     technologies,
   } = project;
 
-  console.log("proj", project);
+  // console.log("proj", project);
 
   const overview_plaintext: string = overview ? toPlainText(overview) : "";
   return (

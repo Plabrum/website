@@ -14,7 +14,7 @@ import SanityImage from "../general/SanityImage";
 function About({ abouts }: { abouts: AboutType[] }) {
   const { about_photo, desc_title, description } = abouts[0];
   return (
-    <div className="grid grid-cols-1 sm:my-auto md:grid-cols-3 relative md:w-5/6 md:text-left mx-auto text-center items-center overflow-hidden">
+    <div className="grid grid-cols-1 my-auto md:grid-cols-3 relative md:w-5/6 md:text-left mx-auto text-center items-center overflow-hidden">
       {/* <h3 className="col-span-3 mt-20 uppercase tracking-[20px] text-custom-t2 text-2xl text-center ">
         About
       </h3> */}
@@ -30,7 +30,7 @@ function About({ abouts }: { abouts: AboutType[] }) {
           x: 0,
           opacity: 1,
         }}
-        className="flex-shrink-0 col-span-1 justify-self-center max-sm:mt-4"
+        className="flex-shrink-0 col-span-1 justify-self-center max-sm:mt-4 max-sm:hidden"
       >
         <SanityImage
           sanitySrc={about_photo}

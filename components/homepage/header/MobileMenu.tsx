@@ -1,86 +1,79 @@
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import ThemeSwitch from "components/general/ThemeSwitch";
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import SocialRow from "./SocialRow";
+import { Toggle } from "./Toggle";
 
-type Props = {};
+type Props = { homepage: boolean };
 const itemVariants: Variants = {
   open: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 300, damping: 24 },
+    // transition: { type: "spring", stiffness: 300, damping: 24 },
   },
-  closed: { opacity: 0, y: 20, transition: { duration: 0.2 } },
+  closed: { opacity: 0, y: -20 },
+  //     transition: { duration: 0.2 } },
 };
 
-// function MobileMenu() {
-//   const [isOpen, setIsOpen] = useState(false);
-//   return (
-//     <div className="absolute  border w-[150px] h-[300px]">
-//       <div className="backdrop-blur-lg">
-//         <ul>
-//           <li>Hi</li>
-//           <li>hello</li>
-//           <li>bonjour</li>
-//         </ul>
-//       </div>
-//     </div>
-//   );
-// }
-
-function MobileMenu({}: Props) {
+export default function MobileMenu({ homepage }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const icon_size = "lg:h-7 lg:w-7 h-6 w-6";
   return (
     <motion.div
       initial={false}
       animate={isOpen ? "open" : "closed"}
-      className="sm:hidden text-custom-t2"
+      className=""
     >
-      <motion.button
-        className="flex items-center my-auto"
-        whileTap={{ scale: 0.97 }}
-        variants={{
-          open: { rotate: 180 },
-          closed: { rotate: 0 },
-        }}
-        transition={{ duration: 0.2 }}
-        style={{ originY: 0.55 }}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <FaChevronDown className={`text-custom-t2  ${icon_size}`} />
-      </motion.button>
-
       <motion.ul
-        className="rounded-2xl absolute backdrop-blur-md text-custom-t1"
+        className="absolute top-0 left-0 rounded-br-2xl  pl-8 py-4 w-56 backdrop-blur-md text-custom-t1"
         variants={{
           open: {
-            clipPath: "inset(0% 0% 0% 0% round 10px)",
-            transition: {
-              type: "spring",
-              bounce: 0,
-              duration: 0.7,
-              delayChildren: 0.3,
-              staggerChildren: 0.05,
-            },
+            visibility: "visible",
           },
           closed: {
-            clipPath: "inset(10% 50% 90% 50% round 10px)",
-            transition: {
-              type: "spring",
-              bounce: 0,
-              duration: 0.3,
-            },
+            visibility: "hidden",
           },
         }}
-        style={{ pointerEvents: isOpen ? "auto" : "none" }}
       >
-        <motion.li className="py-2 pt-8 px-6 w-48" variants={itemVariants}>
+        <motion.li
+          className="pr-4"
+          variants={itemVariants}
+          onClick={() => setIsOpen(false)}
+        >
+          <div className="flex flex-row justify-end">
+            <ThemeSwitch className={icon_size + ""} />
+          </div>
+        </motion.li>
+        {!homepage && (
+          <motion.li
+            className="py-2 px-6 "
+            variants={itemVariants}
+            onClick={() => setIsOpen(false)}
+          >
+            <Link href="/">
+              <button className=" text-md uppercase tracking-widest ">
+                Home
+              </button>
+            </Link>
+          </motion.li>
+        )}
+
+        <motion.li
+          className="py-2 px-6 "
+          variants={itemVariants}
+          onClick={() => setIsOpen(false)}
+        >
           <SocialRow className="text-custom-t1" />
         </motion.li>
 
-        <motion.li className="py-2  px-6" variants={itemVariants}>
+        <motion.li
+          className="py-2  px-6"
+          variants={itemVariants}
+          onClick={() => setIsOpen(false)}
+        >
           <Link href="/#about">
             <button className=" text-md uppercase tracking-widest ">
               About
@@ -88,7 +81,11 @@ function MobileMenu({}: Props) {
           </Link>
         </motion.li>
 
-        <motion.li className="py-2 px-6" variants={itemVariants}>
+        <motion.li
+          className="py-2 px-6"
+          variants={itemVariants}
+          onClick={() => setIsOpen(false)}
+        >
           <Link href="/#experience">
             <button className="text-s  uppercase tracking-widest">
               Experience
@@ -96,14 +93,22 @@ function MobileMenu({}: Props) {
           </Link>
         </motion.li>
 
-        <motion.li className="py-2 px-6 pb-8" variants={itemVariants}>
+        <motion.li
+          className="py-2 px-6"
+          variants={itemVariants}
+          onClick={() => setIsOpen(false)}
+        >
           <Link href="/#projects">
             <button className="text-s  uppercase tracking-widest ">
               Projects
             </button>
           </Link>
         </motion.li>
-        <motion.li className="py-2 px-6 pb-8" variants={itemVariants}>
+        <motion.li
+          className="py-2 px-6"
+          variants={itemVariants}
+          onClick={() => setIsOpen(false)}
+        >
           <Link href="/#contact">
             <button className="text-s  uppercase tracking-widest ">
               Contact
@@ -111,8 +116,13 @@ function MobileMenu({}: Props) {
           </Link>
         </motion.li>
       </motion.ul>
+
+      <div className="absolute top-0 left-0 pt-4 pl-4">
+        <Toggle
+          toggle={() => setIsOpen((isOpen) => !isOpen)}
+          className="stroke-custom-t2 "
+        />
+      </div>
     </motion.div>
   );
 }
-
-export default MobileMenu;
