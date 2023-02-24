@@ -103,6 +103,13 @@ function MobileMenu({}: Props) {
             </button>
           </Link>
         </motion.li>
+        <motion.li className="py-2 px-6 pb-8" variants={itemVariants}>
+          <Link href="/#contact">
+            <button className="text-s  uppercase tracking-widest ">
+              Contact
+            </button>
+          </Link>
+        </motion.li>
       </motion.ul>
     </motion.div>
   );
