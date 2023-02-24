@@ -6,7 +6,7 @@ import { PortableText } from "@portabletext/react";
 import { AboutType, ExperienceType, ProjectType } from "schemas/schema_types";
 import About from "../components/homepage/About";
 import Contact from "../components/homepage/Contact";
-import Header from "../components/homepage/Header";
+import Header from "../components/homepage/header/Header";
 import Hero from "../components/homepage/Hero";
 import Projects from "../components/homepage/Projects";
 import Skills from "../components/homepage/Skills";
@@ -32,21 +32,28 @@ function Index({ abouts, projects, experiences }: Props) {
       <Header showNav={showNav} />
 
       {/* Hero */}
-      <section id="hero" className="h-screen flex items-center snap-top">
+      {/* <section id="hero" className="h-screen flex items-center snap-top">
         <div ref={heroRef} className="justify-self-center mx-auto mb-20">
           <Hero abouts={abouts} />
         </div>
-      </section>
-      {/* About */}
-      {/* <section id="about" className="snap-center">
-        <About abouts={abouts} />
       </section> */}
+
+      <Section idName="hero">
+        <div ref={heroRef} className="my-auto">
+          <Hero abouts={abouts} />
+        </div>
+      </Section>
+      {/* About */}
 
       <Section idName="about" titleName="About">
         <About abouts={abouts} />
       </Section>
 
-      <Section idName="experience" titleName="Experiences">
+      <Section
+        idName="experience"
+        titleName="Experience"
+        className="snap-center flex flex-col "
+      >
         <Experiences experiences={experiences} />
       </Section>
 
@@ -77,7 +84,6 @@ export async function getStaticProps() {
     description,
     }`
   );
-  // console.log("tags", about.taglines);
   const projects: ProjectType[] = await client.fetch(groq`
   *[_type == "project" && !(_id in path('drafts.**'))]{
     _id,
@@ -107,11 +113,6 @@ export async function getStaticProps() {
     },
   }
   | order(duration.start desc)`);
-
-  // console.log(
-  //   "company from source",
-  //   experiences[0].company || "no comp found?"
-  // );
 
   return {
     props: {

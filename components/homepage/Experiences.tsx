@@ -10,8 +10,8 @@ type Props = {
 
 export default function Experiences({ experiences }: Props) {
   return (
-    <div className="flex w-full justify-center my-auto">
-      <div className="mt-4  grid w-3/4 grid-cols-1 ">
+    <div className="flex w-full justify-center my-auto ">
+      <div className="mt-4 grid sm:w-3/4 mr-4 grid-cols-1 ">
         {experiences?.map((experience, index) => {
           return (
             <ExperienceCard

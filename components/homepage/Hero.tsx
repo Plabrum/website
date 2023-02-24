@@ -6,6 +6,7 @@ import BackgroundCircles from "./BackgroundCircles";
 import SanityImage from "../general/SanityImage";
 // import type { Image as SanImage } from "sanity";
 import { AboutType } from "schemas/schema_types";
+import CentralTabs from "./header/CentralTabs";
 
 // export interface Props {
 //   name: string;
@@ -22,7 +23,7 @@ export default function Hero({ abouts }: { abouts: AboutType[] }) {
     delaySpeed: 2000,
   });
   return (
-    <div className=" space-y-8 text-center overflow-hidden">
+    <div className="flex flex-col space-y-2 text-center justify-center items-center px-4">
       {/* <BackgroundCircles /> */}
       {/* <img
         className="relative rounded-full h-32 w-32 mx-auto object-cover"
@@ -34,37 +35,21 @@ export default function Hero({ abouts }: { abouts: AboutType[] }) {
         alt="hero photo"
         width={200}
         height={200}
-        className="relative rounded-full h-32 w-32 mx-auto object-cover"
+        className="relative rounded-full h-32 w-32 object-cover"
       />
-      <div className="">
-        <h2 className="text-sm uppercase text-custom-t2 pb-2 tracking-[15px]">
-          {job_title}
-        </h2>
-        <h1 className="text-5xl lg:text-6xl font-semibold px-10">
-          <span className="mr-3">
-            {name}
-            {/* {text}
+
+      <h2 className="text-sm uppercase text-custom-t2 pb-2 tracking-[15px]">
+        {job_title}
+      </h2>
+      <h1 className="text-5xl lg:text-6xl font-semibold px-10">
+        <span className="mr-3">
+          {name}
+          {/* {text}
             <Cursor cursorColor="#F7AB0A" /> */}
-          </span>
-        </h1>
-        <div className="pt-5">
-          <Link href="/#about">
-            <button className="heroButton">About</button>
-          </Link>
-          {/* <Link href="/#skills">
-            <button className="heroButton">Skills</button>
-          </Link> */}
-          <Link href="/#experience">
-            <button className="heroButton">Experience</button>
-          </Link>
-          <Link href="/#projects">
-            <button className="heroButton">Projects</button>
-          </Link>
-          <Link href="/#contact">
-            <button className="heroButton">Contact</button>
-          </Link>
-        </div>
-      </div>
+        </span>
+      </h1>
+
+      <CentralTabs className="max-sm:hidden " />
     </div>
   );
 }

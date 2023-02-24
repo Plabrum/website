@@ -1,6 +1,7 @@
 import { PortableText, toPlainText } from "@portabletext/react";
 import SanityImage from "components/general/SanityImage";
 import TechLogo from "components/general/TechLogo";
+import Header from "components/homepage/header/Header";
 import { client } from "lib/sanity.client";
 import { GetStaticProps } from "next";
 import { groq } from "next-sanity";
@@ -8,7 +9,11 @@ import Head from "next/head";
 import Link from "next/link";
 import { ProjectType } from "schemas/schema_types";
 
-export default function ProjectSlugRoute(project: ProjectType) {
+export default function ProjectSlugRoute({
+  project,
+}: {
+  project: ProjectType;
+}) {
   const {
     _id,
     title,
@@ -19,6 +24,8 @@ export default function ProjectSlugRoute(project: ProjectType) {
     demo_url,
     technologies,
   } = project;
+
+  console.log("proj", project);
 
   const overview_plaintext: string = overview ? toPlainText(overview) : "";
   return (
@@ -32,6 +39,7 @@ export default function ProjectSlugRoute(project: ProjectType) {
           />
         }
       </Head>
+      <Header showNav={true} />
 
       <h2>{title}</h2>
       <SanityImage
@@ -81,7 +89,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   }`,
     { slug: params.slug }
   );
-
+  // console.log(project);
+  console.log("fetching projects", project);
   return {
     props: {
       project,
@@ -94,7 +103,7 @@ export const getStaticPaths = async () => {
 *[_type == "project" && slug.current != null].slug.current
 `);
   const full_paths = paths?.map((slug) => "/projects/" + slug) || [];
-  console.log("paths", paths);
+  // console.log("paths", paths);
   return {
     paths: full_paths,
     fallback: false,
