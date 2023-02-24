@@ -7,6 +7,8 @@ import SanityImage from "../general/SanityImage";
 // import type { Image as SanImage } from "sanity";
 import { AboutType } from "schemas/schema_types";
 import CentralTabs from "./header/CentralTabs";
+import { FaChevronDown } from "react-icons/fa";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 // export interface Props {
 //   name: string;
@@ -49,7 +51,10 @@ export default function Hero({ abouts }: { abouts: AboutType[] }) {
         </span>
       </h1>
 
-      <CentralTabs className="max-sm:hidden " />
+      <CentralTabs className="max-sm:hidden pt-4 " />
+      <Link href="/#about" className="pt-8">
+        <ChevronDownIcon className=" h-16 animate-pulse duration-300" />
+      </Link>
     </div>
   );
 }

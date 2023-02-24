@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { CompanyType, ExperienceType } from "schemas/schema_types";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import SanityImage from "components/general/SanityImage";
+import Link from "next/link";
 
 type Props = { isLast: boolean; experience: ExperienceType };
 const components: PortableTextComponents = {
@@ -33,16 +34,17 @@ function ExperienceCard({ isLast, experience }: Props) {
 
   return (
     <div className="flex mt-4 grow sm:min-h-[100px]">
-      <div className="flex flex-col shrink-0 ">
-        <SanityImage
-          sanitySrc={company.logo_image}
-          alt="Company or school logo"
-          className="rounded-md object-contain sm:h-16 h-12 "
-          height={100}
-          width={100}
-        />
+      <div className="flex flex-col sm:w-16 w-12 shrink-0 mx-6">
+        <Link href={company.company_page || ""} className="">
+          <SanityImage
+            sanitySrc={company.logo_image}
+            alt="Company or school logo"
+            className="rounded-md object-contain"
+            height={100}
+            width={100}
+          />
+        </Link>
         {!isLast && <div className="mt-2 w-px grow self-center bg-custom-t2" />}
-        {/* <div className="mt-2 w-px grow self-center bg-white" /> */}
       </div>
       <div className="flex flex-col grow">
         <h1 className="sm:text-2xl text-xl justify-self-start">{role}</h1>

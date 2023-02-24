@@ -7,7 +7,7 @@ import { SunIcon, MoonIcon, SparklesIcon } from "@heroicons/react/24/solid";
 export default function ThemeSwitch({ className }: { className: string }) {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme, systemTheme } = useTheme();
-
+  // https://framermotionplayground.com/tutorial/switch-button good improvement
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
