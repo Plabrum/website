@@ -3,6 +3,7 @@
 # Phil Adds:
 .ipynb_checkpoints
 .vscode
+ignore/
 
 # dependencies
 /node_modules
