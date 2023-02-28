@@ -23,7 +23,7 @@ export default function ProjectCard({ project }: ProjectCardProp) {
     return (
       <div className="grid sm:grid-cols-3 grid-cols-4 bg-custom-bg2 sm:aspect-[2/1] aspect-[5/2] rounded-3xl overflow-hidden">
         <div className="relative col-span-1">
-          <Link href={"/projects/" + slug}>
+          <Link href={slug || "/"}>
             <SanityImage
               sanitySrc={coverImage}
               //   width={200}
@@ -36,7 +36,7 @@ export default function ProjectCard({ project }: ProjectCardProp) {
         </div>
         <div className="sm:col-span-2 col-span-3 grid grid-cols-1 w-5/6 sm:my-2 max-sm:h-full justify-self-center sm:self-center">
           {/* Title */}
-          <Link className="max-sm:mt-4 self-start " href={"/projects/" + slug}>
+          <Link className="max-sm:mt-4 self-start " href={slug || "/"}>
             <h1 className="sm:text-3xl text-xl">{title}</h1>
             <div className="max-sm:hidden flex flex-row text-custom-t4 text-sm">
               <h2>{datestring}</h2>

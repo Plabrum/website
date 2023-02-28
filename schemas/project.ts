@@ -1,5 +1,11 @@
 import { RocketIcon } from "@sanity/icons";
-import { defineArrayMember, defineField, defineType } from "sanity";
+import {
+  CustomValidator,
+  defineArrayMember,
+  defineField,
+  defineType,
+  SlugValue,
+} from "sanity";
 
 export default defineType({
   name: "project",
@@ -24,6 +30,12 @@ export default defineType({
         source: "title",
         maxLength: 96,
         isUnique: (value, context) => context.defaultIsUnique(value, context),
+        slugify: (value) => {
+          if (!value.startsWith("/projects/")) {
+            return "/projects/" + value;
+          }
+          return value;
+        },
       },
       validation: (rule) => rule.required(),
     }),

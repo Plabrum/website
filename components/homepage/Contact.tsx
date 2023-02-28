@@ -8,6 +8,7 @@ import {
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import axios from "axios";
+import { FaSpinner } from "react-icons/fa";
 
 type Inputs = {
   name: string;
@@ -21,7 +22,7 @@ type Props = {};
 function Contact({}: Props) {
   const { register, handleSubmit, reset } = useForm<Inputs>();
   const [emailResponse, setEmailResponse] = useState<string | null>(null);
-  // const [recaptchaToken, setRecaptchaToken] = useState<string>();
+  const [formInProgress, setFormInProgress] = useState<boolean>(false);
   const { executeRecaptcha } = useGoogleReCaptcha();
   // const recaptchaRef = useRef<any>();
 
@@ -34,9 +35,11 @@ function Contact({}: Props) {
   function onSuccess(data: any) {
     setEmailResponse("success");
     reset();
+    setFormInProgress(false);
   }
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    setFormInProgress(true);
     if (!executeRecaptcha) {
       console.log("captcha not ready");
       return;
@@ -46,7 +49,7 @@ function Contact({}: Props) {
       token: token,
       ...formData,
     };
-
+    //Todo: make this with axios and remove the ugly .then methods
     const response = fetch("/api/contact", {
       method: "POST",
       headers: {
@@ -76,7 +79,7 @@ function Contact({}: Props) {
     <div className="relative h-3/4 flex flex-col items-center justify-center ">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-4 mx-auto sm:w-1/2 w-3/4 appearance-none"
+        className="grid grid-cols-2 gap-4 mx-auto sm:w-1/2 w-3/4 max-w-[800px] appearance-none"
       >
         <input
           {...register("name")}
@@ -102,14 +105,23 @@ function Contact({}: Props) {
           {...register("message")}
           placeholder="Message"
           autoComplete="off"
-          className={contact_box + " col-span-2"}
+          className={contact_box + " col-span-2  min-h-[150px]"}
         />
 
         <button
           type="submit"
-          className="col-span-2 bg-custom-t4 py-5 uppercase tracking-[4px] px-10 rounded-md  text-custom-t1 dont-bold text-sm"
+          disabled={formInProgress}
+          className="col-span-2 flex  h-14 bg-custom-t4  items-center justify-center rounded-md "
         >
-          Submit
+          <div className="  ">
+            {formInProgress ? (
+              <FaSpinner className="mx-auto animate-spin w-6 h-6" />
+            ) : (
+              <p className=" text-custom-t1 dont-bold text-sm uppercase tracking-[4px]">
+                Submit
+              </p>
+            )}
+          </div>
         </button>
       </form>
       {emailResponse ? (

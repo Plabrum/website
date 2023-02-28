@@ -52,8 +52,8 @@ export default function Hero({ abouts }: { abouts: AboutType[] }) {
       </h1>
 
       <CentralTabs className="max-sm:hidden pt-4 " />
-      <Link href="/#about" className="pt-8">
-        <ChevronDownIcon className=" h-16 animate-pulse duration-300" />
+      <Link href="/#about" className="md:hidden pt-8">
+        <ChevronDownIcon className="md:hidden h-16 animate-pulse duration-300" />
       </Link>
     </div>
   );

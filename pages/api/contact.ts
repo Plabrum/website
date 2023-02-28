@@ -89,8 +89,8 @@ async function sendEmail(req: NextApiRequest, res: NextApiResponse) {
   };
 
   let info = await transporter.sendMail(recipientMessage);
-
-  if (info.messageId) {
+  let info2 = await transporter.sendMail(adminMessage);
+  if (info.messageId && info2.messageId) {
     return res.status(200).json({ success: `Email sent!` });
   } else if (info.rejected) {
     return res.status(400).json({
@@ -101,8 +101,6 @@ async function sendEmail(req: NextApiRequest, res: NextApiResponse) {
       error: info.response,
     });
   }
-
-  let info2 = await transporter.sendMail(adminMessage);
 }
 
 export default async function handler(
