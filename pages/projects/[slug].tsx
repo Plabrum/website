@@ -71,8 +71,9 @@ export default function ProjectSlugRoute({
 }
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
+  // console.log("ctx", ctx);
   const { params = {} } = ctx;
-
+  // console.log("params.slug", params.slug);
   // const project = getProjectBySlug({ slug: params.slug });
   const project = await client.fetch(
     groq`
@@ -87,10 +88,9 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     demo_url,
     "technologies":technologies[]->{_id, name, tech_page, logo_image},
   }`,
-    { slug: params.slug }
+    { slug: "/projects/" + params.slug }
   );
-  // console.log(project);
-  console.log("fetching projects", project);
+  // console.log("fetching projects", project);
   return {
     props: {
       project,
@@ -102,10 +102,10 @@ export const getStaticPaths = async () => {
   const paths: string[] = await client.fetch(groq`
 *[_type == "project" && slug.current != null].slug.current
 `);
-  const full_paths = paths?.map((slug) => "/projects/" + slug) || [];
-  // console.log("paths", paths);
+  const full_paths = paths || [];
+  console.log("paths", paths);
   return {
-    paths: full_paths,
+    paths: paths,
     fallback: false,
   };
 };
