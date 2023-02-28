@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import {
   EnvelopeIcon,
   MapIcon,
@@ -6,6 +6,8 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/solid";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import axios from "axios";
 
 type Inputs = {
   name: string;
@@ -19,36 +21,39 @@ type Props = {};
 function Contact({}: Props) {
   const { register, handleSubmit, reset } = useForm<Inputs>();
   const [emailResponse, setEmailResponse] = useState<string | null>(null);
+  // const [recaptchaToken, setRecaptchaToken] = useState<string>();
+  const { executeRecaptcha } = useGoogleReCaptcha();
+  // const recaptchaRef = useRef<any>();
 
   function onError(e: any, backend: boolean) {
     const errorLoc: string = backend ? "Backend" : "Frontend";
-    setEmailResponse(errorLoc);
+    const error_message: string = e.error;
+    setEmailResponse(error_message);
     console.log("Error", e);
   }
   function onSuccess(data: any) {
     setEmailResponse("success");
-    console.log("Success", data);
-    // reset();
+    reset();
   }
 
-  const onSubmit: SubmitHandler<Inputs> = (formData) => {
-    // const data = {
-    //   name: formData.name,
-    //   subject: formData.subject,
-    //   email: formData.email,
-    //   message: formData.message,
-    // };
-    // async function UseContactApi(formData: Inputs) {
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    if (!executeRecaptcha) {
+      console.log("captcha not ready");
+      return;
+    }
+    const token = await executeRecaptcha();
+    const captchaFormData = {
+      token: token,
+      ...formData,
+    };
 
-    //   return response;
-    // }
     const response = fetch("/api/contact", {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(captchaFormData),
     })
       .then((response) => {
         if (response?.ok) {
@@ -60,9 +65,8 @@ function Contact({}: Props) {
       .catch((error) => {
         onError(error, false);
       });
-
-    // window.location.href = `mailto:blahblah@gmail.com?subject=${formData.subject}&body=Hi, my name is ${formData.name}. ${formData.message} (${formData.email})`;
   };
+
   const contact_box: string = ` bg-custom-bg2 rounded-lg px-6 py-4 transition-all text-custom-t2 placeholder-custom-t4
   outline-none focus:ring focus:border-custom-t2`;
 
@@ -100,6 +104,7 @@ function Contact({}: Props) {
           autoComplete="off"
           className={contact_box + " col-span-2"}
         />
+
         <button
           type="submit"
           className="col-span-2 bg-custom-t4 py-5 uppercase tracking-[4px] px-10 rounded-md  text-custom-t1 dont-bold text-sm"
@@ -117,7 +122,7 @@ function Contact({}: Props) {
           <span className=" ">
             {emailResponse === "success"
               ? "Success! Contact message has been sent!"
-              : `Error submitting contact form (${emailResponse})`}
+              : `Error submitting contact form: ${emailResponse}`}
           </span>
           <button className="" onClick={() => setEmailResponse(null)}>
             <XMarkIcon className="w-8 h-8" />

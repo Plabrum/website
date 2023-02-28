@@ -22,7 +22,7 @@ type Props = {
   experiences: ExperienceType[];
 };
 
-function Index({ abouts, projects, experiences }: Props) {
+export default function Index({ abouts, projects, experiences }: Props) {
   const heroRef = useRef<HTMLDivElement>(null);
   const showNav = useIntersectionObserver(heroRef);
 
@@ -122,5 +122,3 @@ export async function getStaticProps() {
     },
   };
 }
-
-export default Index;
