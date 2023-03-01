@@ -14,6 +14,9 @@ export default defineType({
   icon: RocketIcon,
   // Uncomment below to have edits publish automatically as you type
   // liveEdit: true,
+  initialValue: {
+    pin: false,
+  },
   fields: [
     defineField({
       name: "title",
@@ -37,6 +40,14 @@ export default defineType({
           return value;
         },
       },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "pin",
+      description: "Show this project on the homepage",
+      initialValue: false,
+      title: "Pin to Homepage",
+      type: "boolean",
       validation: (rule) => rule.required(),
     }),
     defineField({

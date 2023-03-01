@@ -7,13 +7,12 @@ import MobileMenu from "./MobileMenu";
 import CentralTabs from "./CentralTabs";
 import Head from "next/head";
 
-type Props = { showNav: boolean; homepage?: boolean };
+type Props = { showNav?: boolean; homepage?: boolean };
 
 // Adding mobile menu: https://codesandbox.io/s/framer-motion-variants-rj7ks0?from-embed=&file=/src/App.tsx
 
-export default function Header({ showNav, homepage = true }: Props) {
+export default function Header({ showNav = true, homepage = false }: Props) {
   const { systemTheme } = useTheme();
-
   const [isDesktop, setDesktop] = useState(false);
 
   useEffect(() => {

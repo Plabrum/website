@@ -33,36 +33,26 @@ export default function ProjectPage({ project }: { project: ProjectType }) {
   });
 
   return (
-    <div className="mt-20 flex-grow px-4 md:px-16 lg:px-32">
-      <div className="w-5/6 lg:w-3/5 mb-8">
+    <div className="mt-40 flex-grow px-4 md:px-16 lg:px-32">
+      <div className="w-5/6 lg:w-3/5 mb-8 ">
         {/* Title */}
-        {title && (
-          <div className="text-3xl font-bold tracking-tight md:text-5xl">
-            {title}
-          </div>
-        )}
+        <div className="text-3xl font-bold tracking-tight md:text-5xl text-custom-t1">
+          {title}
+        </div>
         {/* Description */}
-        {overview && (
-          <div className="mt-4 font-serif text-xl text-gray-600 md:text-2xl">
-            {overview}
-          </div>
-        )}
+        <div className="mt-4 font-serif text-xl text-custom-t2 md:text-2xl">
+          {overview}
+        </div>
       </div>
       <div className="mb-20 space-y-6">
         {/* Header */}
-        {/* <Header title={title} description={overview} /> */}
 
         <div className="rounded-md border border-custom-t2 overflow-hidden">
           {/* Image  */}
-          {/* <ImageBox
-            image={coverImage}
-            alt={`Cover image for ${title}`}
-            classesWrapper="relative aspect-[16/9]"
-          /> */}
           <SanityImage
             sanitySrc={coverImage}
             alt={"coverimage"}
-            className="`w-full overflow-hidden rounded-[3px] "
+            className="`w-full object-cover overflow-hidden rounded-[3px] object-top max-h-[600px]"
             width={3500}
             height={2000}
           />
@@ -77,10 +67,16 @@ export default function ProjectPage({ project }: { project: ProjectType }) {
             }
 
             {/* Client */}
-            {client && (
+            {repo_url && (
               <div className="p-3 lg:p-4">
-                <div className="text-xs md:text-sm">Client</div>
-                <div className="text-md md:text-lg">N/A</div>
+                <div className="text-xs md:text-sm">Code Repository</div>
+                <Link
+                  target="_blank"
+                  className="text-md break-words md:text-lg"
+                  href={repo_url}
+                >
+                  {repo_url}
+                </Link>
               </div>
             )}
 
@@ -115,14 +111,13 @@ export default function ProjectPage({ project }: { project: ProjectType }) {
 
         {/* Description */}
         {description && (
-          <div className="font-serif max-w-3xl text-xl text-gray-600">
+          <div className="font-serif max-w-3xl text-xl text-custom-t1">
             <PortableText value={description} />
           </div>
         )}
         {/* Workaround: scroll to top on route change */}
         {/* <ScrollUp /> */}
       </div>
-      <div className="absolute left-0 w-screen border-t" />
     </div>
   );
 }
