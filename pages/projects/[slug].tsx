@@ -29,7 +29,11 @@ export default function ProjectSlugRoute({
   // console.log("proj", project);
 
   return (
-    <ProjectPage project={project} />
+    <div>
+      <Header />
+      <ProjectPage project={project} />
+    </div>
+
     // <div key={_id}>
     //   <Head>
     //     {<meta key="description" name="description" content={overview} />}

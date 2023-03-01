@@ -29,7 +29,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
   return (
     <div className="snap-y snap-proximity h-screen overflow-y-scroll scrollbar-diss scroll-smooth">
       {/* Header */}
-      <Header showNav={showNav} />
+      <Header showNav={showNav} homepage={true} />
 
       {/* Hero */}
       <Section idName="hero">
@@ -51,7 +51,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
         <Experiences experiences={experiences} />
       </Section>
 
-      <Section idName="projects" titleName="Projects">
+      <Section idName="projects" titleName="Projects" className="flex flex-col">
         <Projects projects={projects} />
       </Section>
 
@@ -79,7 +79,7 @@ export async function getStaticProps() {
     }`
   );
   const projects: ProjectType[] = await client.fetch(groq`
-  *[_type == "project" && !(_id in path('drafts.**'))]{
+  *[_type == "project" && !(_id in path('drafts.**')) && pin==true]{
     _id,
     title,
     'slug': slug.current,
@@ -88,6 +88,7 @@ export async function getStaticProps() {
     duration,
     repo_url,
     demo_url,
+    "technologies":technologies[]->{_id, name, tech_page, logo_image},
     }
     | order(duration.start asc)`);
 
