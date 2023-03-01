@@ -11,6 +11,7 @@ export default function ProjectCard({ project }: ProjectCardProp) {
   if (project) {
     const { title, slug, coverImage, overview, duration, repo_url, demo_url } =
       project;
+
     const startMo = duration?.start ? new Date(duration.start) : "now";
 
     const datestring: string = startMo.toLocaleString("en-us", {
@@ -19,7 +20,7 @@ export default function ProjectCard({ project }: ProjectCardProp) {
       day: "numeric",
     });
     // Create actual card
-    // console.log(duration);
+
     return (
       <div className="grid sm:grid-cols-3 grid-cols-4 bg-custom-bg2 sm:aspect-[2/1] aspect-[5/2] rounded-3xl overflow-hidden">
         <div className="relative col-span-1">
@@ -45,7 +46,7 @@ export default function ProjectCard({ project }: ProjectCardProp) {
 
           {/* Overview */}
           <div className="sm:text-lg sm:my-2 inline-block w-full max-sm:truncate">
-            {overview && <PortableText value={overview} />}
+            {overview}
           </div>
 
           {/* link tags */}

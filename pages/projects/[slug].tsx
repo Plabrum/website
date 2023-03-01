@@ -2,6 +2,7 @@ import { PortableText, toPlainText } from "@portabletext/react";
 import SanityImage from "components/general/SanityImage";
 import TechLogo from "components/general/TechLogo";
 import Header from "components/homepage/header/Header";
+import ProjectPage from "components/projects/ProjectPage";
 import { client } from "lib/sanity.client";
 import { GetStaticProps } from "next";
 import { groq } from "next-sanity";
@@ -27,46 +28,40 @@ export default function ProjectSlugRoute({
 
   // console.log("proj", project);
 
-  const overview_plaintext: string = overview ? toPlainText(overview) : "";
   return (
-    <div key={_id}>
-      <Head>
-        {
-          <meta
-            key="description"
-            name="description"
-            content={overview_plaintext}
-          />
-        }
-      </Head>
-      <Header showNav={true} />
+    <ProjectPage project={project} />
+    // <div key={_id}>
+    //   <Head>
+    //     {<meta key="description" name="description" content={overview} />}
+    //   </Head>
+    //   <Header showNav={true} homepage={false} />
 
-      <h2>{title}</h2>
-      <SanityImage
-        sanitySrc={coverImage}
-        width={200}
-        height={200}
-        alt="cover image"
-      />
-      {overview && <PortableText value={overview} />}
-      {description && <PortableText value={description} />}
-      {technologies &&
-        technologies.map(({ _id, name, logo_image, tech_page }) => {
-          return (
-            <div key={_id}>
-              <TechLogo
-                name={name}
-                logo_image={logo_image}
-                tech_page={tech_page}
-              />
-            </div>
-          );
-        })}
+    //   <h2>{title}</h2>
+    //   <SanityImage
+    //     sanitySrc={coverImage}
+    //     width={200}
+    //     height={200}
+    //     alt="cover image"
+    //   />
+    //   {overview}
+    //   {description && <PortableText value={description} />}
+    //   {technologies &&
+    //     technologies.map(({ _id, name, logo_image, tech_page }) => {
+    //       return (
+    //         <div key={_id}>
+    //           <TechLogo
+    //             name={name}
+    //             logo_image={logo_image}
+    //             tech_page={tech_page}
+    //           />
+    //         </div>
+    //       );
+    //     })}
 
-      {repo_url && <Link href={repo_url}>Repo URL</Link>}
+    //   {repo_url && <Link href={repo_url}>Repo URL</Link>}
 
-      {demo_url && <Link href={demo_url}>Demo URL</Link>}
-    </div>
+    //   {demo_url && <Link href={demo_url}>Demo URL</Link>}
+    // </div>
   );
 }
 
