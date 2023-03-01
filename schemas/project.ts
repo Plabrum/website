@@ -44,35 +44,24 @@ export default defineType({
       description:
         "Used both for the <meta> description tag for SEO, and project subheader.",
       title: "Overview",
-      type: "array",
-      of: [
-        // Paragraphs
-        defineArrayMember({
-          lists: [],
-          marks: {
-            annotations: [],
-            decorators: [
-              {
-                title: "Italic",
-                value: "em",
-              },
-              {
-                title: "Strong",
-                value: "strong",
-              },
-            ],
-          },
-          styles: [],
-          type: "block",
-        }),
-      ],
+      type: "string",
       validation: (rule) => rule.max(155).required(),
+    }),
+    defineField({
+      name: "thumbnailImage",
+      title: "Thumbnail Image",
+      description:
+        "This image will be used as the thumbnail image for the project",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: "coverImage",
       title: "Cover Image",
       description:
-        "This image will be used as the cover image for the project. If you choose to add it to the show case projects, this is the image displayed in the list within the homepage.",
+        "This image will be used as the cover image for the project.",
       type: "image",
       validation: (rule) => rule.required(),
       options: {

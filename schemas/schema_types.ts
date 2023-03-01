@@ -5,7 +5,7 @@ export interface ProjectType {
   title?: string;
   _createdAt?: string;
   slug?: string;
-  overview?: PortableTextBlock[];
+  overview: string;
   coverImage?: Image;
   duration?: {
     start?: string;

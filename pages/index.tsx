@@ -8,9 +8,9 @@ import About from "../components/homepage/About";
 import Contact from "../components/homepage/Contact";
 import Header from "../components/homepage/header/Header";
 import Hero from "../components/homepage/Hero";
-import Projects from "../components/homepage/Projects";
-import Skills from "../components/homepage/Skills";
-import Experiences from "../components/homepage/Experiences";
+import Projects from "../components/homepage/projects/Projects";
+// import Skills from "../components/homepage/Skills";
+import Experiences from "../components/homepage/experience/Experiences";
 import { useEffect, useRef, useState } from "react";
 import { useIntersectionObserver } from "lib/Intersection";
 import Section from "components/homepage/Section";
@@ -27,24 +27,18 @@ export default function Index({ abouts, projects, experiences }: Props) {
   const showNav = useIntersectionObserver(heroRef);
 
   return (
-    <div className="snap-y snap-proximity h-screen overflow-y-scroll scrollbar-diss">
+    <div className="snap-y snap-proximity h-screen overflow-y-scroll scrollbar-diss scroll-smooth">
       {/* Header */}
       <Header showNav={showNav} />
 
       {/* Hero */}
-      {/* <section id="hero" className="h-screen flex items-center snap-top">
-        <div ref={heroRef} className="justify-self-center mx-auto mb-20">
-          <Hero abouts={abouts} />
-        </div>
-      </section> */}
-
       <Section idName="hero">
         <div ref={heroRef} className="my-auto">
           <Hero abouts={abouts} />
         </div>
       </Section>
-      {/* About */}
 
+      {/* About */}
       <Section idName="about" titleName="About">
         <About abouts={abouts} />
       </Section>

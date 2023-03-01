@@ -32,12 +32,14 @@
 
 :root {
   /* Your default theme */
-  --bg1: #f0ddbe;
+  --bg1: #f0ddbe; /* Main background theme */
+  /* --bg1: #f0ddbe; Main background theme */
   --bg2: #f4ecdf;
   --bg3: #5d6b75;
   --bg4: #242424; /*used for footer */
   --t1: #121212;
   --t2: rgb(45, 102, 155); /* used for buttons, icons, etc */
+  /* --t2: rgb(45, 102, 155); used for buttons, icons, etc */
   --t3: rgb(228, 238, 255); /*light text */
   --t4: rgb(158, 158, 158); /* used in footer text*/
   --t5: rgb(108, 161, 248);

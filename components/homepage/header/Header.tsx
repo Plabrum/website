@@ -1,22 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-  FaEnvelope,
-  FaGithub,
-  FaLinkedin,
-  FaChevronDown,
-} from "react-icons/fa";
-import { motion, Variants } from "framer-motion";
-import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
+import { motion } from "framer-motion";
 import ThemeSwitch from "components/general/ThemeSwitch";
 import SocialRow from "./SocialRow";
 import MobileMenu from "./MobileMenu";
 import CentralTabs from "./CentralTabs";
+import Head from "next/head";
 
 type Props = { showNav: boolean; homepage?: boolean };
 
 // Adding mobile menu: https://codesandbox.io/s/framer-motion-variants-rj7ks0?from-embed=&file=/src/App.tsx
 
 export default function Header({ showNav, homepage = true }: Props) {
+  const { systemTheme } = useTheme();
+
   const [isDesktop, setDesktop] = useState(false);
 
   useEffect(() => {
@@ -48,6 +45,62 @@ export default function Header({ showNav, homepage = true }: Props) {
         className={`fixed top-0 z-20 w-screen grid md:grid-cols-3 grid-cols-2 sm:p-4 p-3 items-center 
        ${showNav ? " sm:backdrop-blur-lg transition-500" : ""}`}
       >
+        <Head>
+          <link
+            id="favicon"
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href={
+              systemTheme === "dark"
+                ? "/favicon_dark/favicon-32x32.png"
+                : "/favicon-32x32.png"
+            }
+          />
+          <link
+            id="favicon"
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href={
+              systemTheme === "dark"
+                ? "/favicon_dark/favicon-16x16.png"
+                : "/favicon-16x16.png"
+            }
+          />
+          <link
+            id="favicon"
+            rel="apple-touch-icon"
+            href={
+              systemTheme === "dark"
+                ? "/favicon_dark/apple-touch-icon.png"
+                : "/apple-touch-icon.png"
+            }
+          />
+          <link
+            id="favicon"
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href={
+              systemTheme === "dark"
+                ? "/favicon_dark/android-chrome-192x192.png"
+                : "/android-chrome-192x192.png"
+            }
+          />
+          <link
+            id="favicon"
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href={
+              systemTheme === "dark"
+                ? "/favicon_dark/android-chrome-512x512.png"
+                : "/android-chrome-512x512.png"
+            }
+          />
+        </Head>
+
         <motion.div
           className="justify-self-start"
           initial={{
@@ -67,7 +120,6 @@ export default function Header({ showNav, homepage = true }: Props) {
           <SocialRow className=" ml-4 text-custom-t2 " />
           {/* <MobileMenu /> */}
         </motion.div>
-
         <motion.div
           className="max-md:hidden flex items-center justify-center"
           initial={{ opacity: 0 }}
@@ -77,7 +129,7 @@ export default function Header({ showNav, homepage = true }: Props) {
             duration: 0.5,
           }}
         >
-          <CentralTabs />
+          <CentralTabs homepage={homepage} />
         </motion.div>
         <motion.div
           className="flex shrink mr-4 items-center cursor-pointer justify-self-end"

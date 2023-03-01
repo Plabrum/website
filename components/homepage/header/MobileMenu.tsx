@@ -7,7 +7,6 @@ import { FaChevronDown } from "react-icons/fa";
 import SocialRow from "./SocialRow";
 import { Toggle } from "./Toggle";
 
-type Props = { homepage: boolean };
 const itemVariants: Variants = {
   open: {
     opacity: 1,
@@ -18,7 +17,7 @@ const itemVariants: Variants = {
   //     transition: { duration: 0.2 } },
 };
 
-export default function MobileMenu({ homepage }: Props) {
+export default function MobileMenu({ homepage }: { homepage: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const icon_size = "lg:h-7 lg:w-7 h-6 w-6";
   return (
@@ -47,6 +46,14 @@ export default function MobileMenu({ homepage }: Props) {
             <ThemeSwitch className={icon_size + ""} />
           </div>
         </motion.li>
+
+        <motion.li
+          className="py-2 px-6 "
+          variants={itemVariants}
+          onClick={() => setIsOpen(false)}
+        >
+          <SocialRow className="text-custom-t1" />
+        </motion.li>
         {!homepage && (
           <motion.li
             className="py-2 px-6 "
@@ -60,15 +67,6 @@ export default function MobileMenu({ homepage }: Props) {
             </Link>
           </motion.li>
         )}
-
-        <motion.li
-          className="py-2 px-6 "
-          variants={itemVariants}
-          onClick={() => setIsOpen(false)}
-        >
-          <SocialRow className="text-custom-t1" />
-        </motion.li>
-
         <motion.li
           className="py-2  px-6"
           variants={itemVariants}

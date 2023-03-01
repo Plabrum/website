@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { RefObject } from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
-import BackgroundCircles from "./BackgroundCircles";
+import BackgroundCircles from "./old/BackgroundCircles";
 import SanityImage from "../general/SanityImage";
 // import type { Image as SanImage } from "sanity";
 import { AboutType } from "schemas/schema_types";
@@ -51,7 +51,7 @@ export default function Hero({ abouts }: { abouts: AboutType[] }) {
         </span>
       </h1>
 
-      <CentralTabs className="max-sm:hidden pt-4 " />
+      <CentralTabs className="max-sm:hidden pt-4 " homepage={true} />
       <Link href="/#about" className="md:hidden pt-8">
         <ChevronDownIcon className="md:hidden h-16 animate-pulse duration-300" />
       </Link>
