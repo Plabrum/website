@@ -17,12 +17,12 @@ export default function Projects({ projects }: { projects: ProjectType[] }) {
       </Link>
       <div className="flex flex-col gap-y-4 ">
         {curtailed_project.map((project, index) => (
-          <>
-            <ProjectCardNew key={index} project={project} />
+          <div key={index}>
+            <ProjectCardNew project={project} />
             {index < curtailed_project.length - 1 && (
               <div className="bg-custom-t4 h-px mx-8 rounded-full" />
             )}
-          </>
+          </div>
         ))}
       </div>
     </div>

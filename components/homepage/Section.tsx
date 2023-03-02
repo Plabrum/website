@@ -12,7 +12,7 @@ function Section({ idName, titleName, className, children }: Props) {
       className={
         className
           ? className
-          : "snap-center flex flex-col h-screen sm:min-h-[700px]"
+          : "snap-center shrink-0 flex flex-col h-screen w-screen sm:min-h-[700px] md:max-w-[1500px] self-center"
       }
     >
       {titleName && (

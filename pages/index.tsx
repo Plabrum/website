@@ -23,7 +23,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
   const showNav = useIntersectionObserver(heroRef);
 
   return (
-    <div className="snap-y snap-proximity h-screen overflow-y-scroll scrollbar-hide scroll-smooth">
+    <div className="flex flex-col snap-y snap-proximity h-screen overflow-y-scroll scrollbar-hide scroll-smooth">
       {/* Header */}
       <Header showNav={showNav} homepage={true} />
 
@@ -39,15 +39,11 @@ export default function Index({ abouts, projects, experiences }: Props) {
         <About abouts={abouts} />
       </Section>
 
-      <Section
-        idName="experience"
-        titleName="Experience"
-        className="snap-center flex flex-col "
-      >
+      <Section idName="experience" titleName="Experience">
         <Experiences experiences={experiences} />
       </Section>
 
-      <Section idName="projects" titleName="Projects" className="flex flex-col">
+      <Section idName="projects" titleName="Projects">
         <Projects projects={projects} />
       </Section>
 
