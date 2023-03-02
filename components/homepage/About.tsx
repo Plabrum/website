@@ -35,8 +35,8 @@ function About({ abouts }: { abouts: AboutType[] }) {
         <SanityImage
           sanitySrc={about_photo}
           alt="About section photo"
-          width={200}
-          height={200}
+          width={1000}
+          height={1000}
           className=" w-48 h-48 rounded-full object-cover md:rounded-lg md:w-64 md:h-64 xl:w-[300px] xl:h-[300px]"
         />
       </motion.div>
