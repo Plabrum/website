@@ -2,7 +2,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import ThemeSwitch from "components/general/ThemeSwitch";
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import SocialRow from "./SocialRow";
 import { Toggle } from "./Toggle";
@@ -19,12 +19,31 @@ const itemVariants: Variants = {
 
 export default function MobileMenu({ homepage }: { homepage: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // only add the event listener when the dropdown is opened
+    if (!isOpen) return;
+    function handleClick(event: any) {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    }
+    window.addEventListener("click", handleClick);
+    // clean up
+    return () => window.removeEventListener("click", handleClick);
+  }, [isOpen]);
+
   const icon_size = "lg:h-7 lg:w-7 h-6 w-6";
   return (
     <motion.div
+      ref={mobileMenuRef}
       initial={false}
       animate={isOpen ? "open" : "closed"}
-      className=""
+      className=" "
     >
       <motion.ul
         className="absolute top-0 left-0 rounded-br-2xl  pl-8 py-4 w-56 backdrop-blur-md text-custom-t1"
@@ -96,9 +115,9 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
           variants={itemVariants}
           onClick={() => setIsOpen(false)}
         >
-          <Link href="/#projects">
+          <Link href={homepage ? "/#projects" : "/projects"}>
             <button className="text-s  uppercase tracking-widest ">
-              Projects
+              {homepage ? "Projects" : "All Projects"}
             </button>
           </Link>
         </motion.li>
@@ -115,7 +134,12 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
         </motion.li>
       </motion.ul>
 
-      <div className="absolute top-0 left-0 pt-4 pl-4">
+      <div
+        className={
+          "absolute top-0 left-0 pt-4 pl-4 pr-4 pb-1 rounded-br-xl" +
+          (!isOpen && " backdrop-blur-md")
+        }
+      >
         <Toggle
           toggle={() => setIsOpen((isOpen) => !isOpen)}
           className="stroke-custom-t2 "

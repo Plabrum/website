@@ -45,6 +45,7 @@ export default function Header({ showNav = true, homepage = false }: Props) {
        ${showNav ? " sm:backdrop-blur-lg transition-500" : ""}`}
       >
         <Head>
+          <meta name="theme-color" content="bg-custom-bg1" />
           <link
             id="favicon"
             rel="icon"
@@ -113,7 +114,7 @@ export default function Header({ showNav = true, homepage = false }: Props) {
             scale: 1,
           }}
           transition={{
-            duration: 1.5,
+            duration: 0.5,
           }}
         >
           <SocialRow className=" ml-4 text-custom-t2 " />
@@ -143,7 +144,7 @@ export default function Header({ showNav = true, homepage = false }: Props) {
             scale: 1,
           }}
           transition={{
-            duration: 1.5,
+            duration: 0.5,
           }}
         >
           <ThemeSwitch className={icon_size} />

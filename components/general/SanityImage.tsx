@@ -31,7 +31,6 @@ export default function SanityImage({
   alt,
   ...props
 }: SanityImageProps) {
-  //   console.log("h", height);
   // Could use passed in height and width to pull only necessary images sizes
   const imgSrc = sanitySrc ? urlForImage(sanitySrc) : "";
 

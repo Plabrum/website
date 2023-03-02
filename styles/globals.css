@@ -10,6 +10,10 @@
   }
 }
 
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
 /* For Webkit-based browsers (Chrome, Safari and Opera) */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -37,13 +41,13 @@
   --bg2: #f4ecdf;
   --bg3: #5d6b75;
   --bg4: #242424; /*used for footer */
+
   --t1: #121212;
   --t2: rgb(45, 102, 155); /* used for buttons, icons, etc */
   /* --t2: rgb(45, 102, 155); used for buttons, icons, etc */
   --t3: rgb(228, 238, 255); /*light text */
   --t4: rgb(158, 158, 158); /* used in footer text*/
-  --t5: rgb(108, 161, 248);
-  --t6: rgb(108, 161, 248);
+
   /* --accent: #fba92c; */
   --active: #60a5fa;
   --inactive: #1f2937;
@@ -58,6 +62,4 @@
   --t2: rgb(200, 202, 189); /* used for buttons, icons, etc */
   --t3: rgb(15, 15, 15); /*dark text */
   --t4: rgb(87, 124, 183);
-  --t5: rgb(108, 161, 248);
-  --t6: rgb(108, 161, 248);
 }

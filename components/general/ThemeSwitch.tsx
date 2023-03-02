@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-// import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
-// import { MdAutoFixHigh } from "react-icons/md";
 import { SunIcon, MoonIcon, SparklesIcon } from "@heroicons/react/24/solid";
 
 export default function ThemeSwitch({ className }: { className: string }) {
@@ -20,14 +18,6 @@ export default function ThemeSwitch({ className }: { className: string }) {
   const isDefault: boolean = theme === "system";
   const isDark: boolean =
     theme === "dark" || (isDefault && systemTheme === "dark");
-  // console.log(
-  //   "systemtheme",
-  //   systemTheme,
-  //   "isdefault",
-  //   isDefault,
-  //   "isDark",
-  //   isDark
-  // );
   return (
     <button onClick={() => setTheme(isDark ? "light" : "dark")}>
       {isDark ? (
