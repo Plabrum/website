@@ -1,10 +1,5 @@
-import React, { useCallback, useRef, useState } from "react";
-import {
-  EnvelopeIcon,
-  MapIcon,
-  PhoneIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/solid";
+import { useState } from "react";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import axios from "axios";
@@ -141,6 +136,23 @@ function Contact({}: Props) {
           </button>
         </div>
       ) : null}
+      <div className="text-left text-xs text-custom-t4 mt-2">
+        <span>This site is protected by reCAPTCHA and the Google </span>
+        <a
+          className="underline text-custom-t5"
+          href="https://policies.google.com/privacy"
+        >
+          Privacy Policy
+        </a>{" "}
+        and
+        <a
+          className="underline text-custom-t5"
+          href="https://policies.google.com/terms"
+        >
+          Terms of Service
+        </a>{" "}
+        apply.
+      </div>
     </div>
   );
 }

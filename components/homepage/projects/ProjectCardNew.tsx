@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import SanityImage from "components/general/SanityImage";
-import { PortableText } from "@portabletext/react";
 import { ProjectType } from "schemas/schema_types";
 import {
   FaChevronCircleRight,
@@ -9,14 +8,17 @@ import {
   FaGithub,
   FaHammer,
 } from "react-icons/fa";
-interface ProjectCardProp {
-  project: ProjectType | null;
+
+interface Props {
+  className?: string;
+  project: ProjectType;
 }
-export default function ProjectCardNew({ project }: { project: ProjectType }) {
+export default function ProjectCardNew({ project, className }: Props) {
   const {
     title,
     slug,
     coverImage,
+    thumbnailImage,
     overview,
     duration,
     repo_url,
@@ -32,23 +34,38 @@ export default function ProjectCardNew({ project }: { project: ProjectType }) {
     day: "numeric",
   });
   // Create actual card
-  console.log("tech", technologies);
   return (
-    <div className="grow grid md:grid-cols-2 grid-cols-1  lg:w-[600px] lg:h-[300px] md:w-[400px] md:h-[200px] w-[360px] h-[180px]">
-      <div className="flex flex-col col-span-1   p-2 ">
-        <div className=" sm:mt-8 mt-2">
-          <h1 className="sm:text-4xl text-3xl font-bold text-custom-t1">
-            {title}
-          </h1>
+    <div
+      className={`${className} grow grid md:grid-cols-2 grid-cols-1 md:w-[600px] md:h-[300px]  w-[360px] h-[180px]`}
+    >
+      <div className="flex flex-col col-span-1  p-2 ">
+        <div className="max-sm:flex max-sm:flex-row sm:mt-4 justify-between">
+          <div>
+            <h1 className="sm:text-4xl text-3xl font-bold text-custom-t1">
+              {title}
+            </h1>
+            <h2 className="text-custom-t2 text-sm">{datestring}</h2>
+          </div>
+          <div className="sm:hidden h-full aspect-square mr-4  relative">
+            {thumbnailImage && (
+              <SanityImage
+                alt={"project thumbnail"}
+                sanitySrc={thumbnailImage}
+                // height={500}
+                // width={2000}
+                fill={true}
+                className=" object-cover rounded-md"
+              />
+            )}
+          </div>
         </div>
         {/* <div className="border border-orange-500">
           <p>date start - date end</p>
         </div> */}
-        <div className="text-custom-t2 text-sm items-end">
-          <h2>{datestring}</h2>
-        </div>
 
-        <div className="grow sm:my-8 m-2">{overview}</div>
+        <div className="grow flex items-center">
+          <p className="truncate">{overview}</p>
+        </div>
 
         <Link
           className="self-center flex flex-row h-8 px-4 sm:mb-8 mb-2 rounded-full bg-custom-t2 text-custom-t3 items-center"
@@ -58,7 +75,7 @@ export default function ProjectCardNew({ project }: { project: ProjectType }) {
           <FaChevronRight className="ml-3 w-2 " />
         </Link>
         {technologies && (
-          <div className=" flex flew-row gap-4 ">
+          <div className=" flex flew-row gap-2 ">
             {technologies.map((tech, index) => (
               <p
                 className="rounded-md bg-custom-bg3 px-4 py-1 text-custom-t3 text-sm"
@@ -78,7 +95,7 @@ export default function ProjectCardNew({ project }: { project: ProjectType }) {
           // height={1000}
           // width={2000}
           fill={true}
-          className="object-cover rounded-3xl"
+          className="object-cover rounded-xl"
         />
       </div>
     </div>

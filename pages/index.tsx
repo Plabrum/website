@@ -1,17 +1,13 @@
-import Link from "next/link";
 import groq from "groq";
 import { client } from "../lib/sanity.client";
-import SanityImage from "components/general/SanityImage";
-import { PortableText } from "@portabletext/react";
 import { AboutType, ExperienceType, ProjectType } from "schemas/schema_types";
 import About from "../components/homepage/About";
 import Contact from "../components/homepage/Contact";
 import Header from "../components/homepage/header/Header";
 import Hero from "../components/homepage/Hero";
 import Projects from "../components/homepage/projects/Projects";
-// import Skills from "../components/homepage/Skills";
 import Experiences from "../components/homepage/experience/Experiences";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useIntersectionObserver } from "lib/Intersection";
 import Section from "components/homepage/Section";
 import Footer from "components/homepage/Footer";
@@ -27,7 +23,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
   const showNav = useIntersectionObserver(heroRef);
 
   return (
-    <div className="snap-y snap-proximity h-screen overflow-y-scroll scrollbar-diss scroll-smooth">
+    <div className="snap-y snap-proximity h-screen overflow-y-scroll scrollbar-hide scroll-smooth">
       {/* Header */}
       <Header showNav={showNav} homepage={true} />
 

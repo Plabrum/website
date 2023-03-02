@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import ExperienceCard from "./ExperienceCard";
 import { ExperienceType } from "schemas/schema_types";
-import SanityImage from "components/general/SanityImage";
 
 type Props = {
   experiences: ExperienceType[];

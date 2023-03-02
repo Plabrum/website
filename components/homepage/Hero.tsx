@@ -1,14 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
-import React, { RefObject } from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
-import BackgroundCircles from "./old/BackgroundCircles";
 import SanityImage from "../general/SanityImage";
-// import type { Image as SanImage } from "sanity";
 import { AboutType } from "schemas/schema_types";
 import CentralTabs from "./header/CentralTabs";
 import { FaChevronDown } from "react-icons/fa";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 // export interface Props {
 //   name: string;
@@ -26,12 +21,6 @@ export default function Hero({ abouts }: { abouts: AboutType[] }) {
   });
   return (
     <div className="flex flex-col space-y-2 text-center justify-center items-center px-4">
-      {/* <BackgroundCircles /> */}
-      {/* <img
-        className="relative rounded-full h-32 w-32 mx-auto object-cover"
-        src="https://media.licdn.com/dms/image/C4D03AQElvWX47eE8tQ/profile-displayphoto-shrink_200_200/0/1518124128261?e=1676505600&v=beta&t=EKrhBUJL6FzrhGPzGg4SS_-FXVm03EB1RF2aYmMJrOE"
-        alt=""
-      /> */}
       <SanityImage
         sanitySrc={hero_photo}
         alt="hero photo"
@@ -53,7 +42,7 @@ export default function Hero({ abouts }: { abouts: AboutType[] }) {
 
       <CentralTabs className="max-sm:hidden pt-4 " homepage={true} />
       <Link href="/#about" className="md:hidden pt-8">
-        <ChevronDownIcon className="md:hidden h-16 animate-pulse duration-300" />
+        <FaChevronDown className="md:hidden h-8 w-16 animate-pulse duration-30 text-custom-t2" />
       </Link>
     </div>
   );

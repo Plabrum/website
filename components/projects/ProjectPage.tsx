@@ -1,10 +1,6 @@
 import { PortableText } from "@portabletext/react";
 import SanityImage from "components/general/SanityImage";
-import { client } from "lib/sanity.client";
-// import { GetStaticProps } from "next";
-// import { groq } from "next-sanity";
 import Link from "next/link";
-import React from "react";
 import { ProjectType } from "schemas/schema_types";
 
 export default function ProjectPage({ project }: { project: ProjectType }) {
@@ -33,7 +29,7 @@ export default function ProjectPage({ project }: { project: ProjectType }) {
   });
 
   return (
-    <div className="mt-40 flex-grow px-4 md:px-16 lg:px-32">
+    <div className="sm:mt-40 mt-20 flex-grow px-4 md:px-16 lg:px-32">
       <div className="w-5/6 lg:w-3/5 mb-8 ">
         {/* Title */}
         <div className="text-3xl font-bold tracking-tight md:text-5xl text-custom-t1">
@@ -115,8 +111,6 @@ export default function ProjectPage({ project }: { project: ProjectType }) {
             <PortableText value={description} />
           </div>
         )}
-        {/* Workaround: scroll to top on route change */}
-        {/* <ScrollUp /> */}
       </div>
     </div>
   );

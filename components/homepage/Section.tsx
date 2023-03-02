@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Props {
   idName: string;
   titleName?: string;
@@ -15,7 +13,6 @@ function Section({ idName, titleName, className, children }: Props) {
         className
           ? className
           : "snap-center flex flex-col h-screen sm:min-h-[700px]"
-        // sm:min-h-[800px] min-h-[700px]
       }
     >
       {titleName && (

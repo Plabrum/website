@@ -7,6 +7,7 @@ export interface ProjectType {
   slug?: string;
   overview: string;
   coverImage?: Image;
+  thumbnailImage?: Image;
   duration?: {
     start?: string;
     end?: string;
