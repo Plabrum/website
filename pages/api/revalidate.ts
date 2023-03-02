@@ -25,9 +25,11 @@ export default async function handler(
 ) {
   const signature = req.headers[SIGNATURE_HEADER_NAME] as string;
   const body = await readBody(req); // Read the body into a string
+  console.log("secret", secret, "body", body, "signature", signature);
   if (!isValidSignature(body, signature, secret)) {
+    console.log("invalid signature");
     return res
-      .status(401)
+      .status(402)
       .json({ success: false, message: "Invalid signature" });
   }
 
@@ -48,8 +50,8 @@ export default async function handler(
     }
     await res.revalidate(pathToRevalidate);
 
-    return res.json({ success: true });
+    return res.status(200).json({ success: true });
   } catch (err) {
-    return res.json({ success: false, message: err });
+    return res.status(500).json({ success: false, message: err });
   }
 }
