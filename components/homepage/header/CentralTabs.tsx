@@ -28,7 +28,7 @@ function CentralTabs({
         <button className={navbutton_style}>Experience</button>
       </Link>
 
-      <Link href="/#projects">
+      <Link href={homepage ? "/#projects" : "/projects"}>
         <button className={navbutton_style}>Projects</button>
       </Link>
 

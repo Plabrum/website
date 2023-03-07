@@ -136,22 +136,22 @@ function Contact({}: Props) {
           </button>
         </div>
       ) : null}
-      <div className="text-left text-xs text-custom-t4 mt-2">
-        <span>This site is protected by reCAPTCHA and the Google </span>
+      <div className="text-xs text-custom-t4 mt-2 sm:w-1/2 w-3/4 max-w-[650px] text-center">
+        <span>{"This site is protected by reCAPTCHA and the Google "}</span>
         <a
           className="underline text-custom-t5"
           href="https://policies.google.com/privacy"
         >
-          Privacy Policy
-        </a>{" "}
-        and
+          {"Privacy Policy"}
+        </a>
+        {" and "}
         <a
           className="underline text-custom-t5"
           href="https://policies.google.com/terms"
         >
-          Terms of Service
-        </a>{" "}
-        apply.
+          {"Terms of Service"}
+        </a>
+        {" apply."}
       </div>
     </div>
   );

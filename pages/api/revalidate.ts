@@ -38,17 +38,18 @@ export default async function handler(
   try {
     const { type, slug } = jsonBody;
     // in some cases there may be multiple paths to revalidate
-    var pathToRevalidate = "/";
+
     switch (type) {
       case "project": {
-        pathToRevalidate = slug;
+        await res.revalidate(slug);
+        await res.revalidate("/");
+        await res.revalidate("/projects");
       }
 
       default: {
-        pathToRevalidate = "/";
+        await res.revalidate("/");
       }
     }
-    await res.revalidate(pathToRevalidate);
 
     return res.status(200).json({ success: true });
   } catch (err) {

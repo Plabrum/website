@@ -13,11 +13,14 @@ export default function index({ projects }: Props) {
     <div className="min-h-screen mb-20">
       <Header />
       {/* <div className="h-40">hello</div> */}
-      <div className="flex items-center justify-center">
-        <div className="grid 2xl:grid-cols-3 xl:grid-cols-2 grid-cols-1 gap-8 mt-20 ">
+      <div className="flex items-center justify-center  ">
+        <div className="grid xl:grid-cols-2 grid-cols-1 lg:w-5/6 sm:w-3/4 mt-16 ">
           {projects.map((project, index) => (
             <div key={index}>
-              <ProjectCardNew project={project} className=" " />
+              <ProjectCardNew
+                project={project}
+                className="  max-sm:w-[360px] max-sm:h-[200px]  my-4"
+              />
               {index < projects.length - 1 && (
                 <div className="bg-custom-t4 h-px mx-8 rounded-full" />
               )}

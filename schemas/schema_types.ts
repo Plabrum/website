@@ -12,10 +12,10 @@ export interface ProjectType {
     start?: string;
     end?: string;
   };
-  description?: PortableTextBlock[];
+  description: PortableTextBlock[];
   repo_url?: string;
   demo_url?: string;
-  technologies?: TechnologyType[];
+  technologies: TechnologyType[];
 }
 
 export interface TechnologyType {
