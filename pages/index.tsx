@@ -23,32 +23,42 @@ export default function Index({ abouts, projects, experiences }: Props) {
   const showNav = useIntersectionObserver(heroRef);
 
   return (
-    <div className="flex flex-col snap-y snap-proximity h-screen overflow-y-scroll scrollbar-hide scroll-smooth">
+    <div
+      className="flex flex-col h-screen overflow-y-scroll scroll-smooth bg-custom-bg1"
+      // snap-y snap-proximity  scrollbar-hide
+    >
       {/* Header */}
       <Header showNav={showNav} homepage={true} />
 
       {/* Hero */}
-      <Section idName="hero">
+      <Section
+        idName="hero"
+        className="min-h-screen flex flex-col items-center"
+      >
         <div ref={heroRef} className="my-auto">
           <Hero abouts={abouts} />
         </div>
       </Section>
 
       {/* About */}
-      <Section idName="about" titleName="About">
+      <Section
+        idName="about"
+        titleName="About"
+        className="min-h-screen flex flex-col items-center"
+      >
         <About abouts={abouts} />
       </Section>
 
-      <Section idName="experience" titleName="Experience">
+      <Section idName="experience" titleName="Experience" className="">
         <Experiences experiences={experiences} />
       </Section>
 
-      <Section idName="projects" titleName="Projects">
+      <Section idName="projects" titleName="Projects" className="">
         <Projects projects={projects} />
       </Section>
 
       {/* Contact Me */}
-      <Section idName="contact" titleName="Contact">
+      <Section idName="contact" titleName="Contact" className="min-h-[700px]">
         <Contact />
       </Section>
       <Footer />
@@ -76,7 +86,9 @@ export async function getStaticProps() {
     title,
     'slug': slug.current,
     coverImage,
+    thumbnailImage,
     overview,
+    description,
     duration,
     repo_url,
     demo_url,
