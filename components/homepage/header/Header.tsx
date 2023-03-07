@@ -45,7 +45,8 @@ export default function Header({ showNav = true, homepage = false }: Props) {
        ${showNav ? " sm:backdrop-blur-lg transition-500" : ""}`}
       >
         <Head>
-          <meta name="theme-color" content="bg-custom-bg1" />
+          {/* <meta name="theme-color" content="bg-custom-bg1" /> */}
+          {/* <meta name="theme-color" content="var(--bg1)" /> */}
           <link
             id="favicon"
             rel="icon"

@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+/* @layer components {
   .heroButton {
     @apply px-6 py-2 m-2 border border-custom-t2 rounded-full
        uppercase text-xs tracking-widest text-custom-t2 transition-all
         hover:bg-custom-t2 hover:text-custom-t3;
   }
-}
+} */
 
 .grecaptcha-badge {
   visibility: hidden;
@@ -25,14 +25,13 @@
   scrollbar-width: none; /* Firefox */
 }
 
-.scrollbar-show::-webkit-scrollbar {
+/* .scrollbar-show::-webkit-scrollbar {
   display: none;
 }
 
-/* For IE, Edge and Firefox */
 .scrollbar-cov::-webkit-scrollbar {
   visibility: hidden;
-}
+} */
 
 :root {
   /* Your default theme */
@@ -54,7 +53,7 @@
 }
 
 [data-theme="dark"] {
-  --bg1: rgb(36, 36, 36);
+  --bg1: #242424;
   --bg2: #403f3c;
   --bg3: #d6d1ca;
   --bg4: #1b1b1d; /*used for footer */
