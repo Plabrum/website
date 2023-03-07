@@ -11,6 +11,8 @@ import { useRef } from "react";
 import { useIntersectionObserver } from "lib/Intersection";
 import Section from "components/homepage/Section";
 import Footer from "components/homepage/Footer";
+import Head from "next/head";
+import { useTheme } from "next-themes";
 
 type Props = {
   abouts: AboutType[];
@@ -21,12 +23,19 @@ type Props = {
 export default function Index({ abouts, projects, experiences }: Props) {
   const heroRef = useRef<HTMLDivElement>(null);
   const showNav = useIntersectionObserver(heroRef);
+  const { resolvedTheme } = useTheme();
 
   return (
     <div
-      className="flex flex-col h-screen overflow-y-scroll scroll-smooth bg-custom-bg1"
+      className="flex flex-col h-screen overflow-y-scroll scroll-smooth "
       // snap-y snap-proximity  scrollbar-hide
     >
+      <Head>
+        <meta
+          name="theme-color"
+          content={resolvedTheme === "dark" ? "#242424" : "#f0ddbe"}
+        />
+      </Head>
       {/* Header */}
       <Header showNav={showNav} homepage={true} />
 
