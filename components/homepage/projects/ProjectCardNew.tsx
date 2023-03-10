@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import SanityImage from "components/general/SanityImage";
-import { ProjectType, TechnologyType } from "schemas/schema_types";
+import { ProjectType, TagType, TechnologyType } from "schemas/schema_types";
 import {
   FaChevronCircleRight,
   FaChevronRight,
@@ -20,11 +20,12 @@ export default function ProjectCardNew({ project, className }: Props) {
     slug,
     coverImage,
     thumbnailImage,
-    overview,
+    blurb,
     duration,
     repo_url,
     demo_url,
     technologies,
+    tags,
   } = project;
 
   const startMo = duration?.start ? new Date(duration.start) : "now";
@@ -35,23 +36,39 @@ export default function ProjectCardNew({ project, className }: Props) {
     day: "numeric",
   });
 
-  // const capped_tech = technologies.slice(0, 4);
+  // Force tailwind to cache all the colors:
+  const colors = [
+    "bg-fuchsia-500",
+    "bg-orange-500",
+    "bg-rose-500",
+    "bg-lime-500",
+    "bg-teal-500",
+    "bg-sky-500",
+    "bg-yellow-500",
+  ];
+  function assign_color(tag: TagType) {
+    if (tag.color !== undefined) {
+      const index = tag.color % colors.length;
+      return colors[index];
+    } else {
+      return "bg-gray-500";
+    }
+  }
 
-  // Create actual card
   return (
     <div
-      className={`grid md:grid-cols-2 grid-cols-1 ${className}`}
+      className={`grid md:grid-cols-2 grid-cols-1 group relative  ${className}`}
       //
     >
-      <div className="flex flex-col col-span-1 justify-evenly pl-3 py-2 ">
+      <div className="flex flex-col col-span-1 pl-3 py-2 ">
         <div className="max-sm:flex max-sm:flex-row sm:mt-4 justify-between ">
           <div>
-            <h1 className="sm:text-4xl text-3xl font-bold text-custom-t1">
+            <h1 className="xl:text-3xl lg:text-2xl text-3xl font-bold text-custom-t1 ">
               {title}
             </h1>
             <h2 className="text-custom-t2 text-sm mt-1">{datestring}</h2>
           </div>
-          <div className="sm:hidden h-full aspect-square mr-4  relative">
+          <div className="sm:hidden h-full aspect-square mr-2  relative">
             (
             <SanityImage
               alt={"project thumbnail"}
@@ -68,34 +85,20 @@ export default function ProjectCardNew({ project, className }: Props) {
           </div>
         </div>
 
-        <div className="max-sm:grow flex items-center ">
-          <p className="text-ellipsis">{overview}</p>
-          {/* <p className="grow-0">{plaintext}</p> */}
+        <div className="md:aspect-[3/2] overflow-auto">
+          <PortableText value={blurb} />
         </div>
 
         <Link
-          className="self-center flex flex-row h-8 px-4 rounded-full bg-custom-t2 text-custom-t3 items-center"
+          className="self-center md:hidden flex flex-row h-8 px-4 mt-2 rounded-full bg-custom-bg2 items-center text-custom-t3"
           href={slug || ""}
         >
-          <p className="text-xs uppercase tracking-widest">View Project</p>
+          <p className=" text-xs uppercase tracking-widest">View Project</p>
           <FaChevronRight className="ml-3 w-2 " />
         </Link>
-        <div className="max-md:hidden flex flew-row gap-2 h-8  justify-start overflow-auto">
-          {technologies.map(
-            (tech, index) =>
-              tech && (
-                <div
-                  className="flex rounded-md bg-custom-bg3 items-center whitespace-nowrap"
-                  key={index}
-                >
-                  <p className="px-4 text-custom-t3 text-sm ">{tech.name}</p>
-                </div>
-              )
-          )}
-        </div>
       </div>
-      {/* <div className=" max-sm:hidden  col-span-1 md:p-4 border border-green-500"> */}
-      <div className="max-md:hidden flex flex-col justify-center items-center relative m-4 aspect-square">
+
+      <div className="max-md:hidden flex flex-col justify-center items-center relative aspect-square object-fit m-3">
         <SanityImage
           alt={"project thumbnail"}
           sanitySrc={coverImage}
@@ -107,6 +110,33 @@ export default function ProjectCardNew({ project, className }: Props) {
               33vw"
           className="object-cover rounded-xl"
         />
+      </div>
+
+      <div className="col-span-2 max-md:hidden mx-2 flex flew-row gap-2 h-8 justify-start overflow-auto">
+        {tags.slice(0, 3).map(
+          (tag, index) =>
+            tag && (
+              <div
+                className={
+                  "flex rounded-md items-center whitespace-nowrap " +
+                  assign_color(tag)
+                }
+                key={index}
+              >
+                <p className="px-4 text-custom-t3 text-sm ">{tag.name}</p>
+              </div>
+            )
+        )}
+      </div>
+
+      <div className="md:group-hover:block hidden group-hover:backdrop-blur-md group-hover:bg-black/20 absolute w-full h-full ">
+        <Link
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row h-20 w-1/2 rounded-full bg-custom-accent text-custom-t3 items-center justify-center"
+          href={slug || ""}
+        >
+          <p className="text-md uppercase tracking-widest ">View Project</p>
+          <FaChevronRight className="ml-3 w-2 " />
+        </Link>
       </div>
     </div>
   );

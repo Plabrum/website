@@ -15,13 +15,14 @@ function Section({ idName, titleName, className, children }: Props) {
       }
     >
       {titleName && (
-        <h3
-          className="relative md:mt-28 xs:mt-20 mt-12 uppercase tracking-[20px] max-md:pl-8 text-custom-t2 
-        sm:text-2xl text-xl text-center"
-        >
-          {titleName}
-        </h3>
+        <div className="w-full md:mt-28 xs:mt-20 mt-12 mb-10 text-center">
+          <p className="font-title text-xl tracking-[10px] uppercase text-custom-t2 ">
+            {titleName}
+          </p>
+          <div className="w-20 mt-2 bg-custom-accent h-px  mx-auto" />
+        </div>
       )}
+
       {children}
     </section>
   );

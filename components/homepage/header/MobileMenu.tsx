@@ -46,7 +46,7 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
       className=" "
     >
       <motion.ul
-        className="absolute top-0 left-0 rounded-br-2xl  pl-8 py-4 w-56 backdrop-blur-md text-custom-t1"
+        className="absolute top-0 left-0 rounded-br-2xl  pl-8 py-4 w-56 backdrop-blur-md bg-white/20 text-custom-t1"
         variants={{
           open: {
             visibility: "visible",
@@ -86,29 +86,33 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
             </Link>
           </motion.li>
         )}
-        <motion.li
-          className="py-2  px-6"
-          variants={itemVariants}
-          onClick={() => setIsOpen(false)}
-        >
-          <Link href="/#about">
-            <button className=" text-md uppercase tracking-widest ">
-              About
-            </button>
-          </Link>
-        </motion.li>
+        {homepage && (
+          <motion.li
+            className="py-2  px-6"
+            variants={itemVariants}
+            onClick={() => setIsOpen(false)}
+          >
+            <Link href="/#about">
+              <button className=" text-md uppercase tracking-widest ">
+                About
+              </button>
+            </Link>
+          </motion.li>
+        )}
 
-        <motion.li
-          className="py-2 px-6"
-          variants={itemVariants}
-          onClick={() => setIsOpen(false)}
-        >
-          <Link href="/#experience">
-            <button className="text-s  uppercase tracking-widest">
-              Experience
-            </button>
-          </Link>
-        </motion.li>
+        {homepage && (
+          <motion.li
+            className="py-2 px-6"
+            variants={itemVariants}
+            onClick={() => setIsOpen(false)}
+          >
+            <Link href="/#experience">
+              <button className="text-s  uppercase tracking-widest">
+                Experience
+              </button>
+            </Link>
+          </motion.li>
+        )}
 
         <motion.li
           className="py-2 px-6"

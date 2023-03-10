@@ -65,7 +65,7 @@ function Contact({}: Props) {
       });
   };
 
-  const contact_box: string = ` bg-custom-bg2 rounded-lg px-6 py-4 transition-all text-custom-t2 placeholder-custom-t4
+  const contact_box: string = ` bg-custom-bg3 rounded-lg px-6 py-4 transition-all text-custom-t1 placeholder-custom-t4
   outline-none focus:ring focus:border-custom-t2`;
 
   // focus:border-custom-t2 border-2  hover:border-custom-t4

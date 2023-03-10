@@ -9,14 +9,17 @@ module.exports = {
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+
   theme: {
     screens: {
       xs: "376px",
       ...defaultTheme.screens,
     },
+
     extend: {
       colors: {
         custom: {
+          header: "var(--header)",
           bg1: "var(--bg1)",
           bg2: "var(--bg2)",
           bg3: "var(--bg3)",
@@ -25,7 +28,11 @@ module.exports = {
           t2: "var(--t2)",
           t3: "var(--t3)",
           t4: "var(--t4)",
+          accent: "var(--accent)",
         },
+      },
+      fontFamily: {
+        title: ["IBM Plex Serif", "serif"],
       },
     },
   },
