@@ -1,5 +1,5 @@
 import Header from "components/homepage/header/Header";
-import ProjectCardNew from "components/homepage/projects/ProjectCardNew";
+import ProjectCardNew from "components/homepage/projects/ProjectCard";
 import { client } from "lib/sanity.client";
 import { GetStaticProps } from "next";
 import { groq } from "next-sanity";
