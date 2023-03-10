@@ -2,11 +2,12 @@ import type { Image, PortableTextBlock } from "sanity";
 
 export interface ProjectType {
   _id?: string;
-  title?: string;
+  title: string;
   _createdAt?: string;
-  slug?: string;
-  overview: string;
-  coverImage?: Image;
+  slug: string;
+  meta_description: string;
+  blurb: PortableTextBlock[];
+  coverImage: Image;
   thumbnailImage?: Image;
   duration?: {
     start?: string;
@@ -16,6 +17,12 @@ export interface ProjectType {
   repo_url?: string;
   demo_url?: string;
   technologies: TechnologyType[];
+  tags: TagType[];
+}
+export interface TagType {
+  id?: string;
+  name: string;
+  color?: number;
 }
 
 export interface TechnologyType {

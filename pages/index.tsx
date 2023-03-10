@@ -33,8 +33,9 @@ export default function Index({ abouts, projects, experiences }: Props) {
       <Head>
         <meta
           name="theme-color"
-          content={resolvedTheme === "dark" ? "#242424" : "#f0ddbe"}
+          content={resolvedTheme === "dark" ? "#242424" : "FFF1E3"}
         />
+        <title>Phil Labrum</title>
       </Head>
       {/* Header */}
       <Header showNav={showNav} homepage={true} />
@@ -53,7 +54,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
       <Section
         idName="about"
         titleName="About"
-        className="min-h-screen flex flex-col items-center"
+        className=" flex flex-col items-center sm:py-40 py-20"
       >
         <About abouts={abouts} />
       </Section>
@@ -62,7 +63,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
         <Experiences experiences={experiences} />
       </Section>
 
-      <Section idName="projects" titleName="Projects" className="">
+      <Section idName="projects" titleName="Recent Projects" className="">
         <Projects projects={projects} />
       </Section>
 
@@ -96,12 +97,12 @@ export async function getStaticProps() {
     'slug': slug.current,
     coverImage,
     thumbnailImage,
-    overview,
-    description,
+    blurb,
     duration,
     repo_url,
     demo_url,
-    "technologies":technologies[]->{_id, name, tech_page, logo_image},
+    "tags":tags[]->{name, color},
+    "technologies":technologies[]->{name, tech_page, logo_image},
     }
     | order(duration.start asc)`);
 
@@ -109,7 +110,6 @@ export async function getStaticProps() {
   *[_type == "experience" && !(_id in path('drafts.**'))]{
     _id,
     role,
-    overview,
     duration,
     description,
     technologies,

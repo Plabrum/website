@@ -39,7 +39,7 @@ function ExperienceCard({ isLast, experience }: Props) {
           <SanityImage
             sanitySrc={company.logo_image}
             alt="Company or school logo"
-            className="rounded-md object-contain"
+            className="rounded-md object-contain drop-shadow-sm"
             height={100}
             width={100}
           />

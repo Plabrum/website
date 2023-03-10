@@ -29,7 +29,7 @@ export default function Hero({ abouts }: { abouts: AboutType[] }) {
         className="relative rounded-full h-32 w-32 object-cover"
       />
 
-      <h2 className="text-sm uppercase text-custom-t2 pb-2 tracking-[15px]">
+      <h2 className="text-sm font-title uppercase text-custom-t2 pb-2 tracking-[15px]">
         {job_title}
       </h2>
       <h1 className="text-5xl lg:text-6xl font-semibold px-10">

@@ -42,11 +42,11 @@ export default function Header({ showNav = true, homepage = false }: Props) {
     return (
       <header
         className={`fixed top-0 z-20 w-screen grid md:grid-cols-3 grid-cols-2 sm:p-4 p-3 items-center 
-       ${showNav ? " sm:backdrop-blur-lg transition-500" : ""}`}
+       ${
+         showNav ? " sm:backdrop-blur-sm bg-custom-header transition-500" : ""
+       }`}
       >
         <Head>
-          {/* <meta name="theme-color" content="bg-custom-bg1" /> */}
-          {/* <meta name="theme-color" content="var(--bg1)" /> */}
           <link
             id="favicon"
             rel="icon"
