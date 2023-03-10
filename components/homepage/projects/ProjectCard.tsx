@@ -1,105 +1,143 @@
 import React from "react";
 import Link from "next/link";
 import SanityImage from "components/general/SanityImage";
-import { PortableText } from "@portabletext/react";
-import { ProjectType } from "schemas/schema_types";
-import { FaChevronCircleRight, FaGithub, FaHammer } from "react-icons/fa";
-interface ProjectCardProp {
-  project: ProjectType | null;
+import { ProjectType, TagType, TechnologyType } from "schemas/schema_types";
+import {
+  FaChevronCircleRight,
+  FaChevronRight,
+  FaGithub,
+  FaHammer,
+} from "react-icons/fa";
+import { PortableText, toPlainText } from "@portabletext/react";
+
+interface Props {
+  className?: string;
+  project: ProjectType;
 }
-export default function ProjectCard({ project }: ProjectCardProp) {
-  if (project) {
-    const { title, slug, coverImage, overview, duration, repo_url, demo_url } =
-      project;
+export default function ProjectCardNew({ project, className }: Props) {
+  const {
+    title,
+    slug,
+    coverImage,
+    thumbnailImage,
+    blurb,
+    duration,
+    repo_url,
+    demo_url,
+    technologies,
+    tags,
+  } = project;
 
-    const startMo = duration?.start ? new Date(duration.start) : "now";
+  const startMo = duration?.start ? new Date(duration.start) : "now";
 
-    const datestring: string = startMo.toLocaleString("en-us", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-    // Create actual card
+  const datestring: string = startMo.toLocaleString("en-us", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
-    return (
-      <div className="grid sm:grid-cols-3 grid-cols-4 bg-custom-bg2 sm:aspect-[2/1] aspect-[5/2] rounded-3xl overflow-hidden">
-        <div className="relative col-span-1">
-          <Link href={slug || "/"}>
-            <SanityImage
-              sanitySrc={coverImage}
-              //   width={200}
-              //   height={50}
-              alt="cover image"
-              className="object-cover object-top"
-              fill={true}
-            />
-          </Link>
-        </div>
-        <div className="sm:col-span-2 col-span-3 grid grid-cols-1 w-5/6 sm:my-2 max-sm:h-full justify-self-center sm:self-center">
-          {/* Title */}
-          <Link className="max-sm:mt-4 self-start " href={slug || "/"}>
-            <h1 className="sm:text-3xl text-xl">{title}</h1>
-            <div className="max-sm:hidden flex flex-row text-custom-t4 text-sm">
-              <h2>{datestring}</h2>
-            </div>
-          </Link>
-
-          {/* Overview */}
-          <div className="sm:text-lg sm:my-2 inline-block w-full max-sm:truncate">
-            {overview}
-          </div>
-
-          {/* link tags */}
-          <div className="max-sm:flex max-sm:flex-row self-end  mb-2">
-            <div className="sm:hidden flex flex-row text-custom-t4 text-sm items-end">
-              <h2>{datestring}</h2>
-            </div>
-            <div className="flex  flex-row sm:justify-between gap-x-2 ml-auto justify-self-end">
-              <Link
-                href={repo_url ? repo_url : ""}
-                className="bg-custom-bg3 sm:rounded-md rounded-full sm:p-2 p-1 "
-                title="Link to Code Repository"
-              >
-                <div className="flex flex-row">
-                  <FaGithub className="text-custom-t3 sm:h-10 sm:w-10 w-8 h-8" />
-                  <h3 className="max-md:hidden self-center px-2 uppercase tracking-[2px] text-custom-t3">
-                    Code
-                  </h3>
-                </div>
-              </Link>
-              {demo_url && (
-                <Link
-                  href={demo_url}
-                  className=" bg-custom-bg3 sm:rounded-md rounded-full sm:p-2 p-1 "
-                  title="Link to Demo of project"
-                >
-                  <div className="flex flex-row">
-                    <FaChevronCircleRight className="text-custom-t3 sm:h-10 sm:w-10 w-8 h-8" />
-                    <h3 className="max-md:hidden  self-center px-2 uppercase tracking-[2px] text-custom-t3">
-                      Demo
-                    </h3>
-                  </div>
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  } else {
-    return <div className="aspect-[2/1] "></div>;
-    // Create a null card
+  // Force tailwind to cache all the colors:
+  const colors = [
+    "bg-fuchsia-500",
+    "bg-orange-500",
+    "bg-rose-500",
+    "bg-lime-500",
+    "bg-teal-500",
+    "bg-sky-500",
+    "bg-yellow-500",
+  ];
+  function assign_color(tag: TagType) {
+    if (tag.color !== undefined) {
+      const index = tag.color % colors.length;
+      return colors[index];
+    } else {
+      return "bg-gray-500";
+    }
   }
-}
 
-/* <Link href={"/projects/" + slug}>
-<h3 className="text-4xl font-semibold text-center">{title}</h3>
-<SanityImage
-  sanitySrc={coverImage}
-  width={200}
-  height={200}
-  alt="cover image"
-  className="w-50 h-50"
-/>
-</Link>
-<PortableText value={overview} /> */
+  return (
+    <div
+      className={`grid md:grid-cols-2 grid-cols-1 group relative  ${className}`}
+      //
+    >
+      <div className="flex flex-col col-span-1 pl-3 py-2 ">
+        <div className="max-sm:flex max-sm:flex-row sm:mt-4 justify-between ">
+          <div>
+            <h1 className="xl:text-3xl lg:text-2xl text-3xl font-bold text-custom-t1 ">
+              {title}
+            </h1>
+            <h2 className="text-custom-t2 text-sm mt-1">{datestring}</h2>
+          </div>
+          <div className="sm:hidden h-full aspect-square mr-2  relative">
+            (
+            <SanityImage
+              alt={"project thumbnail"}
+              sanitySrc={thumbnailImage}
+              // height={500}
+              // width={2000}
+              fill={true}
+              sizes="(max-width: 400px) 50vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+              className=" object-cover rounded-md"
+            />
+            )
+          </div>
+        </div>
+
+        <div className="md:aspect-[3/2] overflow-auto">
+          <PortableText value={blurb} />
+        </div>
+
+        <Link
+          className="self-center md:hidden flex flex-row h-8 px-4 mt-2 rounded-full bg-custom-bg2 items-center text-custom-t3"
+          href={slug || ""}
+        >
+          <p className=" text-xs uppercase tracking-widest">View Project</p>
+          <FaChevronRight className="ml-3 w-2 " />
+        </Link>
+      </div>
+
+      <div className="max-md:hidden flex flex-col justify-center items-center relative aspect-square object-fit m-3">
+        <SanityImage
+          alt={"project thumbnail"}
+          sanitySrc={coverImage}
+          // height={1000}
+          // width={2000}
+          fill={true}
+          sizes="(max-width: 400px) 50vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+          className="object-cover rounded-xl"
+        />
+      </div>
+
+      <div className="col-span-2 max-md:hidden mx-2 flex flew-row gap-2 h-8 justify-start overflow-auto">
+        {tags.slice(0, 3).map(
+          (tag, index) =>
+            tag && (
+              <div
+                className={
+                  "flex rounded-md items-center whitespace-nowrap " +
+                  assign_color(tag)
+                }
+                key={index}
+              >
+                <p className="px-4 text-custom-t3 text-sm ">{tag.name}</p>
+              </div>
+            )
+        )}
+      </div>
+
+      <div className="md:group-hover:block hidden group-hover:backdrop-blur-md group-hover:bg-black/20 absolute w-full h-full ">
+        <Link
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row h-20 w-1/2 rounded-full bg-custom-accent text-custom-t3 items-center justify-center"
+          href={slug || ""}
+        >
+          <p className="text-md uppercase tracking-widest ">View Project</p>
+          <FaChevronRight className="ml-3 w-2 " />
+        </Link>
+      </div>
+    </div>
+  );
+}

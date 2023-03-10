@@ -1,6 +1,6 @@
 import { ProjectType } from "schemas/schema_types";
 
-import ProjectCardNew from "./ProjectCardNew";
+import ProjectCard from "./ProjectCard";
 import { FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export default function Projects({ projects }: { projects: ProjectType[] }) {
       <div className="flex flex-col ">
         {projects.map((project, index) => (
           <div key={index}>
-            <ProjectCardNew
+            <ProjectCard
               project={project}
               className="2xl:w-[1000px] xl:w-[750px] lg:w-[650px] md:w-[600px] max-sm:min-h-[220px] my-2 mx-6"
             />
