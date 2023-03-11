@@ -1,5 +1,6 @@
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
 import { PortableText } from "@portabletext/react";
+import { CustomPortableText } from "components/general/CustomPortableText";
 import SanityImage from "components/general/SanityImage";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -54,7 +55,7 @@ export default function ProjectPage({ project }: { project: ProjectType }) {
         width={2000}
         // fill={true}
         // height={"auto"}
-        className="2xl:w-1/2 lg:w-5/6 object-cover"
+        className="2xl:w-1/2 lg:w-3/4 object-cover"
         alt={title + " cover image"}
         sanitySrc={coverImage}
       />
@@ -66,7 +67,7 @@ export default function ProjectPage({ project }: { project: ProjectType }) {
           Project Writeup
         </h1>
         <div className="xl:w-5/6 mx-auto">
-          <PortableText value={description} />
+          <CustomPortableText value={description} />
         </div>
       </div>
     </div>

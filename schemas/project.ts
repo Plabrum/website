@@ -67,16 +67,6 @@ export default defineType({
     }),
 
     defineField({
-      name: "thumbnailImage",
-      title: "Thumbnail Image",
-      description:
-        "This image will be used as the thumbnail image for the project",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
       name: "coverImage",
       title: "Cover Image",
       description:
