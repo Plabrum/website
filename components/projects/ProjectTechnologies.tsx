@@ -6,7 +6,7 @@ type Props = {
   technologies: TechnologyType[];
 };
 
-function Technologies({ technologies }: Props) {
+export default function ProjectTechnologies({ technologies }: Props) {
   return (
     <div className="w-screen">
       <h1 className="sm:text-2xl text-xl text-center font-bold tracking-widest font-mono">
@@ -33,5 +33,3 @@ function Technologies({ technologies }: Props) {
     </div>
   );
 }
-
-export default Technologies;
