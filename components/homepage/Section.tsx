@@ -19,7 +19,7 @@ function Section({ idName, titleName, className, children }: Props) {
           <p className="font-title text-xl tracking-[10px] uppercase text-custom-t2 ">
             {titleName}
           </p>
-          <div className="w-20 mt-2 bg-custom-accent h-px  mx-auto" />
+          <div className="w-20 mt-2 bg-custom-accent h-px mx-auto" />
         </div>
       )}
 
