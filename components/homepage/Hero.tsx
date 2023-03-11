@@ -12,8 +12,8 @@ import { FaChevronDown } from "react-icons/fa";
 //   hero_photo: SanImage;
 // }
 
-export default function Hero({ abouts }: { abouts: AboutType[] }) {
-  const { hero_photo, job_title, taglines, name } = abouts[0];
+export default function Hero({ about }: { about: AboutType }) {
+  const { hero_photo, job_title, taglines, name } = about;
   const [text, count] = useTypewriter({
     words: taglines,
     loop: true,

@@ -24,7 +24,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
   const heroRef = useRef<HTMLDivElement>(null);
   const showNav = useIntersectionObserver(heroRef);
   const { resolvedTheme } = useTheme();
-
+  const about = abouts[0];
   return (
     <div
       className="flex flex-col h-screen overflow-y-scroll scroll-smooth "
@@ -33,9 +33,10 @@ export default function Index({ abouts, projects, experiences }: Props) {
       <Head>
         <meta
           name="theme-color"
-          content={resolvedTheme === "dark" ? "#242424" : "#ffffff"}
+          content={resolvedTheme === "dark" ? "#1b1a1a" : "#ffffff"}
         />
-        <title>Phil Labrum</title>
+        <title>{"Phil Labrum | Software Engineering Portfolio"}</title>
+        <meta name="description" content={about.meta_description} />
       </Head>
       {/* Header */}
       <Header showNav={showNav} homepage={true} />
@@ -46,7 +47,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
         className="min-h-screen flex flex-col items-center"
       >
         <div ref={heroRef} className="my-auto">
-          <Hero abouts={abouts} />
+          <Hero about={about} />
         </div>
       </Section>
 
@@ -56,7 +57,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
         titleName="About"
         className=" flex flex-col items-center sm:py-40 py-20"
       >
-        <About abouts={abouts} />
+        <About about={about} />
       </Section>
 
       <Section idName="experience" titleName="Experience" className="">
@@ -77,7 +78,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
 }
 
 export async function getStaticProps() {
-  const abouts: AboutType[] = await client.fetch(
+  const abouts: AboutType = await client.fetch(
     groq`
   *[_type == "about" && !(_id in path('drafts.**'))]{
     _id,

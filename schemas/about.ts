@@ -24,7 +24,13 @@ export default defineType({
       description: "Job title",
       validation: (rule) => rule.required(),
     }),
-
+    defineField({
+      name: "meta_description",
+      description: "Used for the <meta> description tag for SEO",
+      title: "Meta Description",
+      type: "string",
+      validation: (rule) => rule.max(155).required(),
+    }),
     defineField({
       name: "taglines",
       title: "Tagline array",
