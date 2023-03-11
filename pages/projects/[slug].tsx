@@ -31,7 +31,8 @@ export default function ProjectSlugRoute({
   return (
     <div>
       <Head>
-        <title>{project.title}</title>
+        <title>{"Projects - " + project.title}</title>
+        <meta name="description" content={project.meta_description} />
       </Head>
 
       <Header />

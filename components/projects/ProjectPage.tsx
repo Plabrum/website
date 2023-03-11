@@ -10,25 +10,15 @@ import ProjectHero from "./ProjectHero";
 import Title from "./ProjectTitle";
 
 export default function ProjectPage({ project }: { project: ProjectType }) {
-  const {
-    _id,
-    title,
-    tags,
-    coverImage,
-    description,
-    duration,
-    repo_url,
-    demo_url,
-    technologies,
-  } = project;
+  const { description, technologies } = project;
 
   return (
     <div className=" w-screen min-h-screen flex flex-col sm:space-y-14 space-y-8 items-center  pt-20">
-      {/* Title box */}
-
+      {/* Hero box */}
       <ProjectHero project={project} />
-
+      {/* tech row */}
       <ProjectTechnologies technologies={technologies} />
+      {/* Article */}
       <div className="flex flex-col max-w-[850px]  bg-custom-bg3 sm:space-y-10 space-y-6 sm:py-16 md:px-8 px-3 py-10 ">
         {/* <p>test</p> */}
         <h1 className="sm:text-2xl text-xl text-center mx-5 font-bold tracking-widest font-mono">

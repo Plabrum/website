@@ -36,6 +36,7 @@ export interface TechnologyType {
 export interface AboutType {
   _id: string;
   name: string;
+  meta_description: string;
   job_title: string;
   taglines: string[];
   hero_photo: Image;

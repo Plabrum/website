@@ -51,7 +51,7 @@ export default function ProjectHero({ project }: { project: ProjectType }) {
         className="my-10"
       />
 
-      <div className="2xl:w-1/2 lg:w-3/4 mx-auto flex flex-row justify-center lg:space-x-10 space-x-4 mt-10">
+      <div className="2xl:w-1/2 lg:w-3/4 mx-auto flex flex-row justify-center lg:space-x-10 space-x-4 my-4">
         {tags.map((tag, index) => {
           return (
             <div
