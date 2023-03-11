@@ -84,6 +84,7 @@ export async function getStaticProps() {
     _id,
     name,
     job_title,
+    meta_description,
     taglines,
     hero_photo,
     about_photo,
