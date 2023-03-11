@@ -48,7 +48,7 @@ export default function ProjectHero({ project }: { project: ProjectType }) {
         from_homepage={from_homepage}
         demo_url={demo_url}
         repo_url={repo_url}
-        className="sm:mb-10"
+        className="my-10"
       />
 
       <div className="2xl:w-1/2 lg:w-3/4 mx-auto flex flex-row justify-center lg:space-x-10 space-x-4 mt-10">
