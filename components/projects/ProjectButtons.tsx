@@ -17,7 +17,7 @@ export default function ProjectButtons({
 }: Props) {
   return (
     <div
-      className={`w-5/6 flex flex-row mx-auto justify-between font-mono ${className}`}
+      className={`w-5/6 flex flex-row mx-auto lg:justify-between md:justify-end justify-center font-mono ${className}`}
     >
       <Link
         className="grow-0 flex flex-row max-lg:hidden items-center text-custom-bg2 "
@@ -28,14 +28,14 @@ export default function ProjectButtons({
           {from_homepage ? "Highlighted Projects" : "All Projects"}
         </p>
       </Link>
-      <div className="flex flex-col ">
+      <div className="flex flex-col space-y-2">
         {demo_url && (
           <Link
             href={demo_url}
             className="grow-0 flex flex-row items-center text-custom-bg2"
           >
-            <p className="text-center lg:w-full w-24">Demo</p>
-            <FaExternalLinkSquareAlt className="w-10 h-10 m-2" />
+            <p className="text-center ">Demo</p>
+            <FaExternalLinkSquareAlt className="sm:w-8 sm:h-8 ml-2 w-6 h-6" />
           </Link>
         )}
         {repo_url && (
@@ -43,8 +43,8 @@ export default function ProjectButtons({
             href={repo_url}
             className="grow-0 flex flex-row items-center text-custom-bg2"
           >
-            <p className="text-center lg:w-full w-24">Code</p>
-            <FaGithub className="w-10 h-10 m-2" />
+            <p className="text-center">Code</p>
+            <FaGithub className="sm:w-8 sm:h-8 ml-2 w-6 h-6" />
           </Link>
         )}
       </div>
