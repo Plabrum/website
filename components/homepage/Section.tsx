@@ -5,7 +5,12 @@ interface Props {
   children: JSX.Element;
 }
 
-function Section({ idName, titleName, className, children }: Props) {
+export default function Section({
+  idName,
+  titleName,
+  className,
+  children,
+}: Props) {
   return (
     <section
       id={idName}
@@ -27,5 +32,3 @@ function Section({ idName, titleName, className, children }: Props) {
     </section>
   );
 }
-
-export default Section;
