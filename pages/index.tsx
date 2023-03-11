@@ -33,7 +33,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
       <Head>
         <meta
           name="theme-color"
-          content={resolvedTheme === "dark" ? "#242424" : "FFF1E3"}
+          content={resolvedTheme === "dark" ? "#242424" : "#ffffff"}
         />
         <title>Phil Labrum</title>
       </Head>
@@ -63,7 +63,7 @@ export default function Index({ abouts, projects, experiences }: Props) {
         <Experiences experiences={experiences} />
       </Section>
 
-      <Section idName="projects" titleName="Recent Projects" className="">
+      <Section idName="projects" titleName="Highlighted Projects" className="">
         <Projects projects={projects} />
       </Section>
 
