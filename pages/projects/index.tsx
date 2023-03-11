@@ -18,7 +18,7 @@ export default function Index({ projects }: Props) {
       <Header />
       {/* <div className="h-40">hello</div> */}
 
-      <div className="grid 2xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 mt-20 2xl:mx-16 md:mx-20 sm:mx-8 mx-2 2xl:gap-x-8 gap-x-2">
+      <div className="grid lg:grid-cols-2 grid-cols-1 mt-20 2xl:mx-16 md:mx-20 sm:mx-8 mx-2 2xl:gap-x-8 gap-x-2">
         {/* <div className="2xl:col-span-3 xl:col-span-2 col-span-1 mx-auto w-1/2 h-10 flex flex-row border-4 border-custom-t2 rounded-full ">
           <input
             placeholder="Enter keywords, technolgies, title..."

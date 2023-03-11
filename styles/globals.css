@@ -63,13 +63,13 @@
 
 [data-theme="dark"] {
   --header: #0000004c;
-  --bg1: #323031;
+  --bg1: #1b1a1a;
   --bg2: #5fb5bf;
   --bg3: #2b2a2a;
-  --bg4: #1b1b1d; /*used for footer */
+  --bg4: #060606; /*used for footer */
   --t1: #ffffff;
   --t2: #5fb5bf; /* used for buttons, icons, etc */
   --t3: #f1efef; /*dark text */
-  --t4: #888585;
+  --t4: #a1a1a1;
   --accent: #db3a34;
 }
