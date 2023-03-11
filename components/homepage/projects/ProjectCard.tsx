@@ -60,7 +60,6 @@ export default function ProjectCardNew({ project, className }: Props) {
   return (
     <div
       className={`grid md:grid-cols-2 grid-cols-1 group relative  ${className}`}
-      //
     >
       <Link
         className="sm:hidden"
@@ -70,13 +69,7 @@ export default function ProjectCardNew({ project, className }: Props) {
           alt={"project thumbnail"}
           sanitySrc={coverImage}
           height={1000}
-          // width={2000}
-
-          // fill={true}
-          // sizes="(max-width: 400px) 50vw,
-          //     (max-width: 1200px) 50vw,
-          //     33vw"
-          className=" w-full aspect-[5/4] object-cover mt-2"
+          className=" w-full aspect-[5/4] object-cover mt-2 "
         />
       </Link>
       <div className="flex flex-col col-span-1 pl-3 py-2 ">
@@ -87,21 +80,6 @@ export default function ProjectCardNew({ project, className }: Props) {
             </h1>
             <h2 className="text-custom-t2 text-sm mt-1">{datestring}</h2>
           </div>
-          {/* <div className="sm:hidden h-full aspect-square mr-2  relative">
-            (
-            <SanityImage
-              alt={"project thumbnail"}
-              sanitySrc={thumbnailImage}
-              // height={500}
-              // width={2000}
-              fill={true}
-              // sizes="(max-width: 400px) 50vw,
-              // (max-width: 1200px) 50vw,
-              // 33vw"
-              className=" object-cover rounded-md"
-            />
-            )
-          </div> */}
         </div>
 
         <div className="aspect-[3/2]  overflow-auto  my-auto">
@@ -116,7 +94,7 @@ export default function ProjectCardNew({ project, className }: Props) {
           <FaChevronRight className="ml-3 w-2 " />
         </Link>
       </div>
-      <div className="max-md:hidden flex flex-col justify-center items-center relative aspect-square object-fit m-3">
+      <div className="max-md:hidden flex flex-col justify-center items-center relative aspect-square object-fit mb-3">
         <SanityImage
           alt={"project thumbnail"}
           sanitySrc={coverImage}

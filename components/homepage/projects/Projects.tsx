@@ -8,15 +8,15 @@ export default function Projects({ projects }: { projects: ProjectType[] }) {
   // const curtailed_project = projects.slice(0, 3);
   return (
     <div className="flex flex-col items-center justify-center mt-10">
-      <div className="flex flex-col ">
+      <div className="flex flex-col">
         {projects.map((project, index) => (
           <div key={index}>
             <ProjectCard
               project={project}
-              className="2xl:w-[800px] lg:w-[650px] md:w-[600px] max-sm:min-h-[220px] my-2 mx-6"
+              className="2xl:w-[800px] lg:w-[650px] md:w-[600px] max-sm:min-h-[220px] my-4 mx-6"
             />
             {index < projects.length - 1 && (
-              <div className="bg-custom-t4 h-px mx-8 rounded-full" />
+              <div className="bg-custom-t4 h-px mx-12 rounded-full" />
             )}
           </div>
         ))}

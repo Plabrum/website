@@ -64,12 +64,12 @@
 [data-theme="dark"] {
   --header: #0000004c;
   --bg1: #1b1a1a;
-  --bg2: #5fb5bf;
+  --bg2: #dfdfdf;
   --bg3: #2b2a2a;
   --bg4: #060606; /*used for footer */
   --t1: #ffffff;
-  --t2: #5fb5bf; /* used for buttons, icons, etc */
-  --t3: #f1efef; /*dark text */
+  --t2: #dfdfdf; /* used for buttons, icons, etc */
+  --t3: #000000; /*dark text */
   --t4: #a1a1a1;
-  --accent: #db3a34;
+  --accent: #e76f51;
 }

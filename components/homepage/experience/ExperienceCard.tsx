@@ -44,11 +44,13 @@ function ExperienceCard({ isLast, experience }: Props) {
             width={100}
           />
         </Link>
-        {!isLast && <div className="mt-2 w-px grow self-center bg-custom-t2" />}
+        {!isLast && (
+          <div className="mt-2 w-px grow self-center bg-custom-accent" />
+        )}
       </div>
       <div className="flex flex-col grow">
         <h1 className="sm:text-2xl text-xl justify-self-start">{role}</h1>
-        <div className="text-custom-t2 text-xs">
+        <div className="text-custom-t4 text-xs">
           <h2>
             {startString} - {endString}
           </h2>
