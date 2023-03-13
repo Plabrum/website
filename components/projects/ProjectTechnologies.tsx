@@ -24,7 +24,7 @@ export default function ProjectTechnologies({ technologies }: Props) {
                 height={100}
                 width={100}
                 sanitySrc={tech.logo_image}
-                className="h-10 object-contain filter sm:grayscale group-hover:grayscale-0"
+                className="h-10 object-contain filter sm:grayscale group-hover:grayscale-0 w-auto"
                 alt={tech.name}
               />
               <h1 className="h-8 text-sm font-mono font-medium text-custom-t4 group-hover:text-custom-t2 text-center">

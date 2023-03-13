@@ -34,7 +34,7 @@ export default function ProjectButtons({
             href={demo_url}
             className="grow-0 flex flex-row items-center text-custom-bg2"
           >
-            <p className="text-center ">Try a Demo</p>
+            <p className="text-center ">View Full Demo</p>
             <FaExternalLinkSquareAlt className="sm:w-8 sm:h-8 ml-2 w-6 h-6" />
           </Link>
         )}

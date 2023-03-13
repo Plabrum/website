@@ -13,5 +13,15 @@ export default defineType({
       title: "Link to html",
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      type: "number",
+      name: "width",
+      title: "Width of Aspect ratio",
+    }),
+    defineField({
+      type: "number",
+      name: "height",
+      title: "Height of Aspect ratio",
+    }),
   ],
 });

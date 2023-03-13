@@ -1,7 +1,4 @@
 import { defineType, defineField, defineArrayMember } from "sanity";
-import { ComponentIcon } from "@sanity/icons";
-
-// import { external } from "./external";
 
 /**
  * This is the schema definition for the rich text fields used for
