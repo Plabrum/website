@@ -71,3 +71,7 @@ export interface ExperienceType {
   description?: PortableTextBlock[];
   technologies?: TechnologyType[];
 }
+
+export interface ExternalIframeType {
+  link_to_html: string;
+}

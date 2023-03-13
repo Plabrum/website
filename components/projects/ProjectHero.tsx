@@ -8,17 +8,7 @@ import ProjectButtons from "./ProjectButtons";
 import ProjectTitle from "./ProjectTitle";
 
 export default function ProjectHero({ project }: { project: ProjectType }) {
-  const {
-    _id,
-    title,
-    tags,
-    coverImage,
-    description,
-    duration,
-    repo_url,
-    demo_url,
-    technologies,
-  } = project;
+  const { title, tags, coverImage, duration, repo_url, demo_url } = project;
   const router = useRouter();
   const from_slug = router.query["name"];
   var from_homepage = false;

@@ -1,5 +1,5 @@
 import SanityImage from "components/general/SanityImage";
-import React from "react";
+import Link from "next/link";
 import { TechnologyType } from "schemas/schema_types";
 
 type Props = {
@@ -15,7 +15,11 @@ export default function ProjectTechnologies({ technologies }: Props) {
       <div className="grid sm:grid-rows-1 grid-rows-2 grid-flow-col mt-8 lg:w-1/2 w-3/4 mx-auto justify-between ">
         {technologies.map((tech, index) => {
           return (
-            <div key={index} className="group flex flex-col space-y-2 ">
+            <Link
+              key={index}
+              className="group flex flex-col space-y-2 "
+              href={tech.tech_page}
+            >
               <SanityImage
                 height={100}
                 width={100}
@@ -26,7 +30,7 @@ export default function ProjectTechnologies({ technologies }: Props) {
               <h1 className="h-8 text-sm font-mono font-medium text-custom-t4 group-hover:text-custom-t2 text-center">
                 {tech.name}
               </h1>
-            </div>
+            </Link>
           );
         })}
       </div>

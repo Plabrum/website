@@ -7,7 +7,7 @@ import Header from "../components/homepage/header/Header";
 import Hero from "../components/homepage/Hero";
 import Projects from "../components/homepage/projects/Projects";
 import Experiences from "../components/homepage/experience/Experiences";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useIntersectionObserver } from "lib/Intersection";
 import Section from "components/homepage/Section";
 import Footer from "components/homepage/Footer";
@@ -21,19 +21,19 @@ type Props = {
 };
 
 export default function Index({ abouts, projects, experiences }: Props) {
-  const heroRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement | null>(null);
   const showNav = useIntersectionObserver(heroRef);
   const { resolvedTheme } = useTheme();
   const about = abouts[0];
   return (
     <div
-      className="flex flex-col h-screen overflow-y-scroll scroll-smooth "
+      className="flex flex-col h-screen overflow-y-scroll scroll-smooth bg-custom-bg1"
       // snap-y snap-proximity  scrollbar-hide
     >
       <Head>
         <meta
           name="theme-color"
-          content={resolvedTheme === "dark" ? "#1b1a1a" : "#ffffff"}
+          content={resolvedTheme == "dark" ? "#1b1a1a" : "#f8f8f8"}
         />
         <title>{"Phil Labrum | Software Engineering Portfolio"}</title>
         <meta name="description" content={about.meta_description} />
