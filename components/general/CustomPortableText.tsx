@@ -72,7 +72,7 @@ export function CustomPortableText({
               <SanityImage
                 sanitySrc={value}
                 width={1000}
-                height={1000}
+                // height={1000}
                 alt="cover image"
               />
             </div>
@@ -85,11 +85,18 @@ export function CustomPortableText({
         );
       },
       external: ({ value }: { value: ExternalIframeType }) => {
-        console.log("value", value.link_to_html);
+        const shape =
+          value.width && value.height
+            ? ` aspect-[${value.width}/${value.height}] `
+            : "aspect-video";
+        const tailwind_cache = `aspect-[2/1] aspect-[1/2] aspect-[3/1] aspect-[1/3] aspect[4/3] aspect-[3/4]
+                                aspect-[5/4] aspect-[4/5] aspect-[16/9] aspect-[1/1] `;
+
+        console.log("aspect:", shape);
         return (
           <iframe
             width={"100%"}
-            className="aspect-video"
+            className={shape}
             src={value.link_to_html}
             title="YouTube video player"
             allowFullScreen

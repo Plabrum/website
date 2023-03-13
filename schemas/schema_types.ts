@@ -74,4 +74,6 @@ export interface ExperienceType {
 
 export interface ExternalIframeType {
   link_to_html: string;
+  width?: number;
+  height?: number;
 }
