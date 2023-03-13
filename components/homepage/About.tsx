@@ -20,16 +20,15 @@ function About({ about }: { about: AboutType }) {
       </h3> */}
       <motion.div
         initial={{
-          x: -200,
           opacity: 0,
         }}
         transition={{
           duration: 1,
         }}
         whileInView={{
-          x: 0,
           opacity: 1,
         }}
+        viewport={{ once: true }}
         className="flex-shrink-0 col-span-1 justify-self-center max-sm:mt-4 max-sm:hidden"
       >
         <SanityImage

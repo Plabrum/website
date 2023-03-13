@@ -92,7 +92,6 @@ export function CustomPortableText({
         const tailwind_cache = `aspect-[2/1] aspect-[1/2] aspect-[3/1] aspect-[1/3] aspect[4/3] aspect-[3/4]
                                 aspect-[5/4] aspect-[4/5] aspect-[16/9] aspect-[1/1] `;
 
-        console.log("aspect:", shape);
         return (
           <iframe
             width={"100%"}
