@@ -32,18 +32,18 @@ export default function ProjectCard({ project, className }: Props) {
 
   return (
     <div
-      className={`grid md:grid-cols-2 grid-cols-1 group relative  ${className}`}
+      className={`grid md:grid-cols-2 grid-cols-1 max-md:max-w-[400px] group relative  ${className}`}
     >
       {/* On Mobile show image above description */}
       <Link
-        className="sm:hidden"
+        className="md:hidden"
         href={{ pathname: slug, query: { name: router.asPath } }}
       >
         <SanityImage
           alt={"project thumbnail"}
           sanitySrc={coverImage}
           height={1000}
-          className=" w-full aspect-[5/4] object-cover mt-2 "
+          className=" w-full aspect-[5/3] object-cover mt-2 "
         />
       </Link>
 
@@ -54,11 +54,11 @@ export default function ProjectCard({ project, className }: Props) {
             <h1 className="xl:text-3xl lg:text-2xl text-3xl font-bold text-custom-t1 ">
               {title}
             </h1>
-            <h2 className="text-custom-t2 text-sm mt-1">{datestring}</h2>
+            <h2 className="text-custom-t4 text-sm mt-1">{datestring}</h2>
           </div>
         </div>
 
-        <div className="aspect-[3/2]  overflow-auto  my-auto">
+        <div className="md:aspect-[3/2]  overflow-auto  my-auto">
           <PortableText value={blurb} />
         </div>
 
@@ -67,7 +67,7 @@ export default function ProjectCard({ project, className }: Props) {
           className="self-center md:hidden flex flex-row h-8 px-4 mt-2 rounded-full bg-custom-bg2 items-center text-custom-t3"
           href={{ pathname: slug, query: { name: router.asPath } }}
         >
-          <p className=" text-xs uppercase tracking-widest">View Project</p>
+          <p className=" text-xs uppercase tracking-widest">See More</p>
           <FaChevronRight className="ml-3 w-2 " />
         </Link>
       </div>

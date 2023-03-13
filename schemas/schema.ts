@@ -8,6 +8,7 @@ import experience from "./experience";
 import project from "./project";
 import about from "./about";
 import tag from "./general/tag";
+import external from "./general/external";
 
 export const schemaTypes = [
   post,
@@ -19,4 +20,5 @@ export const schemaTypes = [
   project,
   about,
   tag,
+  external,
 ];

@@ -37,12 +37,12 @@
 
 :root {
   /* Your default theme */
-  --header: #ffffff3c;
-  --bg1: #ffffff; /* Main background theme */
+  --header: #d2d2d264;
+  --bg1: #f8f8f8; /* Main background theme */
 
   /* --bg1: #f0ddbe; Main background theme */
   --bg2: #084c61;
-  --bg3: #f3f4f4;
+  --bg3: #f1f1f1; /* Used for article background */
   --bg4: #323031; /*used for footer */
 
   --t1: #121212;
@@ -62,10 +62,10 @@
 }
 
 [data-theme="dark"] {
-  --header: #0000004c;
+  --header: #4040405d;
   --bg1: #1b1a1a;
   --bg2: #dfdfdf;
-  --bg3: #2b2a2a;
+  --bg3: #2b2a2a; /* Used for article background */
   --bg4: #060606; /*used for footer */
   --t1: #ffffff;
   --t2: #dfdfdf; /* used for buttons, icons, etc */

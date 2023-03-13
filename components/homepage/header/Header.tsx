@@ -154,18 +154,16 @@ export default function Header({ showNav = true, homepage = false }: Props) {
     );
   } else {
     return (
-      <header className={`fixed top-0 z-20 items-center`}>
+      <header className={"fixed top-0 w-full z-20 items-center "}>
         <motion.div
           className=""
           initial={{
-            x: -500,
+            x: 200,
             opacity: 0,
-            scale: 0.5,
           }}
           animate={{
             x: 0,
             opacity: 1,
-            scale: 1,
           }}
           transition={{
             duration: 1.5,

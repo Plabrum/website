@@ -1,5 +1,6 @@
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { Image, PortableTextBlock } from "sanity";
+import { ExternalIframeType } from "schemas/schema_types";
 import SanityImage from "../general/SanityImage";
 
 export function CustomPortableText({
@@ -40,7 +41,7 @@ export function CustomPortableText({
         );
       },
       blockquote: ({ children }) => (
-        <blockquote className=" py-2 pl-2 text-custom-t4 bg-custom-bg1 w-5/6 mx-auto rounded-md">
+        <blockquote className=" py-2 pl-2 text-custom-t4 bg-custom-bg1 sm:w-5/6 mx-2 sm:mx-auto rounded-md">
           <div className="border-l-2 p-2 border-custom-accent">{children}</div>
         </blockquote>
       ),
@@ -81,6 +82,18 @@ export function CustomPortableText({
               </div>
             )}
           </div>
+        );
+      },
+      external: ({ value }: { value: ExternalIframeType }) => {
+        console.log("value", value.link_to_html);
+        return (
+          <iframe
+            width={"100%"}
+            className="aspect-video"
+            src={value.link_to_html}
+            title="YouTube video player"
+            allowFullScreen
+          ></iframe>
         );
       },
     },

@@ -46,7 +46,7 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
       className=" "
     >
       <motion.ul
-        className="absolute top-0 left-0 rounded-br-2xl  pl-8 py-4 w-56 backdrop-blur-md bg-white/20 text-custom-t1"
+        className="absolute top-0 right-0 rounded-bl-2xl pr-8 py-4 w-56 backdrop-blur-md bg-custom-header text-custom-t1 text-end"
         variants={{
           open: {
             visibility: "visible",
@@ -57,11 +57,11 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
         }}
       >
         <motion.li
-          className="pr-4"
+          className="pl-4"
           variants={itemVariants}
           onClick={() => setIsOpen(false)}
         >
-          <div className="flex flex-row justify-end">
+          <div className="flex flex-row justify-start">
             <ThemeSwitch className={icon_size + ""} />
           </div>
         </motion.li>
@@ -71,7 +71,7 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
           variants={itemVariants}
           onClick={() => setIsOpen(false)}
         >
-          <SocialRow className="text-custom-t1" />
+          <SocialRow className="justify-end" />
         </motion.li>
         {!homepage && (
           <motion.li
@@ -80,7 +80,7 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
             onClick={() => setIsOpen(false)}
           >
             <Link href="/">
-              <button className=" text-md uppercase tracking-widest ">
+              <button className="text-md uppercase tracking-widest">
                 Home
               </button>
             </Link>
@@ -93,7 +93,7 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
             onClick={() => setIsOpen(false)}
           >
             <Link href="/#about">
-              <button className=" text-md uppercase tracking-widest ">
+              <button className="text-md uppercase tracking-widest">
                 About
               </button>
             </Link>
@@ -107,7 +107,7 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
             onClick={() => setIsOpen(false)}
           >
             <Link href="/#experience">
-              <button className="text-s  uppercase tracking-widest">
+              <button className="text-md uppercase tracking-widest">
                 Experience
               </button>
             </Link>
@@ -120,7 +120,7 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
           onClick={() => setIsOpen(false)}
         >
           <Link href={homepage ? "/#projects" : "/projects"}>
-            <button className="text-s  uppercase tracking-widest ">
+            <button className="text-md uppercase tracking-widest ">
               {homepage ? "Projects" : "All Projects"}
             </button>
           </Link>
@@ -131,7 +131,7 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
           onClick={() => setIsOpen(false)}
         >
           <Link href="/#contact">
-            <button className="text-s  uppercase tracking-widest ">
+            <button className="text-md uppercase tracking-widest ">
               Contact
             </button>
           </Link>
@@ -140,13 +140,13 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
 
       <div
         className={
-          "absolute top-0 left-0 pt-4 pl-4 pr-4 pb-1 rounded-br-xl" +
-          (!isOpen && " backdrop-blur-md")
+          "absolute top-0 right-0 pt-4 pl-4 pr-4 pb-1 rounded-bl-xl" +
+          (!isOpen && " backdrop-blur-md bg-custom-header")
         }
       >
         <Toggle
           toggle={() => setIsOpen((isOpen) => !isOpen)}
-          className="stroke-custom-t2 "
+          className="stroke-custom-t2"
         />
       </div>
     </motion.div>
