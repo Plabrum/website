@@ -40,7 +40,7 @@ export default function Experiences({ experiences }: Props) {
       >
         {experiences?.map((experience, index) => {
           return (
-            <motion.li variants={item} key={index}>
+            <motion.li className="list-none" variants={item} key={index}>
               <ExperienceCard
                 isLast={experiences.length - 1 === index}
                 experience={experience}
