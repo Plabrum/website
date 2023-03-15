@@ -28,22 +28,22 @@ export default function ProjectButtons({
           {from_homepage ? "Highlighted Projects" : "All Projects"}
         </p>
       </Link>
-      <div className="flex flex-col space-y-2 items-end">
+      <div className="flex flex-col space-y-2 items-end ">
         {demo_url && (
           <Link
             href={demo_url}
-            className="grow-0 flex flex-row items-center text-custom-bg2"
+            className="grow-0 flex flex-row items-center text-custom-t3 bg-custom-accent rounded-md py-1 px-4 justify-center"
           >
-            <p className="text-center ">View Full Demo</p>
+            <p className="text-center ">Demo</p>
             <FaExternalLinkSquareAlt className="sm:w-8 sm:h-8 ml-2 w-6 h-6" />
           </Link>
         )}
         {repo_url && (
           <Link
             href={repo_url}
-            className="grow-0 flex flex-row items-center text-custom-bg2"
+            className="grow-0 flex flex-row items-center text-custom-t3 bg-custom-accent rounded-md py-1 px-4 justify-center"
           >
-            <p className="text-center">View the Code</p>
+            <p className="text-center">Code</p>
             <FaGithub className="sm:w-8 sm:h-8 ml-2 w-6 h-6" />
           </Link>
         )}

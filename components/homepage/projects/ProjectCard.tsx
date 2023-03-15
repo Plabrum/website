@@ -43,7 +43,7 @@ export default function ProjectCard({ project, className }: Props) {
           alt={"project thumbnail"}
           sanitySrc={coverImage}
           height={1000}
-          className=" w-full aspect-[5/3] object-cover mt-2 "
+          className=" w-full md:hidden aspect-[5/3] object-cover mt-2 "
         />
       </Link>
 
@@ -64,8 +64,8 @@ export default function ProjectCard({ project, className }: Props) {
 
         {/* On Mobile Add a see more button */}
         <Link
-          className="self-center md:hidden flex flex-row h-8 px-4 mt-2 rounded-full bg-custom-bg2 items-center text-custom-t3"
-          href={{ pathname: slug, query: { name: router.asPath } }}
+          className="self-center md:hidden flex flex-row h-10 w-full justify-center rounded-full mt-2  bg-custom-bg2 items-center text-custom-t3"
+          href={{ pathname: slug, query: { previous: router.asPath } }}
         >
           <p className=" text-xs uppercase tracking-widest">See More</p>
           <FaChevronRight className="ml-3 w-2 " />
@@ -88,10 +88,10 @@ export default function ProjectCard({ project, className }: Props) {
       </div>
       {/* Desktop Tag Row */}
       <TagRow tags={tags} />
-      <div className="md:group-hover:opacity-100 md:group-hover:scale-105 opacity-0 transition duration-300 ease-in-out group-hover:backdrop-blur-md group-hover:bg-black/20 absolute w-full h-full ">
+      <div className="max-md:hidden md:group-hover:opacity-100 md:group-hover:scale-105 opacity-0 transition duration-300 ease-in-out group-hover:backdrop-blur-md group-hover:bg-black/20 absolute w-full h-full ">
         <Link
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row h-20 w-1/2 rounded-full bg-custom-accent text-custom-t3 items-center justify-center"
-          href={{ pathname: slug, query: { name: router.asPath } }}
+          className=" absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row h-20 w-1/2 rounded-full bg-custom-accent text-custom-t3 items-center justify-center"
+          href={{ pathname: slug, query: { previous: router.asPath } }}
         >
           <p className="text-md uppercase tracking-widest ">View Project</p>
           <FaChevronRight className="ml-3 w-2 " />
