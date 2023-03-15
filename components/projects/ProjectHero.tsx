@@ -10,7 +10,7 @@ import ProjectTitle from "./ProjectTitle";
 export default function ProjectHero({ project }: { project: ProjectType }) {
   const { title, tags, coverImage, duration, repo_url, demo_url } = project;
   const router = useRouter();
-  const from_slug = router.query["name"];
+  const from_slug = router.query["previous"];
   var from_homepage = false;
   if (from_slug instanceof String || typeof from_slug === "string") {
     from_homepage = from_slug.split("#")[0] === "/";
@@ -55,6 +55,10 @@ export default function ProjectHero({ project }: { project: ProjectType }) {
       </div>
       <SanityImage
         width={2000}
+        sizes="(max-width: 500px) 500px,
+        (max-width: 700px) 700px,
+              100vw"
+        priority={true}
         className="2xl:w-1/2 lg:w-3/4 object-cover mx-auto"
         alt={title + " cover image"}
         sanitySrc={coverImage}
