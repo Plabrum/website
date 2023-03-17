@@ -11,8 +11,7 @@ import { useTheme } from "next-themes";
 
 export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
   const { resolvedTheme } = useTheme();
-  const textWidth = "  ";
-  const textStyle = "";
+
   const components: PortableTextComponents = {
     list: {
       // Ex. 1: customizing common list types
@@ -29,68 +28,41 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
     block: {
       normal: ({ children }) => {
         return (
-          <p
-            className={
-              textStyle +
-              "sm:text-xl text-lg font-serif sm:leading-normal leading-snug mb-4"
-            }
-          >
+          <p className="sm:text-xl text-lg font-serif sm:leading-normal leading-snug my-2">
             {children}
           </p>
         );
       },
       h1: ({ children }) => {
         return (
-          <p
-            className={
-              textStyle + "sm:text-4xl text-3xl font-serif font-bold mt-4 mb-6"
-            }
-          >
+          <p className="sm:text-4xl text-3xl font-serif font-bold mt-4 my-4">
             {children}
           </p>
         );
       },
       h2: ({ children }) => {
         return (
-          <p
-            className={
-              textStyle + "sm:text-3xl text-2xl font-serif text-center my-4"
-            }
-          >
+          <p className="sm:text-3xl text-2xl font-serif text-center mt-4">
             {children}
           </p>
         );
       },
       h3: ({ children }) => {
         return (
-          <p
-            className={
-              textStyle +
-              "mx-auto sm:text-3xl text-2xl text-center font-serif my-4 border-b border-custom-accent"
-            }
-          >
+          <p className="mx-auto sm:text-3xl text-2xl text-center font-serif mt-4 border-b border-custom-accent">
             {children}
           </p>
         );
       },
       h4: ({ children }) => {
         return (
-          <p
-            className={
-              textStyle + "mx-auto sm:text-2xl text-xl font-serif my-4"
-            }
-          >
+          <p className="mx-auto sm:text-2xl text-xl font-serif mt-4">
             {children}
           </p>
         );
       },
       blockquote: ({ children }) => (
-        <blockquote
-          className={
-            textStyle +
-            " py-2 pl-2 text-custom-t4 bg-custom-bg1 sm:w-5/6 mx-2 sm:mx-auto rounded-md"
-          }
-        >
+        <blockquote className="py-3 pl-2 text-custom-t4 bg-custom-bg1 sm:w-5/6 mx-2 sm:mx-auto rounded-md">
           <div className="border-l-2 p-2 border-custom-accent">{children}</div>
         </blockquote>
       ),
@@ -111,7 +83,7 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
       },
       code: ({ children }) => {
         return (
-          <span className="mx-auto text-sm font-mono bg-custom-bg3 border border-custom-t4 px-2 py-1 rounded-sm">
+          <span className="mx-auto text-sm font-mono bg-custom-bg3 border border-custom-t4 px-2 rounded-sm">
             {children}
           </span>
         );
