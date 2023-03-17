@@ -12,12 +12,13 @@ export default function ProjectTechnologies({ technologies }: Props) {
       <h1 className="sm:text-2xl text-xl text-center font-bold tracking-widest font-mono">
         Technology Used
       </h1>
-      <div className="grid sm:grid-rows-1 grid-rows-2 grid-flow-col mt-8 lg:w-1/2 w-3/4 mx-auto justify-between ">
+      <div className="grid grid-rows-2 sm:grid-cols-4 grid-cols-3 gap-y-2 mt-8 lg:w-1/2 w-3/4 mx-auto justify-between ">
         {technologies.map((tech, index) => {
           return (
             <Link
               key={index}
               className="group flex flex-col space-y-2 "
+              title={tech.description || ""}
               href={tech.tech_page}
             >
               <SanityImage

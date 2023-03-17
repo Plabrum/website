@@ -54,10 +54,10 @@ export default function ProjectHero({ project }: { project: ProjectType }) {
         })}
       </div>
       <SanityImage
-        width={2000}
+        width={2500}
         sizes="(max-width: 500px) 500px,
         (max-width: 700px) 700px,
-              100vw"
+            2500px"
         priority={true}
         className="2xl:w-1/2 lg:w-3/4 object-cover mx-auto"
         alt={title + " cover image"}
