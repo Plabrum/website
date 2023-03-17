@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     repo_url,
     demo_url,
     "tags":tags[]->{name},
-    "technologies":technologies[]->{ name, tech_page, logo_image},
+    "technologies":technologies[]->{ name, tech_page, logo_image, description},
   }`,
     { slug: "/projects/" + params.slug }
   );

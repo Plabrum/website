@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps = async () => {
     repo_url,
     demo_url,
     "tags":tags[]->{_id, name, color},
-    "technologies":technologies[]->{_id, name, tech_page, logo_image},
+    // "technologies":technologies[]->{_id, name, tech_page, logo_image},
     }
     | order(duration.start asc)`);
 

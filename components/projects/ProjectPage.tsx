@@ -19,21 +19,15 @@ export default function ProjectPage({ project }: { project: ProjectType }) {
       {/* Hero box */}
       <ProjectHero project={project} />
       {/* tech row */}
-      {/* <ProjectTechnologies technologies={technologies} /> */}
+      <ProjectTechnologies technologies={technologies} />
       {/* Article */}
-      <div className="flex flex-col max-w-[850px]  bg-custom-bg3 sm:space-y-10 space-y-6 sm:py-16 md:px-8 px-3 py-10 ">
-        {/* <p>test</p> */}
-        <h1 className="sm:text-2xl text-xl text-center mx-5 font-bold tracking-widest font-mono">
-          Project Writeup
-        </h1>
-        <div className="flex flex-row items-center justify-center">
-          {demo_url && (
-            <ProjectDemoButton url={demo_url} text={"View Full Demo"} />
-          )}
-        </div>
-        <div className="xl:w-5/6 mx-auto">
-          <CustomPortableText value={description} />
-        </div>
+      <div className="flex flex-row items-center justify-center">
+        {demo_url && (
+          <ProjectDemoButton url={demo_url} text={"View Full Demo"} />
+        )}
+      </div>
+      <div className="flex flex-col max-w-[600px] sm:py-16  px-4 py-4 ">
+        <CustomPortableText value={description} />
       </div>
     </div>
   );

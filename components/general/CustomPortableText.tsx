@@ -2,14 +2,17 @@ import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { Image, PortableTextBlock } from "sanity";
 import { ExternalIframeType } from "schemas/schema_types";
 import SanityImage from "../general/SanityImage";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import {
+  gruvboxDark,
+  gruvboxLight,
+} from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { useTheme } from "next-themes";
 
-export function CustomPortableText({
-  paragraphClasses,
-  value,
-}: {
-  paragraphClasses?: string;
-  value: PortableTextBlock[];
-}) {
+export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
+  const { resolvedTheme } = useTheme();
+  const textWidth = "  ";
+  const textStyle = "";
   const components: PortableTextComponents = {
     list: {
       // Ex. 1: customizing common list types
@@ -22,26 +25,72 @@ export function CustomPortableText({
         <ol className="mt-lg pl-10 list-decimal">{children}</ol>
       ),
     },
+
     block: {
       normal: ({ children }) => {
-        return <p className={paragraphClasses}>{children}</p>;
+        return (
+          <p
+            className={
+              textStyle +
+              "sm:text-xl text-lg font-serif sm:leading-normal leading-snug mb-4"
+            }
+          >
+            {children}
+          </p>
+        );
       },
       h1: ({ children }) => {
-        return <p className="text-2xl font-bold mb-4">{children}</p>;
+        return (
+          <p
+            className={
+              textStyle + "sm:text-4xl text-3xl font-serif font-bold mt-4 mb-6"
+            }
+          >
+            {children}
+          </p>
+        );
       },
       h2: ({ children }) => {
-        return <p className="text-xl text-center mb-2">{children}</p>;
+        return (
+          <p
+            className={
+              textStyle + "sm:text-3xl text-2xl font-serif text-center my-4"
+            }
+          >
+            {children}
+          </p>
+        );
       },
       h3: ({ children }) => {
         return (
-          <div>
-            <p className="text-xl text-center ">{children}</p>
-            <div className="h-px w-1/4 bg-custom-accent mx-auto mb-2" />
-          </div>
+          <p
+            className={
+              textStyle +
+              "mx-auto sm:text-3xl text-2xl text-center font-serif my-4 border-b border-custom-accent"
+            }
+          >
+            {children}
+          </p>
+        );
+      },
+      h4: ({ children }) => {
+        return (
+          <p
+            className={
+              textStyle + "mx-auto sm:text-2xl text-xl font-serif my-4"
+            }
+          >
+            {children}
+          </p>
         );
       },
       blockquote: ({ children }) => (
-        <blockquote className=" py-2 pl-2 text-custom-t4 bg-custom-bg1 sm:w-5/6 mx-2 sm:mx-auto rounded-md">
+        <blockquote
+          className={
+            textStyle +
+            " py-2 pl-2 text-custom-t4 bg-custom-bg1 sm:w-5/6 mx-2 sm:mx-auto rounded-md"
+          }
+        >
           <div className="border-l-2 p-2 border-custom-accent">{children}</div>
         </blockquote>
       ),
@@ -51,12 +100,20 @@ export function CustomPortableText({
       link: ({ children, value }) => {
         return (
           <a
-            className="underline transition hover:opacity-50"
+            className="underline text-custom-t2 transition hover:opacity-50"
             href={value?.href}
             rel="noreferrer noopener"
+            target="_blank"
           >
             {children}
           </a>
+        );
+      },
+      code: ({ children }) => {
+        return (
+          <span className="mx-auto text-sm font-mono bg-custom-bg3 border border-custom-t4 px-2 py-1 rounded-sm">
+            {children}
+          </span>
         );
       },
     },
@@ -82,6 +139,18 @@ export function CustomPortableText({
               </div>
             )}
           </div>
+        );
+      },
+      code: ({ value }) => {
+        console.log("code props", value);
+        return (
+          <SyntaxHighlighter
+            language={value.language}
+            style={resolvedTheme === "dark" ? gruvboxDark : gruvboxLight}
+            wrapLongLines
+          >
+            {value.code}
+          </SyntaxHighlighter>
         );
       },
       external: ({ value }: { value: ExternalIframeType }) => {
