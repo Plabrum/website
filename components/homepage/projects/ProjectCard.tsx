@@ -92,6 +92,7 @@ export default function ProjectCard({ project, className }: Props) {
         <Link
           className=" absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row h-20 w-1/2 rounded-full bg-custom-accent text-custom-t3 items-center justify-center"
           href={{ pathname: slug, query: { previous: router.asPath } }}
+          as={slug}
         >
           <p className="text-md uppercase tracking-widest ">View Project</p>
           <FaChevronRight className="ml-3 w-2 " />
