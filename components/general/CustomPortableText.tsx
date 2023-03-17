@@ -114,7 +114,6 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
         );
       },
       code: ({ value }) => {
-        console.log("code props", value);
         return (
           <SyntaxHighlighter
             language={value.language}
@@ -143,7 +142,7 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
         const back_up_ratio = tailwind_cache.includes(shape)
           ? shape
           : "aspect-square";
-        console.log("back_up", back_up_ratio, shape);
+
         return (
           <iframe
             width={"100%"}
