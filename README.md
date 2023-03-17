@@ -49,19 +49,29 @@ Lastly, all animation is completed via Framer Motion, a React animation library 
 First there are few environment variables that must be set in a `.env.local` or equivalent on server:
 
 ```yaml
-# For Sanity
-NEXT_PUBLIC_SANITY_PROJECT_ID=								# Available in Sanity.io project
-NEXT_PUBLIC_SANITY_DATASET=										# Available in Sanity.io project
-NEXT_PUBLIC_SANITY_API_VERSION=								# Date in the form yyyy-mm-dd
-REVALIDATION_TOKEN=														# Token set in Sanity Webhook for ISR
-# For Recaptcha
-NEXT_PUBLIC_BASE_URL= 												# e.g. http://localhost:3000
-NEXT_PUBLIC_RECAPTCHA_SITE_KEY=								# Available in Recaptcha Console
-RECAPTCHA_SECRET_KEY=													# Available in Recaptcha Console
+######## For Sanity ########
+# Available in Sanity.io project
+NEXT_PUBLIC_SANITY_PROJECT_ID=
+# Available in Sanity.io project
+NEXT_PUBLIC_SANITY_DATASET=
+# Date in the form yyyy-mm-dd
+NEXT_PUBLIC_SANITY_API_VERSION=
+# Token set in Sanity Webhook for ISR
+REVALIDATION_TOKEN=
 
-# For Nodemailer
-GMAIL_EMAIL_ADDRESS=													# Sending email Address
-GMAIL_APP_PASSWORD=														# Insecure App password from Gmail
+######## For Recaptcha ########
+# e.g. http://localhost:3000
+NEXT_PUBLIC_BASE_URL=
+# Available in Recaptcha Console
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY=
+# Available in Recaptcha Console
+RECAPTCHA_SECRET_KEY=
+
+######## For Nodemailer ########
+# Sending email Address
+GMAIL_EMAIL_ADDRESS=
+# Insecure App password from Gmail
+GMAIL_APP_PASSWORD=
 ```
 
 Then you should be able to install the required packages and run a development environment:
