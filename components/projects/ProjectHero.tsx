@@ -42,16 +42,17 @@ export default function ProjectHero({ project }: { project: ProjectType }) {
       />
 
       <div className="2xl:w-1/2 lg:w-3/4 mx-auto flex flex-row justify-center lg:space-x-10 space-x-4 my-4">
-        {tags.map((tag, index) => {
-          return (
-            <div
-              className="tracking-widest lowercase sm:text-sm text-xs text-custom-t4 whitespace-nowrap text-center"
-              key={index}
-            >
-              {"#" + tag.name}
-            </div>
-          );
-        })}
+        {tags &&
+          tags.map((tag, index) => {
+            return (
+              <div
+                className="tracking-widest lowercase sm:text-sm text-xs text-custom-t4 whitespace-nowrap text-center"
+                key={index}
+              >
+                {"#" + tag.name}
+              </div>
+            );
+          })}
       </div>
       <SanityImage
         width={2500}

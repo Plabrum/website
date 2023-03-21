@@ -8,6 +8,8 @@ import {
   gruvboxLight,
 } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { useTheme } from "next-themes";
+import "katex/dist/katex.min.css";
+import Latex from "react-latex-next";
 
 export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
   const { resolvedTheme } = useTheme();
@@ -35,28 +37,28 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
       },
       h1: ({ children }) => {
         return (
-          <p className="sm:text-4xl text-3xl font-serif font-bold mt-4 my-4">
+          <p className="sm:text-4xl text-3xl font-serif font-bold  mt-6 mb-4">
             {children}
           </p>
         );
       },
       h2: ({ children }) => {
         return (
-          <p className="sm:text-3xl text-2xl font-serif text-center mt-4">
+          <p className="sm:text-3xl text-2xl font-serif text-center  mt-6 mb-4">
             {children}
           </p>
         );
       },
       h3: ({ children }) => {
         return (
-          <p className="mx-auto sm:text-3xl text-2xl text-center font-serif mt-4 border-b border-custom-accent">
+          <p className="mx-auto sm:text-3xl text-2xl text-center font-serif mt-6 mb-4 border-b border-custom-accent">
             {children}
           </p>
         );
       },
       h4: ({ children }) => {
         return (
-          <p className="mx-auto sm:text-2xl text-xl font-serif mt-4">
+          <p className="mx-auto sm:text-2xl text-xl font-serif mt-6 mb-4">
             {children}
           </p>
         );
@@ -89,6 +91,7 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
         );
       },
     },
+
     types: {
       image: ({
         value,
@@ -113,6 +116,7 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
           </div>
         );
       },
+
       code: ({ value }) => {
         return (
           <SyntaxHighlighter
@@ -123,6 +127,9 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
             {value.code}
           </SyntaxHighlighter>
         );
+      },
+      latex: ({ value }) => {
+        return <Latex>{value.latex_string}</Latex>;
       },
       external: ({ value }: { value: ExternalIframeType }) => {
         const shape =
