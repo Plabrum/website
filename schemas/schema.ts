@@ -9,6 +9,7 @@ import project from "./project";
 import about from "./about";
 import tag from "./general/tag";
 import external from "./general/external";
+import latex from "./general/latex";
 
 export const schemaTypes = [
   post,
@@ -21,4 +22,5 @@ export const schemaTypes = [
   about,
   tag,
   external,
+  latex,
 ];

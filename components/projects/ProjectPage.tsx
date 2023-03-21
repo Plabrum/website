@@ -19,7 +19,7 @@ export default function ProjectPage({ project }: { project: ProjectType }) {
       {/* Hero box */}
       <ProjectHero project={project} />
       {/* tech row */}
-      <ProjectTechnologies technologies={technologies} />
+      {technologies && <ProjectTechnologies technologies={technologies} />}
       {/* Article */}
       <div className="flex flex-row items-center justify-center">
         {demo_url && (

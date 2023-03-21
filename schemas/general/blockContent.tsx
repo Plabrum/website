@@ -10,6 +10,9 @@ import { defineType, defineField, defineArrayMember } from "sanity";
  *    type: 'blockContent'
  *  }
  */
+
+const mathIcon = () => <span style={{ fontWeight: "bold" }}>∑</span>;
+
 export default defineType({
   title: "Block Content",
   name: "blockContent",
@@ -57,9 +60,16 @@ export default defineType({
               },
             ],
           },
+          // {
+          //   title: "Latex",
+          //   name: "inline_latex",
+          //   type: "object",
+          // },
         ],
       },
     }),
+
+    { type: "latex" },
     {
       type: "code",
     },
