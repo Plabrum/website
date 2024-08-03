@@ -129,7 +129,11 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
         );
       },
       latex: ({ value }) => {
-        return <Latex>{value.latex_string}</Latex>;
+        return (
+          <div className="overflow-clip mx-auto">
+            <Latex>{value.latex_string}</Latex>
+          </div>
+        );
       },
       external: ({ value }: { value: ExternalIframeType }) => {
         const shape =
