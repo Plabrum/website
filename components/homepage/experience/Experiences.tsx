@@ -1,7 +1,7 @@
-import React from "react";
-import { motion } from "framer-motion";
-import ExperienceCard from "./ExperienceCard";
-import { ExperienceType } from "schemas/schema_types";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ExperienceType } from 'schemas/schema_types';
+import ExperienceCard from './ExperienceCard';
 
 type Props = {
   experiences: ExperienceType[];
@@ -38,16 +38,11 @@ export default function Experiences({ experiences }: Props) {
         initial="hidden"
         whileInView="show"
       >
-        {experiences?.map((experience, index) => {
-          return (
-            <motion.li className="list-none" variants={item} key={index}>
-              <ExperienceCard
-                isLast={experiences.length - 1 === index}
-                experience={experience}
-              />
-            </motion.li>
-          );
-        })}
+        {experiences?.map((experience, index) => (
+          <motion.li className="list-none" variants={item} key={index}>
+            <ExperienceCard isLast={experiences.length - 1 === index} experience={experience} />
+          </motion.li>
+        ))}
       </motion.div>
     </div>
   );

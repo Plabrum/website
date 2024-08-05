@@ -1,10 +1,13 @@
-import { CustomPortableText } from "components/general/CustomPortableText";
-import { ProjectType } from "schemas/schema_types";
-import ProjectTechnologies from "./ProjectTechnologies";
-import ProjectHero from "./ProjectHero";
-import ProjectDemoButton from "./ProjectDemoButton";
+import { CustomPortableText } from 'components/general/CustomPortableText';
+import { ProjectType } from 'schemas/schema_types';
+import ProjectTechnologies from './ProjectTechnologies';
+import ProjectHero from './ProjectHero';
+import ProjectDemoButton from './ProjectDemoButton';
 
 export default function ProjectPage({ project }: { project: ProjectType }) {
+  if (project == null) {
+    throw Error('unable to load project');
+  }
   const { description, technologies, demo_url } = project;
 
   return (
@@ -15,9 +18,7 @@ export default function ProjectPage({ project }: { project: ProjectType }) {
       {technologies && <ProjectTechnologies technologies={technologies} />}
       {/* Article */}
       <div className="flex flex-row items-center justify-center">
-        {demo_url && (
-          <ProjectDemoButton url={demo_url} text={"View Full Demo"} />
-        )}
+        {demo_url && <ProjectDemoButton url={demo_url} text="View Full Demo" />}
       </div>
       <div className="flex flex-col max-w-[600px] sm:py-16  px-4 py-4 ">
         <CustomPortableText value={description} />

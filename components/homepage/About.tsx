@@ -1,8 +1,8 @@
-import { PortableText } from "@portabletext/react";
-import { motion } from "framer-motion";
-import React from "react";
-import { AboutType } from "schemas/schema_types";
-import SanityImage from "../general/SanityImage";
+import { PortableText } from '@portabletext/react';
+import { motion } from 'framer-motion';
+import React from 'react';
+import { AboutType } from 'schemas/schema_types';
+import SanityImage from '../general/SanityImage';
 // import type { Image as SanImage } from "sanity";
 
 // interface Props {

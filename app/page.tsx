@@ -1,8 +1,8 @@
 // Import your Client Component
-import { groq } from "next-sanity";
-import HomePage from "../components/homepage/home-page";
-import { AboutType, ExperienceType, ProjectType } from "schemas/schema_types";
-import { client } from "lib/sanity.client";
+import { groq } from 'next-sanity';
+import { AboutType, ExperienceType, ProjectType } from 'schemas/schema_types';
+import { client } from 'lib/sanity.client';
+import HomePage from '../components/homepage/home-page';
 
 export async function generateMetadata() {
   const abouts: AboutType[] = await client.fetch(
@@ -22,7 +22,7 @@ export async function generateMetadata() {
   const metaDescription = abouts[0]?.meta_description;
 
   return {
-    title: "Phil Labrum | Software Engineering Portfolio",
+    title: 'Phil Labrum | Software Engineering Portfolio',
     // themeColor: resolvedTheme == "dark" ? "#1b1a1a" : "#f8f8f8",
     description: metaDescription,
   };
@@ -77,7 +77,5 @@ export default async function Page() {
   | order(duration.start desc)`);
 
   // Forward fetched data to your Client Component
-  return (
-    <HomePage abouts={abouts} projects={projects} experiences={experiences} />
-  );
+  return <HomePage abouts={abouts} projects={projects} experiences={experiences} />;
 }

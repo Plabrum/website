@@ -1,13 +1,20 @@
 {
   "extends": [
+    // "eslint-config-airbnb",
+    // "eslint-config-next",
     "next/core-web-vitals",
-    "plugin:prettier/recommended" // must be last element in "extends"
+    "eslint:recommended",
+    "prettier"
   ],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "settings": {
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts"]
-    }
-  }
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error", { "singleQuote": true }],
+    "no-console": "warn",
+    "prettier/prettier": "error"
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
+  },
+  "ignorePatterns": ["node_modules", "build", "dist", "public"]
 }
