@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import SanityImage from "components/general/SanityImage";
@@ -9,8 +10,8 @@ import {
   FaHammer,
 } from "react-icons/fa";
 import { PortableText, toPlainText } from "@portabletext/react";
-import { useRouter } from "next/router";
 import TagRow from "./TagRow";
+import { usePathname } from "next/navigation";
 
 interface Props {
   className?: string;
@@ -18,7 +19,7 @@ interface Props {
 }
 export default function ProjectCard({ project, className }: Props) {
   const { title, slug, coverImage, blurb, duration, tags } = project;
-  const router = useRouter();
+  const pathname = usePathname();
 
   const startMo = duration?.start ? new Date(duration.start) : "now";
 
@@ -37,7 +38,7 @@ export default function ProjectCard({ project, className }: Props) {
       {/* On Mobile show image above description */}
       <Link
         className="md:hidden"
-        href={{ pathname: slug, query: { name: router.asPath } }}
+        href={{ pathname: slug, query: { name: pathname } }}
       >
         <SanityImage
           alt={"project thumbnail"}
@@ -65,7 +66,7 @@ export default function ProjectCard({ project, className }: Props) {
         {/* On Mobile Add a see more button */}
         <Link
           className="self-center md:hidden flex flex-row h-10 w-full justify-center rounded-full mt-2  bg-custom-bg2 items-center text-custom-t3"
-          href={{ pathname: slug, query: { previous: router.asPath } }}
+          href={{ pathname: slug, query: { previous: pathname } }}
         >
           <p className=" text-xs uppercase tracking-widest">See More</p>
           <FaChevronRight className="ml-3 w-2 " />
@@ -91,7 +92,7 @@ export default function ProjectCard({ project, className }: Props) {
       <div className="max-md:hidden md:group-hover:opacity-100 md:group-hover:scale-105 opacity-0 transition duration-300 ease-in-out group-hover:backdrop-blur-md group-hover:bg-black/20 absolute w-full h-full ">
         <Link
           className=" absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row h-20 w-1/2 rounded-full bg-custom-accent text-custom-t3 items-center justify-center"
-          href={{ pathname: slug, query: { previous: router.asPath } }}
+          href={{ pathname: slug, query: { previous: pathname } }}
           as={slug}
         >
           <p className="text-md uppercase tracking-widest ">View Project</p>

@@ -35,7 +35,7 @@ export default function TagRow({ tags }: { tags: TagType[] }) {
             >
               <p className="px-4 text-custom-t3 text-sm ">{tag.name}</p>
             </div>
-          )
+          ),
       )}
     </div>
   );

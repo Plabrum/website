@@ -21,7 +21,7 @@ async function readBody(readable: any) {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const signature = req.headers[SIGNATURE_HEADER_NAME] as string;
   const body = await readBody(req); // Read the body into a string

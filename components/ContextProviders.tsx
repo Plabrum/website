@@ -1,10 +1,13 @@
-import type { AppProps } from "next/app";
+"use client";
 import { ThemeProvider } from "next-themes";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import "../styles/globals.css";
-import Head from "next/head";
 
-export default function App({ Component, pageProps }: AppProps) {
+interface ProvidersProps {
+  children: React.ReactNode;
+}
+
+export default function Providers({ children }: ProvidersProps) {
   const recaptcha_key = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
   return (
     <ThemeProvider>
@@ -17,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
           nonce: undefined,
         }}
       >
-        <Component {...pageProps} />
+        {children}
       </GoogleReCaptchaProvider>
     </ThemeProvider>
   );

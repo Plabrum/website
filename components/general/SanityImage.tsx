@@ -1,3 +1,4 @@
+"use client";
 import fallbackImage from "../../public/fallback.jpg";
 import React, { useEffect, useState } from "react";
 import Image, { ImageProps } from "next/image";
