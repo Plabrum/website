@@ -1,14 +1,7 @@
-import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
-import { PortableText } from "@portabletext/react";
 import { CustomPortableText } from "components/general/CustomPortableText";
-import SanityImage from "components/general/SanityImage";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { ProjectType } from "schemas/schema_types";
 import ProjectTechnologies from "./ProjectTechnologies";
 import ProjectHero from "./ProjectHero";
-import Title from "./ProjectTitle";
-import { FaExternalLinkSquareAlt } from "react-icons/fa";
 import ProjectDemoButton from "./ProjectDemoButton";
 
 export default function ProjectPage({ project }: { project: ProjectType }) {

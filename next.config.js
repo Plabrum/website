@@ -5,14 +5,6 @@ const nextConfig = {
 
 module.exports = nextConfig;
 
-// module.exports = {
-//   assetPrefix: process.env.VERCEL_URL,
-//   images: {
-//     domains: [process.env.VERCEL_URL],
-//     path: `${process.env.VERCEL_URL}/_next/image`,
-//   },
-// };
-
 module.exports = {
   images: {
     remotePatterns: [

@@ -1,3 +1,4 @@
+"use client";
 import { ProjectType } from "schemas/schema_types";
 
 import ProjectCard from "./ProjectCard";

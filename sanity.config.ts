@@ -1,5 +1,6 @@
+"use client";
 import { defineConfig } from "sanity";
-import { deskTool } from "sanity/desk";
+import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schemas/schema";
 import { codeInput } from "@sanity/code-input";
@@ -14,10 +15,7 @@ export default defineConfig({
 
   projectId,
   dataset,
-  // Previously
-  // projectId: "oj0rz57b",
-  // dataset: "production",
-  plugins: [deskTool(), visionTool(), codeInput()],
+  plugins: [structureTool(), visionTool(), codeInput()],
 
   schema: {
     types: schemaTypes,

@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
@@ -11,7 +12,10 @@ type Props = { showNav?: boolean; homepage?: boolean };
 
 // Adding mobile menu: https://codesandbox.io/s/framer-motion-variants-rj7ks0?from-embed=&file=/src/App.tsx
 
-export default function Header({ showNav = true, homepage = false }: Props) {
+export default function HeaderComponent({
+  showNav = true,
+  homepage = false,
+}: Props) {
   const { systemTheme } = useTheme();
   const [isDesktop, setDesktop] = useState(false);
 

@@ -1,18 +1,17 @@
-import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
+"use client";
 import SanityImage from "components/general/SanityImage";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 import { ProjectType } from "schemas/schema_types";
 import ProjectButtons from "./ProjectButtons";
 import ProjectTitle from "./ProjectTitle";
+import { useSearchParams } from "next/navigation";
 
 export default function ProjectHero({ project }: { project: ProjectType }) {
   const { title, tags, coverImage, duration, repo_url, demo_url } = project;
-  const router = useRouter();
-  const from_slug = router.query["previous"];
+  const searchParams = useSearchParams();
+  const from_slug = searchParams?.get("previous");
   var from_homepage = false;
-  if (from_slug instanceof String || typeof from_slug === "string") {
+  if (from_slug != null) {
     from_homepage = from_slug.split("#")[0] === "/";
   }
   const startTime = duration?.start ? new Date(duration.start) : "now";

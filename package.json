@@ -9,20 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@eslint/config-array": "^0.17.1",
     "@heroicons/react": "^2.1.5",
     "@portabletext/react": "^3.1.0",
+    "@sanity/client": "^6.21.1",
     "@sanity/code-input": "^4.1.4",
+    "@sanity/icons": "^3.3.1",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.52.4",
     "@sanity/webhook": "^4.0.4",
-    "@types/node": "^22.1.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@vercel/analytics": "^1.3.1",
+    "@vercel/speed-insights": "^1.0.12",
     "axios": "^1.7.3",
-    "eslint": "^9.8.0",
-    "eslint-config-next": "^14.2.5",
     "framer-motion": "^11.3.21",
+    "groq": "^3.52.4",
+    "katex": "^0.16.11",
     "next": "^14.2.5",
     "next-sanity": "^9.4.3",
     "next-themes": "^0.3.0",
@@ -37,14 +39,21 @@
     "react-social-icons": "^6.17.0",
     "react-syntax-highlighter": "^15.5.0",
     "sanity": "^3.52.4",
+    "styled-components": "^6.1.12",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
     "autoprefixer": "^10.4.20",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.2.5",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "postcss": "^8.4.40",
+    "prettier": "^3.3.3",
     "prettier-plugin-groq": "^0.2.5",
-    "tailwindcss": "^3.4.7",
-    "yarn-upgrade-all": "^0.7.2"
+    "tailwindcss": "^3.4.7"
   }
 }
