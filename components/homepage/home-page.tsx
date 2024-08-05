@@ -1,5 +1,4 @@
 'use client';
-
 import { AboutType, ExperienceType, ProjectType } from 'schemas/schema_types';
 import { useRef } from 'react';
 import { useIntersectionObserver } from 'lib/Intersection';
