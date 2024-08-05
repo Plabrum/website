@@ -1,17 +1,13 @@
-"use client";
-import React from "react";
-import Link from "next/link";
-import SanityImage from "components/general/SanityImage";
-import { ProjectType, TagType, TechnologyType } from "schemas/schema_types";
-import {
-  FaChevronCircleRight,
-  FaChevronRight,
-  FaGithub,
-  FaHammer,
-} from "react-icons/fa";
-import { PortableText, toPlainText } from "@portabletext/react";
-import TagRow from "./TagRow";
-import { usePathname } from "next/navigation";
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import SanityImage from 'components/general/SanityImage';
+import { ProjectType } from 'schemas/schema_types';
+import { FaChevronRight } from 'react-icons/fa';
+import { PortableText } from '@portabletext/react';
+import { usePathname } from 'next/navigation';
+import TagRow from './TagRow';
 
 interface Props {
   className?: string;
@@ -21,27 +17,22 @@ export default function ProjectCard({ project, className }: Props) {
   const { title, slug, coverImage, blurb, duration, tags } = project;
   const pathname = usePathname();
 
-  const startMo = duration?.start ? new Date(duration.start) : "now";
+  const startMo = duration?.start ? new Date(duration.start) : 'now';
 
-  const datestring: string = startMo.toLocaleString("en-us", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
+  const datestring: string = startMo.toLocaleString('en-us', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
   });
 
   // Force tailwind to keep all the colors:
 
   return (
-    <div
-      className={`grid md:grid-cols-2 grid-cols-1 max-md:max-w-[400px] group relative  ${className}`}
-    >
+    <div className={`grid md:grid-cols-2 grid-cols-1 max-md:max-w-[400px] group relative  ${className}`}>
       {/* On Mobile show image above description */}
-      <Link
-        className="md:hidden"
-        href={{ pathname: slug, query: { name: pathname } }}
-      >
+      <Link className="md:hidden" href={{ pathname: slug, query: { name: pathname } }}>
         <SanityImage
-          alt={"project thumbnail"}
+          alt="project thumbnail"
           sanitySrc={coverImage}
           height={1000}
           className=" w-full md:hidden aspect-[5/3] object-cover mt-2 "
@@ -52,9 +43,7 @@ export default function ProjectCard({ project, className }: Props) {
       <div className="flex flex-col col-span-1 pl-3 py-2 ">
         <div className="max-sm:flex max-sm:flex-row sm:mt-4 justify-between ">
           <div>
-            <h1 className="xl:text-3xl lg:text-2xl text-3xl font-bold text-custom-t1 ">
-              {title}
-            </h1>
+            <h1 className="xl:text-3xl lg:text-2xl text-3xl font-bold text-custom-t1 ">{title}</h1>
             <h2 className="text-custom-t4 text-sm mt-1">{datestring}</h2>
           </div>
         </div>
@@ -76,11 +65,11 @@ export default function ProjectCard({ project, className }: Props) {
       {/* Desktop Square photo */}
       <div className="max-md:hidden flex flex-col justify-center items-center relative aspect-square object-fit mb-3">
         <SanityImage
-          alt={"project thumbnail"}
+          alt="project thumbnail"
           sanitySrc={coverImage}
           // height={1000}
           // width={2000}
-          fill={true}
+          fill
           sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               50vw"
