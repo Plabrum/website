@@ -9,6 +9,7 @@ type Inputs = {
   email: string;
   subject: string;
   message: string;
+  honeypot: boolean;
 };
 
 function Contact() {
@@ -18,9 +19,9 @@ function Contact() {
   const { executeRecaptcha } = useGoogleReCaptcha();
   // const recaptchaRef = useRef<any>();
 
-  function onError(e: any, backend: boolean) {
+  function onError(e: Error, backend: boolean) {
     const errorLoc: string = backend ? 'Backend' : 'Frontend';
-    const error_message: string = e.error;
+    const error_message: string = e.message;
     setEmailResponse(error_message);
     console.log('Error', e, errorLoc);
   }
@@ -33,6 +34,9 @@ function Contact() {
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     setFormInProgress(true);
+    if (formData.honeypot) {
+      onError(Error('Non Human Input'), false);
+    }
     if (!executeRecaptcha) {
       console.log('captcha not ready');
       return;
@@ -58,7 +62,7 @@ function Contact() {
         response.json().then((data) => onError(data, true));
       }
     } catch (error) {
-      onError(error, false);
+      onError(error as Error, false);
     }
   };
 
@@ -98,20 +102,20 @@ function Contact() {
           className={`${contact_box} col-span-2  min-h-[150px]`}
         />
 
+        <input
+          type="checkbox"
+          name="contact_me_by_fax_only"
+          value="1"
+          className="hidden"
+          tabIndex={-1}
+          autoComplete="off"
+        />
         <button
+          {...register('honeypot')}
           type="submit"
           disabled={formInProgress || executeRecaptcha == null}
           className="col-span-2 flex  h-14 bg-custom-t4  items-center justify-center rounded-md "
         >
-          <input
-            type="checkbox"
-            name="contact_me_by_fax_only"
-            value="1"
-            className="hidden"
-            tabIndex={-1}
-            autoComplete="off"
-          />
-
           <div className="  ">
             {formInProgress ? (
               <FaSpinner className="mx-auto animate-spin w-6 h-6" />
