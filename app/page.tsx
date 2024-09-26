@@ -58,7 +58,7 @@ export default async function Page() {
     "tags":tags[]->{name, color},
     "technologies":technologies[]->{name, tech_page, logo_image},
     }
-    | order(duration.start asc)`);
+    | order(duration.start desc)`);
 
   const experiences: ExperienceType[] = await client.fetch(groq`
   *[_type == "experience" && !(_id in path('drafts.**'))]{
