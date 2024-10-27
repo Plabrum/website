@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 type Props = {
   title: string;
@@ -12,5 +12,5 @@ export default function Title({ title, date_string, className }: Props) {
       <h1 className="md:text-5xl text-4xl text-custom-t1 font-medium ">{title}</h1>
       <h2 className="sm:text-md text-sm text-custom-t2">{date_string}</h2>
     </div>
-  );
+  )
 }

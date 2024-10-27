@@ -1,33 +1,32 @@
-import { OkHandIcon } from "@sanity/icons";
-import { defineArrayMember, defineField, defineType } from "sanity";
+import { OkHandIcon } from '@sanity/icons';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export default defineType({
-  name: "experience",
-  title: "Experience",
-  type: "document",
+  name: 'experience',
+  title: 'Experience',
+  type: 'document',
   icon: OkHandIcon,
   fields: [
     defineField({
-      name: "company",
-      title: "Company/School",
-      type: "reference",
-      to: { type: "company" },
+      name: 'company',
+      title: 'Company/School',
+      type: 'reference',
+      to: { type: 'company' },
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "role",
-      description: "This field is the title of your role in the experience.",
-      title: "Role Title",
-      type: "string",
+      name: 'role',
+      description: 'This field is the title of your role in the experience.',
+      title: 'Role Title',
+      type: 'string',
       validation: (rule) => rule.required(),
     }),
 
     defineField({
-      name: "overview",
-      description:
-        "Used both for the <meta> description tag for SEO, and project subheader.",
-      title: "Overview",
-      type: "array",
+      name: 'overview',
+      description: 'Used both for the <meta> description tag for SEO, and project subheader.',
+      title: 'Overview',
+      type: 'array',
       of: [
         // Paragraphs
         defineArrayMember({
@@ -36,41 +35,41 @@ export default defineType({
             annotations: [],
             decorators: [
               {
-                title: "Italic",
-                value: "em",
+                title: 'Italic',
+                value: 'em',
               },
               {
-                title: "Strong",
-                value: "strong",
+                title: 'Strong',
+                value: 'strong',
               },
             ],
           },
           styles: [],
-          type: "block",
+          type: 'block',
         }),
       ],
       validation: (rule) => rule.max(155).required(),
     }),
     defineField({
-      name: "duration",
-      title: "Duration",
-      type: "duration",
+      name: 'duration',
+      title: 'Duration',
+      type: 'duration',
     }),
 
     defineField({
-      name: "description",
-      title: "Experience Description",
-      type: "blockContent",
+      name: 'description',
+      title: 'Experience Description',
+      type: 'blockContent',
     }),
 
     defineField({
-      name: "technologies",
-      title: "Tech Used",
-      type: "array",
+      name: 'technologies',
+      title: 'Tech Used',
+      type: 'array',
       of: [
         {
-          type: "reference",
-          to: [{ type: "tech" }],
+          type: 'reference',
+          to: [{ type: 'tech' }],
         },
       ],
     }),

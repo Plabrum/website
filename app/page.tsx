@@ -1,8 +1,8 @@
 // Import your Client Component
-import { groq } from 'next-sanity';
-import { AboutType, ExperienceType, ProjectType } from 'schemas/schema_types';
-import { client } from 'lib/sanity.client';
-import HomePage from '../components/homepage/home-page';
+import { groq } from 'next-sanity'
+import { AboutType, ExperienceType, ProjectType } from 'schemas/schema_types'
+import { client } from 'lib/sanity.client'
+import HomePage from '../components/homepage/home-page'
 
 export async function generateMetadata() {
   const abouts: AboutType[] = await client.fetch(
@@ -18,14 +18,14 @@ export async function generateMetadata() {
     desc_title,
     description,
     }`,
-  );
-  const metaDescription = abouts[0]?.meta_description;
+  )
+  const metaDescription = abouts[0]?.meta_description
 
   return {
     title: 'Phil Labrum | Software Engineering Portfolio',
     // themeColor: resolvedTheme == "dark" ? "#1b1a1a" : "#f8f8f8",
     description: metaDescription,
-  };
+  }
 }
 
 export default async function Page() {
@@ -43,7 +43,7 @@ export default async function Page() {
     desc_title,
     description,
     }`,
-  );
+  )
   const projects: ProjectType[] = await client.fetch(groq`
   *[_type == "project" && !(_id in path('drafts.**')) && pin==true]{
     _id,
@@ -58,7 +58,7 @@ export default async function Page() {
     "tags":tags[]->{name, color},
     "technologies":technologies[]->{name, tech_page, logo_image},
     }
-    | order(duration.start desc)`);
+    | order(duration.start desc)`)
 
   const experiences: ExperienceType[] = await client.fetch(groq`
   *[_type == "experience" && !(_id in path('drafts.**'))]{
@@ -74,8 +74,8 @@ export default async function Page() {
         company_page,
     },
   }
-  | order(duration.start desc)`);
+  | order(duration.start desc)`)
 
   // Forward fetched data to your Client Component
-  return <HomePage abouts={abouts} projects={projects} experiences={experiences} />;
+  return <HomePage abouts={abouts} projects={projects} experiences={experiences} />
 }

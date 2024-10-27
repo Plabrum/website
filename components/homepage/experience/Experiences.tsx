@@ -1,7 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ExperienceType } from 'schemas/schema_types';
-import ExperienceCard from './ExperienceCard';
+import React from 'react'
+import { motion } from 'framer-motion'
+import { ExperienceType } from 'schemas/schema_types'
+import ExperienceCard from './ExperienceCard'
 
 type Props = {
   experiences: ExperienceType[];
@@ -18,7 +18,7 @@ export default function Experiences({ experiences }: Props) {
         staggerChildren: 0.2,
       },
     },
-  };
+  }
 
   const item = {
     hidden: { opacity: 0, y: 0 },
@@ -27,7 +27,7 @@ export default function Experiences({ experiences }: Props) {
       y: 0,
       transition: { duration: 0.6 },
     },
-  };
+  }
 
   return (
     <div className="flex w-full justify-center my-auto ">
@@ -45,5 +45,5 @@ export default function Experiences({ experiences }: Props) {
         ))}
       </motion.div>
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function Footer() {
   return (
@@ -10,7 +10,7 @@ function Footer() {
         </h4>
       </div>
     </div>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

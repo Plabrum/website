@@ -1,31 +1,31 @@
-'use client';
+'use client'
 
-import SanityImage from 'components/general/SanityImage';
-import React from 'react';
-import { ProjectType } from 'schemas/schema_types';
-import { useSearchParams } from 'next/navigation';
-import ProjectButtons from './ProjectButtons';
-import ProjectTitle from './ProjectTitle';
+import SanityImage from 'components/general/SanityImage'
+import React from 'react'
+import { ProjectType } from 'schemas/schema_types'
+import { useSearchParams } from 'next/navigation'
+import ProjectButtons from './ProjectButtons'
+import ProjectTitle from './ProjectTitle'
 
 export default function ProjectHero({ project }: { project: ProjectType }) {
-  const { title, tags, coverImage, duration, repo_url, demo_url } = project;
-  const searchParams = useSearchParams();
-  const from_slug = searchParams?.get('previous');
-  let from_homepage = false;
+  const { title, tags, coverImage, duration, repo_url, demo_url } = project
+  const searchParams = useSearchParams()
+  const from_slug = searchParams?.get('previous')
+  let from_homepage = false
   if (from_slug != null) {
-    from_homepage = from_slug.split('#')[0] === '/';
+    from_homepage = from_slug.split('#')[0] === '/'
   }
-  const startTime = duration?.start ? new Date(duration.start) : 'now';
-  const endTime = duration?.end ? new Date(duration.end) : 'now';
+  const startTime = duration?.start ? new Date(duration.start) : 'now'
+  const endTime = duration?.end ? new Date(duration.end) : 'now'
 
   const startString: string = startTime.toLocaleString('en-us', {
     year: 'numeric',
     month: 'short',
-  });
+  })
   const endString: string = endTime.toLocaleString('en-us', {
     year: 'numeric',
     month: 'short',
-  });
+  })
   return (
     <div>
       <ProjectTitle title={title} date_string={`${startString} - ${endString}`} className="sm:mt-16 mt-4" />
@@ -54,5 +54,5 @@ export default function ProjectHero({ project }: { project: ProjectType }) {
         sanitySrc={coverImage}
       />
     </div>
-  );
+  )
 }

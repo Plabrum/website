@@ -1,8 +1,8 @@
-import React from 'react';
-import { ExperienceType } from 'schemas/schema_types';
-import { PortableText, PortableTextComponents } from '@portabletext/react';
-import SanityImage from 'components/general/SanityImage';
-import Link from 'next/link';
+import React from 'react'
+import { ExperienceType } from 'schemas/schema_types'
+import { PortableText, PortableTextComponents } from '@portabletext/react'
+import SanityImage from 'components/general/SanityImage'
+import Link from 'next/link'
 
 type Props = { isLast: boolean; experience: ExperienceType };
 const components: PortableTextComponents = {
@@ -11,23 +11,23 @@ const components: PortableTextComponents = {
     bullet: ({ children }) => <ul className="mt-xl list-disc">{children}</ul>,
     number: ({ children }) => <ol className="mt-lg list-decimal">{children}</ol>,
   },
-};
+}
 
 function ExperienceCard({ isLast, experience }: Props) {
-  const { role, duration, description, company } = experience;
+  const { role, duration, description, company } = experience
 
   // const { name, comp_description, logo_image, company_page } = company;
-  const startTime = duration?.start ? new Date(duration.start) : 'now';
-  const endTime = duration?.end ? new Date(duration.end) : 'now';
+  const startTime = duration?.start ? new Date(duration.start) : 'now'
+  const endTime = duration?.end ? new Date(duration.end) : 'now'
 
   const startString: string = startTime.toLocaleString('en-us', {
     year: 'numeric',
     month: 'short',
-  });
+  })
   const endString: string = endTime.toLocaleString('en-us', {
     year: 'numeric',
     month: 'short',
-  });
+  })
 
   return (
     <div className="flex mt-4 grow sm:min-h-[100px]">
@@ -64,7 +64,7 @@ function ExperienceCard({ isLast, experience }: Props) {
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default ExperienceCard;
+export default ExperienceCard

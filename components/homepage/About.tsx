@@ -1,8 +1,8 @@
-import { PortableText } from '@portabletext/react';
-import { motion } from 'framer-motion';
-import React from 'react';
-import { AboutType } from 'schemas/schema_types';
-import SanityImage from '../general/SanityImage';
+import { PortableText } from '@portabletext/react'
+import { motion } from 'framer-motion'
+import React from 'react'
+import { AboutType } from 'schemas/schema_types'
+import SanityImage from '../general/SanityImage'
 // import type { Image as SanImage } from "sanity";
 
 // interface Props {
@@ -12,7 +12,7 @@ import SanityImage from '../general/SanityImage';
 // }
 
 function About({ about }: { about: AboutType }) {
-  const { about_photo, desc_title, description } = about;
+  const { about_photo, desc_title, description } = about
   return (
     <div className="grid grid-cols-1 my-auto md:grid-cols-3 relative md:w-5/6 md:text-left mx-auto text-center items-center overflow-hidden">
       {/* <h3 className="col-span-3 mt-20 uppercase tracking-[20px] text-custom-t2 text-2xl text-center ">
@@ -46,7 +46,7 @@ function About({ about }: { about: AboutType }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default About;
+export default About

@@ -1,9 +1,9 @@
-import ThemeSwitch from 'components/general/ThemeSwitch';
-import { motion, Variants } from 'framer-motion';
-import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
-import SocialRow from './SocialRow';
-import { Toggle } from './Toggle';
+import ThemeSwitch from 'components/general/ThemeSwitch'
+import { motion, Variants } from 'framer-motion'
+import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+import SocialRow from './SocialRow'
+import { Toggle } from './Toggle'
 
 const itemVariants: Variants = {
   open: {
@@ -13,26 +13,28 @@ const itemVariants: Variants = {
   },
   closed: { opacity: 0, y: -20 },
   //     transition: { duration: 0.2 } },
-};
+}
 
 export default function MobileMenu({ homepage }: { homepage: boolean }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false)
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // only add the event listener when the dropdown is opened
-    if (!isOpen) return;
-    function handleClick(event: any) {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    }
-    window.addEventListener('click', handleClick);
+    if (!isOpen) return
+     function handleClick(event: MouseEvent) {
+       const target = event.target
+       if (mobileMenuRef.current && target instanceof Node && !mobileMenuRef.current.contains(target)) {
+         setIsOpen(false)
+       }
+     }
+    
+    window.addEventListener('click', handleClick)
     // clean up
-    return () => window.removeEventListener('click', handleClick);
-  }, [isOpen]);
+    return () => window.removeEventListener('click', handleClick)
+  }, [isOpen])
 
-  const icon_size = 'lg:h-7 lg:w-7 h-6 w-6';
+  const icon_size = 'lg:h-7 lg:w-7 h-6 w-6'
   return (
     <motion.div ref={mobileMenuRef} initial={false} animate={isOpen ? 'open' : 'closed'} className=" ">
       <motion.ul
@@ -96,5 +98,5 @@ export default function MobileMenu({ homepage }: { homepage: boolean }) {
         <Toggle toggle={() => setIsOpen((isOpen) => !isOpen)} className="stroke-custom-t2" />
       </div>
     </motion.div>
-  );
+  )
 }

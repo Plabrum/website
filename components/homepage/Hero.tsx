@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import { AboutType } from 'schemas/schema_types';
-import { FaChevronDown } from 'react-icons/fa';
-import SanityImage from '../general/SanityImage';
-import CentralTabs from './header/CentralTabs';
+import Link from 'next/link'
+import { AboutType } from 'schemas/schema_types'
+import { FaChevronDown } from 'react-icons/fa'
+import SanityImage from '../general/SanityImage'
+import CentralTabs from './header/CentralTabs'
 
 export default function Hero({ about }: { about: AboutType }) {
-  const { hero_photo, job_title, name } = about;
+  const { hero_photo, job_title, name } = about
   return (
     <div className="flex flex-col space-y-2 text-center justify-center items-center px-4">
       <SanityImage
@@ -30,5 +30,5 @@ export default function Hero({ about }: { about: AboutType }) {
         <FaChevronDown className="md:hidden h-8 w-16 animate-pulse duration-30 text-custom-t2" />
       </Link>
     </div>
-  );
+  )
 }

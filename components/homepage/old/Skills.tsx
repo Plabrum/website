@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import Skill from './Skill';
+import React from 'react'
+import { motion } from 'framer-motion'
+import Skill from './Skill'
 
 export default function Skills() {
   return (
@@ -35,5 +35,5 @@ export default function Skills() {
         <Skill />
       </div>
     </motion.div>
-  );
+  )
 }

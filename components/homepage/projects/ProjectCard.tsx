@@ -1,30 +1,30 @@
-'use client';
+'use client'
 
-import React from 'react';
-import Link from 'next/link';
-import SanityImage from 'components/general/SanityImage';
-import { ProjectType } from 'schemas/schema_types';
-import { FaChevronRight } from 'react-icons/fa';
-import { PortableText } from '@portabletext/react';
-import { usePathname } from 'next/navigation';
-import TagRow from './TagRow';
+import React from 'react'
+import Link from 'next/link'
+import SanityImage from 'components/general/SanityImage'
+import { ProjectType } from 'schemas/schema_types'
+import { FaChevronRight } from 'react-icons/fa'
+import { PortableText } from '@portabletext/react'
+import { usePathname } from 'next/navigation'
+import TagRow from './TagRow'
 
 interface Props {
   className?: string;
   project: ProjectType;
 }
 export default function ProjectCard({ project, className }: Props) {
-  const { title, slug, coverImage, blurb, duration, tags } = project;
-  const linkRef = `projects/${slug}`;
-  const pathname = usePathname();
+  const { title, slug, coverImage, blurb, duration, tags } = project
+  const linkRef = `projects/${slug}`
+  const pathname = usePathname()
 
-  const startMo = duration?.start ? new Date(duration.start) : 'now';
+  const startMo = duration?.start ? new Date(duration.start) : 'now'
 
   const datestring: string = startMo.toLocaleString('en-us', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-  });
+  })
 
   // Force tailwind to keep all the colors:
 
@@ -90,5 +90,5 @@ export default function ProjectCard({ project, className }: Props) {
         </Link>
       </div>
     </div>
-  );
+  )
 }

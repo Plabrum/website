@@ -1,15 +1,15 @@
-'use client';
-import { AboutType, ExperienceType, ProjectType } from 'schemas/schema_types';
-import { useRef } from 'react';
-import { useIntersectionObserver } from 'lib/Intersection';
-import Section from 'components/homepage/Section';
-import Footer from 'components/homepage/Footer';
-import About from './About';
-import Contact from './Contact';
-import HeaderComponent from './header/Header';
-import Hero from './Hero';
-import Projects from './projects/Projects';
-import Experiences from './experience/Experiences';
+'use client'
+import { AboutType, ExperienceType, ProjectType } from 'schemas/schema_types'
+import { useRef } from 'react'
+import { useIntersectionObserver } from 'lib/Intersection'
+import Section from 'components/homepage/Section'
+import Footer from 'components/homepage/Footer'
+import About from './About'
+import Contact from './Contact'
+import HeaderComponent from './header/Header'
+import Hero from './Hero'
+import Projects from './projects/Projects'
+import Experiences from './experience/Experiences'
 
 type Props = {
   abouts: AboutType[];
@@ -18,9 +18,9 @@ type Props = {
 };
 
 export default function HomePage({ abouts, projects, experiences }: Props) {
-  const heroRef = useRef<HTMLDivElement | null>(null);
-  const showNav = useIntersectionObserver(heroRef);
-  const about = abouts[0];
+  const heroRef = useRef<HTMLDivElement | null>(null)
+  const showNav = useIntersectionObserver(heroRef)
+  const about = abouts[0]
   return (
     <div className="flex flex-col h-screen overflow-y-scroll scroll-smooth bg-custom-bg1">
       {/* Header */}
@@ -52,5 +52,5 @@ export default function HomePage({ abouts, projects, experiences }: Props) {
       </Section>
       <Footer />
     </div>
-  );
+  )
 }

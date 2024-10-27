@@ -1,13 +1,13 @@
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import Providers from 'components/ContextProviders';
-import { Metadata } from 'next';
-import React from 'react';
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import Providers from 'components/ContextProviders'
+import { Metadata } from 'next'
+import React from 'react'
 
 export const metadata: Metadata = {
   title: 'Home',
   description: 'Welcome to Next.js',
-};
+}
 
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -26,5 +26,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  );
+  )
 }

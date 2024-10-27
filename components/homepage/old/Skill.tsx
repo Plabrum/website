@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from 'react'
+import { motion } from 'framer-motion'
 
 type Props = { directionLeft?: boolean };
 
@@ -28,5 +28,5 @@ export default function Skill({ directionLeft }: Props) {
         </div>
       </div>
     </div>
-  );
+  )
 }

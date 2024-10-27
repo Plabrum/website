@@ -1,6 +1,6 @@
-import SanityImage from 'components/general/SanityImage';
-import Link from 'next/link';
-import { TechnologyType } from 'schemas/schema_types';
+import SanityImage from 'components/general/SanityImage'
+import Link from 'next/link'
+import { TechnologyType } from 'schemas/schema_types'
 
 type Props = {
   technologies: TechnologyType[];
@@ -32,5 +32,5 @@ export default function ProjectTechnologies({ technologies }: Props) {
         ))}
       </div>
     </div>
-  );
+  )
 }
