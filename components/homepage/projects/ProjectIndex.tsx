@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import HeaderComponent from 'components/homepage/header/Header';
-import ProjectCard from 'components/homepage/projects/ProjectCard';
-import { Suspense } from 'react';
-import { ProjectType } from 'schemas/schema_types';
+import HeaderComponent from 'components/homepage/header/Header'
+import ProjectCard from 'components/homepage/projects/ProjectCard'
+import { Suspense } from 'react'
+import { ProjectType } from 'schemas/schema_types'
 
 type Props = { projects: ProjectType[] };
 
@@ -23,5 +23,5 @@ export default function ProjectIndex({ projects }: Props) {
         </div>
       </div>
     </Suspense>
-  );
+  )
 }

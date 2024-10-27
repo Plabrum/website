@@ -1,4 +1,4 @@
-import type { Image, PortableTextBlock } from "sanity";
+import type { Image, PortableTextBlock } from 'sanity';
 
 export interface ProjectType {
   _id?: string;

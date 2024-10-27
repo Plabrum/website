@@ -1,7 +1,7 @@
-import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid';
-import Link from 'next/link';
-import React from 'react';
-import { FaExternalLinkSquareAlt, FaGithub } from 'react-icons/fa';
+import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link'
+import React from 'react'
+import { FaExternalLinkSquareAlt, FaGithub } from 'react-icons/fa'
 
 interface Props {
   from_homepage: boolean;
@@ -40,5 +40,5 @@ export default function ProjectButtons({ from_homepage, repo_url, demo_url, clas
         )}
       </div>
     </div>
-  );
+  )
 }

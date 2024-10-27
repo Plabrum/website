@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import { ProjectType } from 'schemas/schema_types';
+import { ProjectType } from 'schemas/schema_types'
 
-import { FaChevronRight } from 'react-icons/fa';
-import Link from 'next/link';
-import ProjectCard from './ProjectCard';
+import { FaChevronRight } from 'react-icons/fa'
+import Link from 'next/link'
+import ProjectCard from './ProjectCard'
 
 export default function Projects({ projects }: { projects: ProjectType[] }) {
   // const curtailed_project = projects.slice(0, 3);
@@ -31,5 +31,5 @@ export default function Projects({ projects }: { projects: ProjectType[] }) {
         <FaChevronRight className="ml-3 w-2 " />
       </Link>
     </div>
-  );
+  )
 }

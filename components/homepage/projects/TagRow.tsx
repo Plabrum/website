@@ -1,5 +1,5 @@
-import React from 'react';
-import { TagType } from 'schemas/schema_types';
+import React from 'react'
+import { TagType } from 'schemas/schema_types'
 
 // type Props = { tags:  };
 
@@ -12,13 +12,13 @@ export default function TagRow({ tags }: { tags: TagType[] }) {
     'bg-teal-500',
     'bg-sky-500',
     'bg-yellow-500',
-  ];
+  ]
   function assign_color(tag: TagType) {
     if (tag.color !== undefined) {
-      const index = tag.color % colors.length;
-      return colors[index];
+      const index = tag.color % colors.length
+      return colors[index]
     }
-    return 'bg-gray-500';
+    return 'bg-gray-500'
   }
   return (
     <div className="col-span-2 max-md:hidden mx-2 flex flew-row gap-2 h-8 justify-start overflow-auto">
@@ -31,5 +31,5 @@ export default function TagRow({ tags }: { tags: TagType[] }) {
           ),
       )}
     </div>
-  );
+  )
 }

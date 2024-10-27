@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 interface Props {
   toggle: () => void;
@@ -36,5 +36,5 @@ export function Toggle({ toggle, className }: Props) {
         />
       </svg>
     </button>
-  );
+  )
 }

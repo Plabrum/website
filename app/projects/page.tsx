@@ -1,7 +1,7 @@
-import ProjectIndex from 'components/homepage/projects/ProjectIndex';
-import { client } from 'lib/sanity.client';
-import { groq } from 'next-sanity';
-import { ProjectType } from 'schemas/schema_types';
+import ProjectIndex from 'components/homepage/projects/ProjectIndex'
+import { client } from 'lib/sanity.client'
+import { groq } from 'next-sanity'
+import { ProjectType } from 'schemas/schema_types'
 
 export default async function Page() {
   const projects: ProjectType[] = await client.fetch(groq`
@@ -17,6 +17,6 @@ export default async function Page() {
           demo_url,
           "tags":tags[]->{_id, name, color}
           }
-          | order(duration.start asc)`);
-  return <ProjectIndex projects={projects} />;
+          | order(duration.start asc)`)
+  return <ProjectIndex projects={projects} />
 }

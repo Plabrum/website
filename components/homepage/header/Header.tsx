@@ -1,45 +1,45 @@
-'use client';
+'use client'
 
-import React, { useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
-import { motion } from 'framer-motion';
-import ThemeSwitch from 'components/general/ThemeSwitch';
-import Head from 'next/head';
-import SocialRow from './SocialRow';
-import MobileMenu from './MobileMenu';
-import CentralTabs from './CentralTabs';
+import React, { useEffect, useState } from 'react'
+import { useTheme } from 'next-themes'
+import { motion } from 'framer-motion'
+import ThemeSwitch from 'components/general/ThemeSwitch'
+import Head from 'next/head'
+import SocialRow from './SocialRow'
+import MobileMenu from './MobileMenu'
+import CentralTabs from './CentralTabs'
 
 type Props = { showNav?: boolean; homepage?: boolean };
 
 // Adding mobile menu: https://codesandbox.io/s/framer-motion-variants-rj7ks0?from-embed=&file=/src/App.tsx
 
 export default function HeaderComponent({ showNav = true, homepage = false }: Props) {
-  const { systemTheme } = useTheme();
-  const [isDesktop, setDesktop] = useState(false);
+  const { systemTheme } = useTheme()
+  const [isDesktop, setDesktop] = useState(false)
 
   useEffect(() => {
-    const breakpoint = 1000;
+    const breakpoint = 1000
     if (window.innerWidth > breakpoint) {
-      setDesktop(true);
+      setDesktop(true)
     } else {
-      setDesktop(false);
+      setDesktop(false)
     }
 
     const updateMedia = () => {
       if (window.innerWidth > breakpoint) {
-        setDesktop(true);
+        setDesktop(true)
       } else {
-        setDesktop(false);
+        setDesktop(false)
       }
-    };
-    window.addEventListener('resize', updateMedia);
-    return () => window.removeEventListener('resize', updateMedia);
-  }, []);
+    }
+    window.addEventListener('resize', updateMedia)
+    return () => window.removeEventListener('resize', updateMedia)
+  }, [])
 
   // const navbutton_style = `text-2xs px-4 py-1 lg:text-xs lg:px-6 lg:py-2 border border-custom-t2 rounded-full
   //                           uppercase text-xs tracking-widest
   //                           text-custom-t2 transition-all hover:bg-custom-t2 hover:text-custom-t3`;
-  const icon_size = 'lg:h-7 lg:w-7 h-6 w-6';
+  const icon_size = 'lg:h-7 lg:w-7 h-6 w-6'
   if (isDesktop) {
     return (
       <header
@@ -131,7 +131,7 @@ export default function HeaderComponent({ showNav = true, homepage = false }: Pr
           <ThemeSwitch className={icon_size} />
         </motion.div>
       </header>
-    );
+    )
   }
   return (
     <header className="fixed top-0 w-full z-20 items-center ">
@@ -152,5 +152,5 @@ export default function HeaderComponent({ showNav = true, homepage = false }: Pr
         <MobileMenu homepage={homepage} />
       </motion.div>
     </header>
-  );
+  )
 }

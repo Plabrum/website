@@ -1,17 +1,17 @@
-'use client';
+'use client'
 
-import { PortableText, PortableTextComponents } from '@portabletext/react';
-import { Image, PortableTextBlock } from 'sanity';
-import { ExternalIframeType } from 'schemas/schema_types';
-import SanityImage from './SanityImage';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { gruvboxDark, gruvboxLight } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
-import { useTheme } from 'next-themes';
-import 'katex/dist/katex.min.css';
-import Latex from 'react-latex-next';
+import { PortableText, PortableTextComponents } from '@portabletext/react'
+import { Image, PortableTextBlock } from 'sanity'
+import { ExternalIframeType } from 'schemas/schema_types'
+import SanityImage from './SanityImage'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { gruvboxDark, gruvboxLight } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+import { useTheme } from 'next-themes'
+import 'katex/dist/katex.min.css'
+import Latex from 'react-latex-next'
 
 export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
-  const { resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme()
 
   const components: PortableTextComponents = {
     list: {
@@ -87,7 +87,7 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
         </div>
       ),
       external: ({ value }: { value: ExternalIframeType }) => {
-        const shape = value.width && value.height ? ` aspect-[${value.width}/${value.height}] ` : '';
+        const shape = value.width && value.height ? ` aspect-[${value.width}/${value.height}] ` : ''
 
         const tailwind_cache = `aspect-[1/1]
                                 aspect-[2/1] aspect-[1/2] 
@@ -96,9 +96,9 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
                                 aspect-[3/5] aspect-[5/3]
                                 aspect[4/3] aspect-[3/4]
                                 aspect-[5/4] aspect-[4/5]
-                                aspect-[16/9]`;
+                                aspect-[16/9]`
 
-        const back_up_ratio = tailwind_cache.includes(shape) ? shape : 'aspect-square';
+        const back_up_ratio = tailwind_cache.includes(shape) ? shape : 'aspect-square'
 
         return (
           <iframe
@@ -108,10 +108,10 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
             title="YouTube video player"
             allowFullScreen
           />
-        );
+        )
       },
     },
-  };
+  }
 
-  return <PortableText components={components} value={value} />;
+  return <PortableText components={components} value={value} />
 }

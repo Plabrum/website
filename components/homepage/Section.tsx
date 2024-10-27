@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 interface Props {
   idName: string;
@@ -25,5 +25,5 @@ export default function Section({ idName, titleName, className, children }: Prop
 
       {children}
     </section>
-  );
+  )
 }

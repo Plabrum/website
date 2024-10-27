@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import React from 'react';
+import { motion } from 'framer-motion'
+import React from 'react'
 
 function BackgroundCircles() {
   return (
@@ -23,7 +23,7 @@ function BackgroundCircles() {
       <div className="absolute border border-[#F7AB0A] opacity-20 rounded-full h-[650px] w-[650px] mt-52 animate-pulse" />
       <div className="absolute border border-[#333333] rounded-full h-[800px] w-[800px] mt-52" />
     </motion.div>
-  );
+  )
 }
 
-export default BackgroundCircles;
+export default BackgroundCircles

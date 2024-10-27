@@ -1,6 +1,6 @@
-import ProjectIndex from 'components/projects/ProjectsIndex';
-import { client } from 'lib/sanity.client';
-import { groq } from 'next-sanity';
+import ProjectIndex from 'components/projects/ProjectsIndex'
+import { client } from 'lib/sanity.client'
+import { groq } from 'next-sanity'
 
 type ProjectPageServerProps = {
   params: { slug: string };
@@ -23,18 +23,18 @@ export async function generateMetadata({ params }: ProjectPageServerProps) {
         "technologies":technologies[]->{ name, tech_page, logo_image, description},
       }`,
     { slug: `${params.slug}` },
-  );
+  )
   return {
     title: `Projects - ${project.title}`,
     description: project.meta_description,
-  };
+  }
 }
 
 export async function generateStaticParams() {
   const paths: string[] = await client.fetch(groq`
     *[_type == "project" && slug.current != null].slug.current
-    `);
-  return paths.map((slug) => ({ slug }));
+    `)
+  return paths.map((slug) => ({ slug }))
 }
 
 export default async function Page({ params }: ProjectPageServerProps) {
@@ -54,7 +54,7 @@ export default async function Page({ params }: ProjectPageServerProps) {
     "technologies":technologies[]->{ name, tech_page, logo_image, description},
   }`,
     { slug: `${params.slug}` },
-  );
+  )
 
-  return <ProjectIndex project={project} />;
+  return <ProjectIndex project={project} />
 }

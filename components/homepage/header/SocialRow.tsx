@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import React from 'react';
-import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
+import Link from 'next/link'
+import React from 'react'
+import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa'
 
 function SocialRow({ className }: { className?: string }) {
   return (
@@ -15,7 +15,7 @@ function SocialRow({ className }: { className?: string }) {
         <FaEnvelope className="lg:h-7 lg:w-7 h-6 w-6" />
       </Link>
     </div>
-  );
+  )
 }
 
-export default SocialRow;
+export default SocialRow

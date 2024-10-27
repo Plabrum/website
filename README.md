@@ -2,39 +2,35 @@
 
 This project showcases all the projects that I have worked on over the past few years. Take a look at the finished [website](https://plabrum.com)!
 
-Interested in how I built this project and selected the technologies? 
+Interested in how I built this project and selected the technologies?
 
 [Read the writeup at plabrum.com](https://plabrum.com/projects/portfolio_website)
 
-
-
 ### Technologies used:
 
-* Hosting Provider: `Vercel`
+- Hosting Provider: `Vercel`
 
-* Framework: `Next.js `
+- Framework: `Next.js `
 
-* UI Library: `React`
+- UI Library: `React`
 
-* Primary Language: `Typescript`
+- Primary Language: `Typescript`
 
-* Styling: `TailwindCSS`
+- Styling: `TailwindCSS`
 
-* Animation: Framer: `Motion`
+- Animation: Framer: `Motion`
 
-* Content Management: `Sanity`
+- Content Management: `Sanity`
 
-* Bot Protection: `ReCaptcha V3`
-
-  
+- Bot Protection: `ReCaptcha V3`
 
 #### Technical Description
 
-This website dynamically loads content from Sanity.io which is used as the headless content management system (CMS). You can see the components related to sanity in pages/studio/[[...index]].tsx`. 
+This website dynamically loads content from Sanity.io which is used as the headless content management system (CMS). You can see the components related to sanity in pages/studio/[[...index]].tsx`.
 
 All pages on this website are statically generated allowing for deployment on CDN, any content updates trigger a webhook that regenerates just the required pages using a serverless function. This allows the website to be incredibly efficient - running completely for free (save for the yearly domain name DNS fee), and highly scalable (in the vanishingly small event that my portfolio goes viral).
 
-All images are using the `next/image` component and set with `priority` and `sizes` tags were necessary. The `sizes` tag triggers Next.js to generate images with only the resolution necessary for the device size, ensuring that unnecessary resolution does not hold back loading time. The `priority` tag keeps certain images from lazy loading so that any important large images will be ready for viewing by the time the user has scrolled down to them. 
+All images are using the `next/image` component and set with `priority` and `sizes` tags were necessary. The `sizes` tag triggers Next.js to generate images with only the resolution necessary for the device size, ensuring that unnecessary resolution does not hold back loading time. The `priority` tag keeps certain images from lazy loading so that any important large images will be ready for viewing by the time the user has scrolled down to them.
 
 Google reCaptcha V3 protects the contact form at the bottom from crawlers submitting junk mail. The reduced user friction comes at a cost - the entire website is wrapped in a `GoogleReCaptchaProvider` higher-order component significantly impacting the page load times.
 
@@ -79,4 +75,3 @@ Then you should be able to install the required packages and run a development e
 ```bash
 yarn add && yarn dev
 ```
-
