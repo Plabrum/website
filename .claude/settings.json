@@ -1,5 +1,6 @@
 {
   "enabledPlugins": {
-    "sanity@claude-plugins-official": true
+    "sanity@claude-plugins-official": true,
+    "playwright@claude-plugins-official": false
   }
 }
