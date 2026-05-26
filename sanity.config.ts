@@ -10,12 +10,28 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
 
 export default defineConfig({
   basePath: '/studio',
-  name: 'Personal_Website_Studio',
+  name: 'default',
   title: 'Personal Website Studio',
 
   projectId,
   dataset,
-  plugins: [structureTool(), visionTool(), codeInput()],
+  plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title('Content')
+          .items([
+            S.listItem()
+              .title('Site Settings')
+              .id('siteSettings')
+              .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+            S.divider(),
+            ...S.documentTypeListItems().filter((item) => item.getId() !== 'siteSettings'),
+          ]),
+    }),
+    visionTool(),
+    codeInput(),
+  ],
 
   schema: {
     types: schemaTypes,

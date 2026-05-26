@@ -51,6 +51,13 @@ export default defineType({
       validation: (rule) => rule.max(155).required(),
     }),
     defineField({
+      name: 'featured',
+      title: 'Featured role',
+      description: 'Render in the primary § N list (vs. compact "Earlier" list)',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
       name: 'duration',
       title: 'Duration',
       type: 'duration',

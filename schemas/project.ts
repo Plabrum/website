@@ -61,16 +61,6 @@ export default defineType({
     }),
 
     defineField({
-      name: 'coverImage',
-      title: 'Cover Image',
-      description: 'This image will be used as the cover image for the project.',
-      type: 'image',
-      validation: (rule) => rule.required(),
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
       name: 'duration',
       title: 'Duration',
       type: 'duration',

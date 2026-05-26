@@ -1,75 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* @layer components {
-  .heroButton {
-    @apply px-6 py-2 m-2 border border-custom-t2 rounded-full
-       uppercase text-xs tracking-widest text-custom-t2 transition-all
-        hover:bg-custom-t2 hover:text-custom-t3;
+:root {
+  --bg: #fbfaf7;
+  --bg-elev: #f4f0e6;
+  --text: #1a1a1a;
+  --text-strong: #0a0a0a;
+  --muted: #6f6a60;
+  --rule: #e8e3d8;
+  --code-bg: #f4f0e6;
+  --accent: #a8531f;
+  --accent-hover: #7e3d15;
+  --accent-deep: #a8531f;
+
+  --measure: 660px;
+  --measure-wide: 1040px;
+}
+
+.dark {
+  --bg: #171410;
+  --bg-elev: #1e1a14;
+  --text: #f2ead8;
+  --text-strong: #fbf5e6;
+  --muted: #8a8170;
+  --rule: #2b251c;
+  --code-bg: #1a160f;
+  --accent: #d9a05b;
+  --accent-hover: #e8b878;
+  --accent-deep: #b8662a;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif), 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+  font-size: 18.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 17.5px;
   }
-} */
+}
 
 .grecaptcha-badge {
   visibility: hidden;
 }
 
-/* For Webkit-based browsers (Chrome, Safari and Opera) */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+/* Sidenote: desktop pulls into the right margin, mobile collapses inline.
+   Kept here because the dual-mode position trick is hard to express in
+   utilities (parent-absolute positioning across a responsive breakpoint). */
+@media (min-width: 901px) {
+  .sidenote {
+    position: absolute;
+    width: 230px;
+    right: -270px;
+    margin-top: -4px;
+  }
+  .sidenote > details > summary {
+    display: none;
+  }
+  .sidenote .sidenote-body {
+    display: block;
+  }
 }
-
-/* For IE, Edge and Firefox */
-.scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-/* .scrollbar-show::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-cov::-webkit-scrollbar {
-  visibility: hidden;
-} */
-
-:root {
-  /* Your default theme */
-  --header: #f8f8f87e;
-  --bg1: #f8f8f8; /* Main background theme */
-
-  /* --bg1: #f0ddbe; Main background theme */
-  --bg2: #084c61;
-  --bg3: #f1f1f1; /* Used for article background */
-  --bg4: #323031; /*used for footer */
-
-  --t1: #121212;
-  --t2: #084c61; /* used for buttons, icons, etc */
-  /* --t2: rgb(45, 102, 155); used for buttons, icons, etc */
-  --t3: #ffff; /*light text */
-  --t4: #888585; /* used in footer text*/
-
-  /* --accent: #fba92c; */
-  --accent: #ffc857;
-
-  --a: #177e89;
-  --b: #084c61;
-  --c: #db3a34;
-  --d: #ffc857;
-  --e: #323031;
-}
-
-[data-theme='dark'] {
-  --header: #4040405d;
-  --bg1: #1b1a1a;
-  --bg2: #dfdfdf;
-  --bg3: #2b2a2a; /* Used for article background */
-  --bg4: #060606; /*used for footer */
-  --t1: #ffffff;
-  --t2: #dfdfdf; /* used for buttons, icons, etc */
-  --t3: #000000; /*dark text */
-  --t4: #a1a1a1;
-  --accent: #e76f51;
+@media (max-width: 900px) {
+  .sidenote {
+    display: inline;
+  }
+  .sidenote > details {
+    display: inline;
+  }
+  .sidenote summary {
+    display: inline;
+    cursor: pointer;
+    color: var(--accent);
+    font-family: var(--font-sans), 'Inter', sans-serif;
+    font-size: 0.8em;
+    vertical-align: super;
+    list-style: none;
+  }
+  .sidenote summary::-webkit-details-marker {
+    display: none;
+  }
+  .sidenote details .sidenote-body {
+    display: none;
+  }
+  .sidenote details[open] .sidenote-body {
+    display: block;
+    margin: 8px 0 16px;
+    padding: 8px 0 8px 14px;
+    border-left: 2px solid var(--rule);
+    font-size: 14.5px;
+  }
 }

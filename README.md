@@ -73,5 +73,5 @@ GMAIL_APP_PASSWORD=
 Then you should be able to install the required packages and run a development environment:
 
 ```bash
-yarn add && yarn dev
+pnpm install && pnpm dev
 ```

@@ -7,7 +7,6 @@ export interface ProjectType {
   slug: string;
   meta_description: string;
   blurb: PortableTextBlock[];
-  coverImage: Image;
   thumbnailImage?: Image;
   duration?: {
     start?: string;

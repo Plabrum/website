@@ -1,29 +1,46 @@
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import Providers from 'components/ContextProviders'
 import { Metadata } from 'next'
+import { Source_Serif_4, Inter, JetBrains_Mono } from 'next/font/google'
 import React from 'react'
+import '../styles/globals.css'
+
+const serif = Source_Serif_4({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  variable: '--font-serif',
+  display: 'swap',
+})
+const sans = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-mono',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'Home',
-  description: 'Welcome to Next.js',
+  title: 'Phil Labrum',
+  description: 'Software engineer. Writing, projects, experience.',
+  alternates: {
+    types: {
+      'application/rss+xml': '/feed.xml',
+    },
+  },
 }
 
-export default function RootLayout({
-  // Layouts must accept a children prop.
-  // This will be populated with nested layouts or pages
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="bg-custom-bg1 text-custom-t1">
-        <Providers>
-          {children}
-          <Analytics />
-          <SpeedInsights />
-        </Providers>
+    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

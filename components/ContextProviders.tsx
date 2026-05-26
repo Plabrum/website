@@ -12,7 +12,7 @@ interface ProvidersProps {
 export default function Providers({ children }: ProvidersProps) {
   const recaptcha_key = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''
   return (
-    <ThemeProvider>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <GoogleReCaptchaProvider
         reCaptchaKey={recaptcha_key}
         scriptProps={{

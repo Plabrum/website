@@ -70,6 +70,8 @@ export default defineType({
     }),
 
     { type: 'latex' },
+    { type: 'pullQuote' },
+    { type: 'sidenote' },
     {
       type: 'code',
     },
