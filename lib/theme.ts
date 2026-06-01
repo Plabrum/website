@@ -24,7 +24,7 @@ export const theme = {
     codeBg: '#eef0e9',
     accent: '#2f5141',
     accentHover: '#213a2f',
-    accentDeep: '#2f5141',
+    accentDeep: '#2f5141'
   },
   dark: {
     bg: '#14140f',
@@ -36,6 +36,6 @@ export const theme = {
     codeBg: '#17170f',
     accent: '#7ba98a',
     accentHover: '#95bfa1',
-    accentDeep: '#5a8468',
-  },
+    accentDeep: '#5a8468'
+  }
 } as const

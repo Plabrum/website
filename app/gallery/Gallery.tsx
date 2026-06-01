@@ -1,6 +1,6 @@
 'use client'
 
-import { CSSProperties, useEffect, useState } from 'react'
+import { type CSSProperties, useEffect, useState } from 'react'
 import { Button } from 'components/ui/button'
 import { Input } from 'components/ui/input'
 import { IndexList } from 'components/site/IndexList'
@@ -74,11 +74,18 @@ export default function Gallery() {
   const [mode, setMode] = useState<Mode>('light')
 
   // Restore the last viewed combo so flipping back and forth across reloads is painless.
+  // Reads from localStorage (an external store) on mount; defaults render on the
+  // server, so this must run in an effect to avoid a hydration mismatch — the
+  // set-state-in-effect here is the legitimate external-store sync case.
   useEffect(() => {
     const saved = localStorage.getItem('gallery-state')
     if (saved) {
       try {
-        const { paletteId: p, mode: m } = JSON.parse(saved)
+        const { paletteId: p, mode: m } = JSON.parse(saved) as {
+          paletteId?: string
+          mode?: string
+        }
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing from localStorage (external store) on mount; defaults are server-rendered
         if (p) setPaletteId(p)
         if (m === 'light' || m === 'dark') setMode(m)
       } catch {
@@ -109,7 +116,9 @@ export default function Gallery() {
                     <button
                       key={p.id}
                       type="button"
-                      onClick={() => setPaletteId(p.id)}
+                      onClick={() => {
+                        setPaletteId(p.id)
+                      }}
                       className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-[13px] transition-colors ${
                         active
                           ? 'border-white/70 bg-white/10 text-white'
@@ -138,7 +147,9 @@ export default function Gallery() {
                 <button
                   key={m}
                   type="button"
-                  onClick={() => setMode(m)}
+                  onClick={() => {
+                    setMode(m)
+                  }}
                   className={`rounded-full px-3 py-1 text-[12px] capitalize transition-colors ${
                     mode === m ? 'bg-white/15 text-white' : 'text-white/50 hover:text-white/80'
                   }`}

@@ -1,12 +1,19 @@
-'use client';
-import { defineConfig } from 'sanity';
-import { structureTool } from 'sanity/structure';
-import { visionTool } from '@sanity/vision';
-import { schemaTypes } from './schemas/schema';
-import { codeInput } from '@sanity/code-input';
+'use client'
+import { defineConfig } from 'sanity'
+import { structureTool } from 'sanity/structure'
+import { visionTool } from '@sanity/vision'
+import { schemaTypes } from './schemas/schema'
+import { codeInput } from '@sanity/code-input'
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
+
+if (!projectId) {
+  throw new Error('Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID')
+}
+if (!dataset) {
+  throw new Error('Missing environment variable: NEXT_PUBLIC_SANITY_DATASET')
+}
 
 export default defineConfig({
   basePath: '/studio',
@@ -17,7 +24,7 @@ export default defineConfig({
   dataset,
   plugins: [
     structureTool({
-      structure: (S) =>
+      structure: S =>
         S.list()
           .title('Content')
           .items([
@@ -26,14 +33,14 @@ export default defineConfig({
               .id('siteSettings')
               .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
             S.divider(),
-            ...S.documentTypeListItems().filter((item) => item.getId() !== 'siteSettings'),
-          ]),
+            ...S.documentTypeListItems().filter(item => item.getId() !== 'siteSettings')
+          ])
     }),
     visionTool(),
-    codeInput(),
+    codeInput()
   ],
 
   schema: {
-    types: schemaTypes,
-  },
-});
+    types: schemaTypes
+  }
+})

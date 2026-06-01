@@ -2,16 +2,18 @@ import { defineQuery } from 'next-sanity'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { client, imageBuilder } from 'lib/sanity.client'
-import { formatDate, formatLong } from 'lib/format'
+import { formatLong } from 'lib/format'
 import PortableTextRenderer from 'components/portable-text'
-import { IndexList } from 'components/site/IndexList'
 import { EntryLinks, type EntryLink } from 'components/site/EntryLinks'
+import type { Metadata } from 'next'
 import type { PortableTextBlock } from 'sanity'
 import type { Image } from 'sanity'
 
-type Props = { params: Promise<{ slug: string }> }
+interface Props {
+  params: Promise<{ slug: string }>
+}
 
-type EntryDetail = {
+interface EntryDetail {
   _id: string
   title: string
   type: 'essay' | 'project'
@@ -20,19 +22,13 @@ type EntryDetail = {
   updatedAt?: string
   links?: EntryLink[]
   body?: PortableTextBlock[]
-  tags?: Array<{ name: string }>
-  prev?: { title: string; slug: string } | null
-  next?: { title: string; slug: string } | null
-  related?: Array<{ title: string; slug: string; publishedAt: string }>
+  tags?: { name: string }[]
+  related?: { title: string; slug: string; publishedAt: string }[]
 }
 
 const entryDetailQuery = defineQuery(`*[_type=="entry" && slug.current == $slug][0]{
   _id, title, type, summary, publishedAt, updatedAt, links, body,
   "tags": tags[]->{ name },
-  "prev": *[_type=="entry" && defined(slug.current) && defined(publishedAt) && publishedAt < ^.publishedAt]
-    | order(publishedAt desc)[0]{ title, "slug": slug.current },
-  "next": *[_type=="entry" && defined(slug.current) && defined(publishedAt) && publishedAt > ^.publishedAt]
-    | order(publishedAt asc)[0]{ title, "slug": slug.current },
   "related": *[_type=="entry" && defined(slug.current) && _id != ^._id && count(tags[@._ref in ^.tags[]._ref]) > 0]
     | order(publishedAt desc)[0...3]{ title, "slug": slug.current, publishedAt }
 }`)
@@ -44,18 +40,22 @@ const entryMetaQuery = defineQuery(`*[_type=="entry" && slug.current == $slug][0
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-  const slugs = await client.fetch<string[]>(entrySlugsQuery, {}, {
-    next: { tags: ['entry'] },
-  })
-  return slugs.map((slug) => ({ slug }))
+  const slugs = await client.fetch<string[]>(
+    entrySlugsQuery,
+    {},
+    {
+      next: { tags: ['entry'] }
+    }
+  )
+  return slugs.map(slug => ({ slug }))
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const data = await client.fetch<{ title?: string; summary?: string; socialImage?: Image } | null>(
     entryMetaQuery,
     { slug },
-    { next: { tags: ['entry'] } },
+    { next: { tags: ['entry'] } }
   )
   if (!data) return { title: 'Not found' }
   const ogImage = data.socialImage
@@ -64,104 +64,49 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${data.title} — Phil Labrum`,
     description: data.summary,
-    openGraph: ogImage
-      ? { title: data.title, description: data.summary, images: [{ url: ogImage }] }
-      : undefined,
+    openGraph: ogImage ? { title: data.title, description: data.summary, images: [{ url: ogImage }] } : undefined
   }
 }
 
 export default async function EntryPage({ params }: Props) {
   const { slug } = await params
-  const entry = await client.fetch<EntryDetail | null>(
-    entryDetailQuery,
-    { slug },
-    { next: { tags: ['entry'] } },
-  )
+  const entry = await client.fetch<EntryDetail | null>(entryDetailQuery, { slug }, { next: { tags: ['entry'] } })
   if (!entry) notFound()
 
   return (
-    <article className="mx-auto max-w-measure relative">
+    <article className="relative mx-auto max-w-measure">
       <header className="mb-9">
-        <h1 className="text-[36px] leading-[1.18] m-0 mb-3.5 font-semibold tracking-[-0.01em] text-text-strong max-sm:text-[28px]">
+        <h1 className="max-sm:text-[28px] m-0 mb-4 text-[36px] font-semibold leading-[1.18] tracking-[-0.01em] text-text-strong">
           {entry.title}
         </h1>
-        <div className="font-sans text-muted text-xs uppercase tracking-[0.08em]">
-          Published {formatLong(entry.publishedAt)}
-          {entry.updatedAt && (
-            <>
-              {' · '}
-              <span className="text-accent">Updated {formatLong(entry.updatedAt)}</span>
-            </>
+        <div className="max-sm:flex-col max-sm:items-start flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 font-sans">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px] text-muted">
+            <time dateTime={entry.publishedAt}>{formatLong(entry.publishedAt)}</time>
+            {entry.updatedAt && <span className="text-accent">· Updated {formatLong(entry.updatedAt)}</span>}
+            {entry.links && entry.links.length > 0 && (
+              <span
+                aria-hidden
+                className="text-rule"
+              >
+                ·
+              </span>
+            )}
+            <EntryLinks links={entry.links} />
+          </div>
+          {entry.tags && entry.tags.length > 0 && (
+            <div className="max-sm:text-left text-[12px] lowercase tracking-[0.02em] text-muted">
+              {entry.tags.map(t => t.name).join('  ·  ')}
+            </div>
           )}
         </div>
-        <EntryLinks links={entry.links} />
-        {entry.tags && entry.tags.length > 0 && (
-          <div className="flex gap-2 flex-wrap mt-3.5">
-            {entry.tags.map((t) => (
-              <span
-                key={t.name}
-                className="font-sans text-[11px] lowercase tracking-[0.03em] text-muted border border-rule rounded-full px-2.5 py-0.5 bg-transparent"
-              >
-                {t.name}
-              </span>
-            ))}
-          </div>
-        )}
       </header>
 
       {entry.body && <PortableTextRenderer value={entry.body} />}
 
-      {(entry.prev || entry.next) && (
-        <nav
-          className="grid grid-cols-2 gap-7 mt-16 pt-6 border-t border-rule font-sans max-sm:grid-cols-1 max-sm:gap-[18px]"
-          aria-label="Adjacent entries"
-        >
-          <div className="flex flex-col gap-1">
-            {entry.prev && (
-              <>
-                <span className="text-[11px] uppercase tracking-[0.1em] text-muted">← Previous</span>
-                <Link
-                  href={`/writing/${entry.prev.slug}`}
-                  className="text-text no-underline font-serif text-[17px] hover:text-accent"
-                >
-                  {entry.prev.title}
-                </Link>
-              </>
-            )}
-          </div>
-          <div className="flex flex-col gap-1 text-right max-sm:text-left">
-            {entry.next && (
-              <>
-                <span className="text-[11px] uppercase tracking-[0.1em] text-muted">Next →</span>
-                <Link
-                  href={`/writing/${entry.next.slug}`}
-                  className="text-text no-underline font-serif text-[17px] hover:text-accent"
-                >
-                  {entry.next.title}
-                </Link>
-              </>
-            )}
-          </div>
-        </nav>
-      )}
-
-      {entry.related && entry.related.length > 0 && (
-        <section className="mt-14">
-          <h3 className="font-sans text-xs uppercase tracking-[0.12em] text-muted font-semibold m-0 mb-3.5">
-            Related
-          </h3>
-          <IndexList
-            items={entry.related.map((r) => ({
-              key: r.slug,
-              href: `/writing/${r.slug}`,
-              meta: formatDate(r.publishedAt),
-              title: r.title,
-            }))}
-          />
-        </section>
-      )}
-
-      <nav className="mt-16 pt-6 border-t border-rule font-sans" aria-label="Writing">
+      <nav
+        className="mt-16 border-t border-rule pt-6 font-sans"
+        aria-label="Writing"
+      >
         <Link
           href="/writing"
           className="text-[11px] uppercase tracking-[0.1em] text-muted no-underline hover:text-accent"

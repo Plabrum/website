@@ -5,7 +5,7 @@ export function formatDate(iso?: string | null): string {
   return d.toLocaleDateString('en-US', {
     day: '2-digit',
     month: 'short',
-    year: 'numeric',
+    year: 'numeric'
   })
 }
 
@@ -16,7 +16,7 @@ export function formatLong(iso?: string | null): string {
   return d.toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
-    year: 'numeric',
+    year: 'numeric'
   })
 }
 

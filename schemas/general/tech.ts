@@ -1,5 +1,5 @@
-import { defineField, defineType } from 'sanity';
-import { PackageIcon } from '@sanity/icons';
+import { defineField, defineType } from 'sanity'
+import { PackageIcon } from '@sanity/icons'
 
 export default defineType({
   name: 'tech',
@@ -11,12 +11,12 @@ export default defineType({
       type: 'string',
       name: 'name',
       title: 'Technology Name',
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       type: 'string',
       name: 'description',
-      title: 'Description',
+      title: 'Description'
     }),
     defineField({
       name: 'logo_image',
@@ -24,13 +24,13 @@ export default defineType({
       type: 'image',
       description: 'This image will be used as the technologies logo image.',
       options: {
-        hotspot: true,
-      },
+        hotspot: true
+      }
     }),
     defineField({
       name: 'tech_page',
       title: 'URL to Tech Homepage',
-      type: 'url',
-    }),
-  ],
-});
+      type: 'url'
+    })
+  ]
+})

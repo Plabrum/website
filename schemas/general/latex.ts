@@ -1,5 +1,5 @@
-import { defineField, defineType } from 'sanity';
-import { ComponentIcon } from '@sanity/icons';
+import { defineField, defineType } from 'sanity'
+import { ComponentIcon } from '@sanity/icons'
 
 export default defineType({
   name: 'latex',
@@ -11,7 +11,7 @@ export default defineType({
       type: 'string',
       name: 'latex_string',
       title: 'Latex String',
-      validation: (rule) => rule.required(),
-    }),
-  ],
-});
+      validation: rule => rule.required()
+    })
+  ]
+})

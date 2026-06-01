@@ -3,7 +3,7 @@ import { client } from 'lib/sanity.client'
 import PortableTextRenderer from 'components/portable-text'
 import type { PortableTextBlock } from 'sanity'
 
-type HomeData = {
+interface HomeData {
   about: {
     name?: string
     bio?: string
@@ -18,19 +18,27 @@ const homeQuery = defineQuery(`{
 }`)
 
 export default async function Page() {
-  const data = await client.fetch<HomeData>(homeQuery, {}, {
-    next: { tags: ['siteSettings'] },
-  })
+  const data = await client.fetch<HomeData>(
+    homeQuery,
+    {},
+    {
+      next: { tags: ['siteSettings'] }
+    }
+  )
   const about = data.about
 
   return (
     <div className="mx-auto max-w-measure">
       <section className="mb-4">
-        <h1 className="font-serif text-[28px] leading-tight m-0 mb-6 text-text">
+        <h1 className="m-0 mb-6 font-serif text-[28px] leading-tight text-text">
+          {/* eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- empty-string name should fall back to default, not render blank */}
           {about?.name || 'Phil Labrum'}
         </h1>
         {about?.intro && about.intro.length > 0 ? (
-          <PortableTextRenderer value={about.intro} compact />
+          <PortableTextRenderer
+            value={about.intro}
+            compact
+          />
         ) : (
           about?.bio && <p className="m-0 text-[15px] leading-[1.6] text-muted">{about.bio}</p>
         )}

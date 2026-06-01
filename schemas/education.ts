@@ -1,5 +1,5 @@
-import { defineField, defineType } from 'sanity';
-import { CaseIcon } from '@sanity/icons';
+import { defineField, defineType } from 'sanity'
+import { CaseIcon } from '@sanity/icons'
 
 export default defineType({
   name: 'education',
@@ -11,28 +11,28 @@ export default defineType({
       name: 'school',
       title: 'School',
       type: 'string',
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       name: 'degree',
       title: 'Degree',
-      type: 'string',
+      type: 'string'
     }),
     defineField({
       name: 'year_start',
       title: 'Start year',
-      type: 'number',
+      type: 'number'
     }),
     defineField({
       name: 'year_end',
       title: 'End year',
-      type: 'number',
+      type: 'number'
     }),
     defineField({
       name: 'company',
       title: 'School (reference for logo)',
       type: 'reference',
-      to: { type: 'company' },
-    }),
-  ],
-});
+      to: { type: 'company' }
+    })
+  ]
+})

@@ -1,5 +1,5 @@
-import { defineField, defineType } from 'sanity';
-import { EarthGlobeIcon } from '@sanity/icons';
+import { defineField, defineType } from 'sanity'
+import { EarthGlobeIcon } from '@sanity/icons'
 
 export default defineType({
   name: 'company',
@@ -11,12 +11,12 @@ export default defineType({
       type: 'string',
       name: 'name',
       title: 'Company or School Name',
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       type: 'string',
       name: 'company_description',
-      title: 'Description',
+      title: 'Description'
     }),
     defineField({
       name: 'logo_image',
@@ -24,14 +24,14 @@ export default defineType({
       type: 'image',
       description: 'This image will be used as the company logo image.',
       options: {
-        hotspot: true,
+        hotspot: true
       },
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       name: 'company_page',
       title: 'URL to company Homepage',
-      type: 'url',
-    }),
-  ],
-});
+      type: 'url'
+    })
+  ]
+})

@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Gallery from './Gallery'
 
@@ -6,7 +6,7 @@ import Gallery from './Gallery'
 // ships, and is excluded from indexing as a belt-and-suspenders measure.
 export const metadata: Metadata = {
   title: 'Palette gallery (local)',
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: false }
 }
 
 export default function GalleryPage() {

@@ -1,5 +1,5 @@
-import { defineField, defineType } from 'sanity';
-import { ComposeIcon } from '@sanity/icons';
+import { defineField, defineType } from 'sanity'
+import { ComposeIcon } from '@sanity/icons'
 
 /**
  * The unified writing surface. An `entry` is a single piece of writing.
@@ -19,7 +19,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       name: 'type',
@@ -29,30 +29,30 @@ export default defineType({
       options: {
         list: [
           { title: 'Essay', value: 'essay' },
-          { title: 'Project', value: 'project' },
+          { title: 'Project', value: 'project' }
         ],
-        layout: 'radio',
+        layout: 'radio'
       },
       initialValue: 'essay',
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
       options: { source: 'title', maxLength: 96 },
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       name: 'updatedAt',
       title: 'Updated at',
-      type: 'datetime',
+      type: 'datetime'
     }),
     defineField({
       name: 'summary',
@@ -60,7 +60,7 @@ export default defineType({
       type: 'string',
       description:
         'One line. Used as the index gloss and the social/SEO description. Falls back to the first paragraph when blank.',
-      validation: (rule) => rule.max(200),
+      validation: rule => rule.max(200)
     }),
     defineField({
       name: 'links',
@@ -77,50 +77,51 @@ export default defineType({
               name: 'url',
               title: 'URL',
               type: 'url',
-              validation: (rule) => rule.required(),
+              validation: rule => rule.required()
             }),
             defineField({
               name: 'caption',
               title: 'Caption',
-              type: 'string',
-            }),
+              type: 'string'
+            })
           ],
           preview: {
             select: { title: 'caption', subtitle: 'url' },
-            prepare: ({ title, subtitle }) => ({
-              title: title || subtitle,
-              subtitle: title ? subtitle : undefined,
-            }),
-          },
-        },
-      ],
+            prepare: ({ title, subtitle }: { title?: string; subtitle?: string }) => {
+              // empty caption should fall back to the url, so || (not ??) is intended
+              // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+              const heading = title || subtitle || 'Link'
+              // show the url as subtitle only when there's a caption heading above it
+              return title && subtitle ? { title: heading, subtitle } : { title: heading }
+            }
+          }
+        }
+      ]
     }),
     defineField({
       name: 'body',
       title: 'Body',
-      type: 'blockContent',
+      type: 'blockContent'
     }),
     defineField({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }]
     }),
     defineField({
       name: 'socialImage',
       title: 'Social image',
       description: 'Used for link previews (og:image) only — never shown on the page.',
       type: 'image',
-      options: { hotspot: true },
-    }),
+      options: { hotspot: true }
+    })
   ],
   preview: {
     select: { title: 'title', type: 'type', publishedAt: 'publishedAt' },
-    prepare: ({ title, type, publishedAt }) => ({
-      title,
-      subtitle: [type === 'project' ? 'Project' : 'Essay', publishedAt?.slice(0, 10)]
-        .filter(Boolean)
-        .join(' · '),
-    }),
-  },
-});
+    prepare: ({ title, type, publishedAt }: { title?: string; type?: string; publishedAt?: string }) => ({
+      title: title ?? 'Untitled',
+      subtitle: [type === 'project' ? 'Project' : 'Essay', publishedAt?.slice(0, 10)].filter(Boolean).join(' · ')
+    })
+  }
+})

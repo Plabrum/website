@@ -34,6 +34,16 @@
   --accent-deep: #5a8468;
 }
 
+html {
+  /* Hide the scrollbar while keeping scroll functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
 html,
 body {
   background: var(--bg);

@@ -2,12 +2,9 @@
 
 import nodemailer from 'nodemailer'
 
-export type ContactState =
-  | { ok: true }
-  | { ok: false; error: string }
-  | null
+export type ContactState = { ok: true } | { ok: false; error: string } | null
 
-type ContactPayload = {
+interface ContactPayload {
   name: string
   email: string
   message: string
@@ -22,7 +19,7 @@ async function verifyRecaptcha(token: string): Promise<{ ok: boolean; score: num
   const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body,
+    body
   })
   if (!res.ok) return { ok: false, score: 0 }
   const data = (await res.json()) as { success?: boolean; score?: number }
@@ -56,7 +53,7 @@ export async function sendContactMessage(payload: ContactPayload): Promise<Conta
 
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
-    auth: { user, pass },
+    auth: { user, pass }
   })
 
   try {
@@ -67,8 +64,8 @@ export async function sendContactMessage(payload: ContactPayload): Promise<Conta
       subject: `Contact form: ${payload.name}`,
       text: `From: ${payload.name} <${payload.email}>\n\n${payload.message}`,
       html: `<p><strong>From:</strong> ${escapeHtml(payload.name)} &lt;${escapeHtml(payload.email)}&gt;</p><p>${escapeHtml(
-        payload.message,
-      ).replace(/\n/g, '<br/>')}</p>`,
+        payload.message
+      ).replace(/\n/g, '<br/>')}</p>`
     })
     return { ok: true }
   } catch (err) {

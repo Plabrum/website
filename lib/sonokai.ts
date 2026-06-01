@@ -22,12 +22,12 @@ const blue = '#76cce0'
 const purple = '#b39df3'
 
 export const sonokai: Record<string, React.CSSProperties> = {
-  hljs: {
+  'hljs': {
     display: 'block',
     overflowX: 'auto',
     padding: '0.5em',
     background: sonokaiBg,
-    color: sonokaiFg,
+    color: sonokaiFg
   },
   'hljs-comment': { color: sonokaiDim, fontStyle: 'italic' },
   'hljs-quote': { color: sonokaiDim, fontStyle: 'italic' },
@@ -64,5 +64,5 @@ export const sonokai: Record<string, React.CSSProperties> = {
   'hljs-addition': { color: green, backgroundColor: 'rgba(158, 208, 114, 0.1)' },
   'hljs-deletion': { color: red, backgroundColor: 'rgba(252, 93, 124, 0.1)' },
   'hljs-emphasis': { fontStyle: 'italic' },
-  'hljs-strong': { fontWeight: 'bold' },
+  'hljs-strong': { fontWeight: 'bold' }
 }

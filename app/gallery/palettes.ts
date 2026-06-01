@@ -7,7 +7,7 @@
 // proposal: `--accent` is the on-`--bg` hue (lifted on dark for legibility),
 // `--accent-deep` is the on-substrate hue (drop cap, code rule, quote marks).
 
-export type PaletteVars = {
+export interface PaletteVars {
   '--bg': string
   '--bg-elev': string
   '--text': string
@@ -20,7 +20,7 @@ export type PaletteVars = {
   '--accent-deep': string
 }
 
-export type Palette = {
+export interface Palette {
   id: string
   label: string
   blurb: string
@@ -28,7 +28,7 @@ export type Palette = {
   dark: PaletteVars
 }
 
-export const palettes: Palette[] = [
+export const palettes: [Palette, ...Palette[]] = [
   {
     id: 'current',
     label: 'Current',
@@ -43,7 +43,7 @@ export const palettes: Palette[] = [
       '--code-bg': '#f4f0e6',
       '--accent': '#a8531f',
       '--accent-hover': '#7e3d15',
-      '--accent-deep': '#a8531f',
+      '--accent-deep': '#a8531f'
     },
     dark: {
       '--bg': '#171410',
@@ -55,13 +55,14 @@ export const palettes: Palette[] = [
       '--code-bg': '#1a160f',
       '--accent': '#d9a05b',
       '--accent-hover': '#e8b878',
-      '--accent-deep': '#b8662a',
-    },
+      '--accent-deep': '#b8662a'
+    }
   },
   {
     id: 'ink',
     label: 'Ink Blue',
-    blurb: 'Keep the warm paper, swap rust for a deep Prussian/ink blue. Classic editorial. Blue-on-walnut reads like "blue hour" in dark.',
+    blurb:
+      'Keep the warm paper, swap rust for a deep Prussian/ink blue. Classic editorial. Blue-on-walnut reads like "blue hour" in dark.',
     light: {
       '--bg': '#faf9f6',
       '--bg-elev': '#f0eee8',
@@ -72,7 +73,7 @@ export const palettes: Palette[] = [
       '--code-bg': '#f0eee8',
       '--accent': '#2a4a6b',
       '--accent-hover': '#1d3550',
-      '--accent-deep': '#233a55',
+      '--accent-deep': '#233a55'
     },
     dark: {
       '--bg': '#171410',
@@ -84,13 +85,14 @@ export const palettes: Palette[] = [
       '--code-bg': '#1a160f',
       '--accent': '#7ea7cc',
       '--accent-hover': '#9bbcdb',
-      '--accent-deep': '#5a7fa3',
-    },
+      '--accent-deep': '#5a7fa3'
+    }
   },
   {
     id: 'oxblood',
     label: 'Oxblood',
-    blurb: 'Smallest move from today — keep warm paper, deepen the accent from terracotta to a richer wine/oxblood. Leather-bound, not pottery.',
+    blurb:
+      'Smallest move from today — keep warm paper, deepen the accent from terracotta to a richer wine/oxblood. Leather-bound, not pottery.',
     light: {
       '--bg': '#fbfaf7',
       '--bg-elev': '#f4f0e6',
@@ -101,7 +103,7 @@ export const palettes: Palette[] = [
       '--code-bg': '#f4f0e6',
       '--accent': '#7a2233',
       '--accent-hover': '#5c1926',
-      '--accent-deep': '#7a2233',
+      '--accent-deep': '#7a2233'
     },
     dark: {
       '--bg': '#171410',
@@ -113,8 +115,8 @@ export const palettes: Palette[] = [
       '--code-bg': '#1a160f',
       '--accent': '#c97a86',
       '--accent-hover': '#d8949e',
-      '--accent-deep': '#a8505e',
-    },
+      '--accent-deep': '#a8505e'
+    }
   },
   {
     id: 'forest',
@@ -130,7 +132,7 @@ export const palettes: Palette[] = [
       '--code-bg': '#eef0e9',
       '--accent': '#2f5141',
       '--accent-hover': '#213a2f',
-      '--accent-deep': '#2f5141',
+      '--accent-deep': '#2f5141'
     },
     dark: {
       '--bg': '#14140f',
@@ -142,13 +144,14 @@ export const palettes: Palette[] = [
       '--code-bg': '#17170f',
       '--accent': '#7ba98a',
       '--accent-hover': '#95bfa1',
-      '--accent-deep': '#5a8468',
-    },
+      '--accent-deep': '#5a8468'
+    }
   },
   {
     id: 'cool',
     label: 'Cool Neutral',
-    blurb: 'Drops the warmth entirely — clean near-white paper, cool grey text, a single restrained slate accent. Crisp and modern.',
+    blurb:
+      'Drops the warmth entirely — clean near-white paper, cool grey text, a single restrained slate accent. Crisp and modern.',
     light: {
       '--bg': '#fcfcfb',
       '--bg-elev': '#f1f2f4',
@@ -159,7 +162,7 @@ export const palettes: Palette[] = [
       '--code-bg': '#f1f2f4',
       '--accent': '#3d5468',
       '--accent-hover': '#2b3e4f',
-      '--accent-deep': '#3d5468',
+      '--accent-deep': '#3d5468'
     },
     dark: {
       '--bg': '#101215',
@@ -171,7 +174,7 @@ export const palettes: Palette[] = [
       '--code-bg': '#131519',
       '--accent': '#8fa8bd',
       '--accent-hover': '#a8bdce',
-      '--accent-deep': '#6b8298',
-    },
-  },
+      '--accent-deep': '#6b8298'
+    }
+  }
 ]

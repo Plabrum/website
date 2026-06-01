@@ -1,5 +1,5 @@
 import { defineQuery } from 'next-sanity'
-import { toHTML, PortableTextHtmlComponents } from '@portabletext/to-html'
+import { toHTML, type PortableTextHtmlComponents } from '@portabletext/to-html'
 import { client, imageBuilder } from 'lib/sanity.client'
 import { theme } from 'lib/theme'
 import type { Image, PortableTextBlock } from 'sanity'
@@ -12,7 +12,7 @@ const c = theme.light
 
 export const dynamic = 'force-static'
 
-type Post = {
+interface Post {
   title: string
   slug: string
   summary?: string
@@ -21,7 +21,8 @@ type Post = {
   body?: PortableTextBlock[]
 }
 
-const feedQuery = defineQuery(`*[_type=="entry" && !(_id in path('drafts.**')) && defined(slug.current) && defined(publishedAt)]
+const feedQuery =
+  defineQuery(`*[_type=="entry" && !(_id in path('drafts.**')) && defined(slug.current) && defined(publishedAt)]
   | order(publishedAt desc)[0...50]{
     title, "slug": slug.current, summary, publishedAt, updatedAt, body
   }`)
@@ -45,37 +46,44 @@ const components: Partial<PortableTextHtmlComponents> = {
   types: {
     code: ({ value }: { value: { language?: string; code: string } }) =>
       `<pre style="background:${c.codeBg};border-left:2px solid ${c.accentDeep};padding:12px 14px;overflow-x:auto;"><code>${escapeXml(
-        value.code,
+        value.code
       )}</code></pre>`,
     pullQuote: ({ value }: { value: { text: string } }) =>
       `<blockquote style="font-style:italic;text-align:center;font-size:1.2em;margin:24px 0;">${escapeXml(
-        value.text,
+        value.text
       )}</blockquote>`,
     sidenote: ({ value }: { value: { text: string } }) =>
       `<aside style="color:${c.muted};font-size:0.9em;border-left:2px solid ${c.rule};padding-left:10px;margin:12px 0;">${escapeXml(
-        value.text,
+        value.text
       )}</aside>`,
-    image: ({ value }: { value: Image & { alt?: string; caption?: string } }) => {
-      const src = value?.asset?._ref ? imageBuilder?.image(value).width(1200).url() : ''
+    image: ({
+      value
+    }: {
+      value: Omit<Image, 'asset'> & { asset?: Image['asset']; alt?: string; caption?: string }
+    }) => {
+      const src = value.asset?._ref ? imageBuilder.image(value).width(1200).url() : ''
       if (!src) return ''
       const cap = value.caption ? `<figcaption>${escapeXml(value.caption)}</figcaption>` : ''
-      return `<figure><img src="${src}" alt="${escapeXml(value.alt || '')}" />${cap}</figure>`
+      return `<figure><img src="${src}" alt="${escapeXml(value.alt ?? '')}" />${cap}</figure>`
     },
-    latex: ({ value }: { value: { latex_string: string } }) =>
-      `<p><code>${escapeXml(value.latex_string)}</code></p>`,
+    latex: ({ value }: { value: { latex_string: string } }) => `<p><code>${escapeXml(value.latex_string)}</code></p>`,
     external: ({ value }: { value: { link_to_html: string } }) =>
-      `<p><a href="${value.link_to_html}">${escapeXml(value.link_to_html)}</a></p>`,
-  },
+      `<p><a href="${value.link_to_html}">${escapeXml(value.link_to_html)}</a></p>`
+  }
 }
 
 export async function GET() {
-  const posts = await client.fetch<Post[]>(feedQuery, {}, {
-    next: { tags: ['entry'] },
-  })
+  const posts = await client.fetch<Post[]>(
+    feedQuery,
+    {},
+    {
+      next: { tags: ['entry'] }
+    }
+  )
   const base = siteUrl()
 
   const items = posts
-    .map((p) => {
+    .map(p => {
       const link = `${base}/writing/${p.slug}`
       const html = p.body ? toHTML(p.body, { components }) : ''
       const pub = new Date(p.publishedAt).toUTCString()
@@ -90,9 +98,7 @@ export async function GET() {
     })
     .join('\n')
 
-  const lastBuild = posts[0]?.publishedAt
-    ? new Date(posts[0].publishedAt).toUTCString()
-    : new Date().toUTCString()
+  const lastBuild = posts[0]?.publishedAt ? new Date(posts[0].publishedAt).toUTCString() : new Date().toUTCString()
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -108,6 +114,6 @@ ${items}
 </rss>`
 
   return new Response(xml, {
-    headers: { 'Content-Type': 'application/xml; charset=utf-8' },
+    headers: { 'Content-Type': 'application/xml; charset=utf-8' }
   })
 }

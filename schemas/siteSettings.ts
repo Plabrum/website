@@ -1,5 +1,5 @@
-import { CogIcon } from '@sanity/icons';
-import { defineField, defineType } from 'sanity';
+import { CogIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'siteSettings',
@@ -11,14 +11,14 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       name: 'bio',
       title: 'Bio',
       description: 'One-line tagline (role + location). Used for page metadata and as a fallback intro.',
       type: 'string',
-      validation: (rule) => rule.required().max(140),
+      validation: rule => rule.required().max(140)
     }),
     defineField({
       name: 'intro',
@@ -33,32 +33,32 @@ export default defineType({
           marks: {
             decorators: [
               { title: 'Emphasis', value: 'em' },
-              { title: 'Strong', value: 'strong' },
+              { title: 'Strong', value: 'strong' }
             ],
             annotations: [
               {
                 name: 'link',
                 type: 'object',
                 title: 'Link',
-                fields: [{ name: 'href', type: 'string', title: 'URL' }],
-              },
-            ],
-          },
-        },
-      ],
+                fields: [{ name: 'href', type: 'string', title: 'URL' }]
+              }
+            ]
+          }
+        }
+      ]
     }),
     defineField({
       name: 'linkedinUrl',
       title: 'LinkedIn URL',
-      type: 'url',
+      type: 'url'
     }),
     defineField({
       name: 'githubUrl',
       title: 'GitHub URL',
-      type: 'url',
-    }),
+      type: 'url'
+    })
   ],
   preview: {
-    prepare: () => ({ title: 'Site Settings' }),
-  },
-});
+    prepare: () => ({ title: 'Site Settings' })
+  }
+})

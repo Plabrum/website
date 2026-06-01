@@ -1,5 +1,5 @@
-import { OkHandIcon } from '@sanity/icons';
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import { OkHandIcon } from '@sanity/icons'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'experience',
@@ -12,14 +12,14 @@ export default defineType({
       title: 'Company/School',
       type: 'reference',
       to: { type: 'company' },
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       name: 'role',
       description: 'This field is the title of your role in the experience.',
       title: 'Role Title',
       type: 'string',
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
 
     defineField({
@@ -36,37 +36,37 @@ export default defineType({
             decorators: [
               {
                 title: 'Italic',
-                value: 'em',
+                value: 'em'
               },
               {
                 title: 'Strong',
-                value: 'strong',
-              },
-            ],
+                value: 'strong'
+              }
+            ]
           },
           styles: [],
-          type: 'block',
-        }),
+          type: 'block'
+        })
       ],
-      validation: (rule) => rule.max(155).required(),
+      validation: rule => rule.max(155).required()
     }),
     defineField({
       name: 'featured',
       title: 'Featured role',
       description: 'Render in the primary § N list (vs. compact "Earlier" list)',
       type: 'boolean',
-      initialValue: false,
+      initialValue: false
     }),
     defineField({
       name: 'duration',
       title: 'Duration',
-      type: 'duration',
+      type: 'duration'
     }),
 
     defineField({
       name: 'description',
       title: 'Experience Description',
-      type: 'blockContent',
+      type: 'blockContent'
     }),
 
     defineField({
@@ -76,9 +76,9 @@ export default defineType({
       of: [
         {
           type: 'reference',
-          to: [{ type: 'tech' }],
-        },
-      ],
-    }),
-  ],
-});
+          to: [{ type: 'tech' }]
+        }
+      ]
+    })
+  ]
+})

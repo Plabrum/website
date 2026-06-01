@@ -1,5 +1,5 @@
-import { defineField, defineType } from 'sanity';
-import { TagIcon } from '@sanity/icons';
+import { defineField, defineType } from 'sanity'
+import { TagIcon } from '@sanity/icons'
 
 export default defineType({
   name: 'tag',
@@ -11,12 +11,12 @@ export default defineType({
       type: 'string',
       name: 'name',
       title: 'Tag Name',
-      validation: (rule) => rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       type: 'number',
       name: 'color',
-      title: 'Tag color',
-    }),
-  ],
-});
+      title: 'Tag color'
+    })
+  ]
+})

@@ -1,4 +1,4 @@
-import { defineType, defineField, defineArrayMember } from 'sanity';
+import { defineType, defineArrayMember } from 'sanity'
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -10,8 +10,6 @@ import { defineType, defineField, defineArrayMember } from 'sanity';
  *    type: 'blockContent'
  *  }
  */
-
-const mathIcon = () => <span style={{ fontWeight: 'bold' }}>∑</span>;
 
 export default defineType({
   title: 'Block Content',
@@ -31,11 +29,11 @@ export default defineType({
         { title: 'H2', value: 'h2' },
         { title: 'H3', value: 'h3' },
         { title: 'H4', value: 'h4' },
-        { title: 'Quote', value: 'blockquote' },
+        { title: 'Quote', value: 'blockquote' }
       ],
       lists: [
         { title: 'Bullet', value: 'bullet' },
-        { title: 'Number', value: 'number' },
+        { title: 'Number', value: 'number' }
       ],
       // Marks let you mark up inline text in the block editor.
       marks: {
@@ -44,7 +42,7 @@ export default defineType({
         decorators: [
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
-          { title: 'Code', value: 'code' },
+          { title: 'Code', value: 'code' }
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -56,35 +54,35 @@ export default defineType({
               {
                 title: 'URL',
                 name: 'href',
-                type: 'url',
-              },
-            ],
-          },
+                type: 'url'
+              }
+            ]
+          }
           // {
           //   title: "Latex",
           //   name: "inline_latex",
           //   type: "object",
           // },
-        ],
-      },
+        ]
+      }
     }),
 
     { type: 'latex' },
     { type: 'pullQuote' },
     { type: 'sidenote' },
     {
-      type: 'code',
+      type: 'code'
     },
     // You can add additional types here. Note that you can't use
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
     defineArrayMember({
       type: 'image',
-      options: { hotspot: true },
+      options: { hotspot: true }
     }),
 
     defineArrayMember({
-      type: 'external',
-    }),
-  ],
-});
+      type: 'external'
+    })
+  ]
+})

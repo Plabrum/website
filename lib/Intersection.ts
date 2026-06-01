@@ -1,6 +1,6 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react'
+import { type RefObject, useEffect, useRef, useState } from 'react'
 
-export function useIntersectionObserver(ref: MutableRefObject<Element | null>) {
+export function useIntersectionObserver(ref: RefObject<Element | null>) {
   const [element, setElement] = useState<Element | null>(null)
   //   const [isIntersecting, setIsIntersecting] = useState(false);
   const [showNav, setShowNav] = useState(false)
@@ -20,8 +20,8 @@ export function useIntersectionObserver(ref: MutableRefObject<Element | null>) {
     if (!element) return
     cleanOb()
     const ob = (observer.current = new IntersectionObserver(([entry]) => {
-      const isElementIntersecting = entry.isIntersecting
-      setShowNav(!isElementIntersecting)
+      if (!entry) return
+      setShowNav(!entry.isIntersecting)
     }))
     ob.observe(element)
     return () => {

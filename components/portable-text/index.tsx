@@ -1,7 +1,7 @@
 'use client'
 
-import { PortableText, PortableTextComponents } from '@portabletext/react'
-import { PortableTextBlock } from 'sanity'
+import { PortableText, type PortableTextComponents } from '@portabletext/react'
+import { type PortableTextBlock } from 'sanity'
 import { useMemo } from 'react'
 import SanityImage from '../general/SanityImage'
 import SyntaxHighlighter from 'react-syntax-highlighter'
@@ -32,18 +32,15 @@ function slugifyChildren(children: React.ReactNode): string {
     typeof children === 'string'
       ? children
       : Array.isArray(children)
-      ? children.map((c) => (typeof c === 'string' ? c : '')).join('')
-      : ''
-  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+        ? children.map(c => (typeof c === 'string' ? c : '')).join('')
+        : ''
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
 }
 
-export function PortableTextRenderer({
-  value,
-  compact = false,
-}: {
-  value: PortableTextBlock[]
-  compact?: boolean
-}) {
+export function PortableTextRenderer({ value, compact = false }: { value: PortableTextBlock[]; compact?: boolean }) {
   const figureNumbers = useFigureNumbers(value)
 
   const components: PortableTextComponents = {
@@ -54,7 +51,7 @@ export function PortableTextRenderer({
         return (
           <h2
             id={id}
-            className="font-sans text-[12px] uppercase tracking-[0.14em] font-semibold text-muted mt-[56px] mb-5 pt-4 border-t border-rule"
+            className="mb-5 mt-[56px] border-t border-rule pt-4 font-sans text-[12px] font-semibold uppercase tracking-[0.14em] text-muted"
           >
             {children}
           </h2>
@@ -65,50 +62,48 @@ export function PortableTextRenderer({
         return (
           <h3
             id={id}
-            className="font-serif text-[21px] leading-snug font-semibold text-text-strong mt-10 mb-2.5"
+            className="mb-2.5 mt-10 font-serif text-[21px] font-semibold leading-snug text-text-strong"
           >
             {children}
           </h3>
         )
       },
       h4: ({ children }) => (
-        <h4 className="font-sans text-[12px] uppercase tracking-[0.1em] font-semibold text-muted mt-7 mb-1.5">
+        <h4 className="mb-1.5 mt-7 font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-muted">
           {children}
         </h4>
       ),
       blockquote: ({ children }) => (
-        <blockquote className="my-8 pl-5 border-l border-rule text-muted italic text-[19px]">
-          {children}
-        </blockquote>
-      ),
+        <blockquote className="my-8 border-l border-rule pl-5 text-[19px] italic text-muted">{children}</blockquote>
+      )
     },
     list: {
-      bullet: ({ children }) => <ul className="list-disc pl-6 mb-[22px]">{children}</ul>,
-      number: ({ children }) => <ol className="list-decimal pl-6 mb-[22px]">{children}</ol>,
+      bullet: ({ children }) => <ul className="mb-[22px] list-disc pl-6">{children}</ul>,
+      number: ({ children }) => <ol className="mb-[22px] list-decimal pl-6">{children}</ol>
     },
     marks: {
-      link: ({ children, value }) => (
+      link: ({ children, value }: { children: React.ReactNode; value?: { href?: string } }) => (
         <a
           href={value?.href}
           target="_blank"
           rel="noreferrer noopener"
-          className="text-accent border-b border-accent/35 hover:text-accent-hover hover:border-accent-hover"
+          className="border-accent/35 border-b text-accent hover:border-accent-hover hover:text-accent-hover"
         >
           {children}
         </a>
       ),
       code: ({ children }) => (
-        <code className="font-mono text-[0.85em] bg-code-bg px-1.5 py-px rounded-sm">{children}</code>
+        <code className="rounded-sm bg-code-bg px-1.5 py-px font-mono text-[0.85em]">{children}</code>
       ),
       em: ({ children }) => <em>{children}</em>,
-      strong: ({ children }) => <strong>{children}</strong>,
+      strong: ({ children }) => <strong>{children}</strong>
     },
     types: {
       // A ruled statement band, not a magazine pull quote: left-aligned serif
       // set off by top/bottom hairlines — the same border-y grammar as the
       // section headings, no breakout, no decorative quote glyphs.
       pullQuote: ({ value }: { value: { text: string } }) => (
-        <aside className="my-10 border-y border-rule py-7 font-serif italic text-[22px] leading-[1.45] text-text-strong max-sm:my-8 max-sm:py-6 max-sm:text-[20px]">
+        <aside className="max-sm:my-8 max-sm:py-6 max-sm:text-[20px] my-10 border-y border-rule py-7 font-serif text-[22px] italic leading-[1.45] text-text-strong">
           {value.text}
         </aside>
       ),
@@ -120,11 +115,7 @@ export function PortableTextRenderer({
           </details>
         </span>
       ),
-      image: ({
-        value,
-      }: {
-        value: { _key?: string; alt?: string; caption?: string; asset?: { _ref: string } }
-      }) => {
+      image: ({ value }: { value: { _key?: string; alt?: string; caption?: string; asset?: { _ref: string } } }) => {
         const n = value._key ? figureNumbers.get(value._key) : undefined
         return (
           <figure className="my-6">
@@ -132,13 +123,13 @@ export function PortableTextRenderer({
               sanitySrc={value as never}
               width={1200}
               height={800}
-              alt={value.alt || ''}
-              className="w-full h-auto"
+              alt={value.alt ?? ''}
+              className="h-auto w-full"
             />
             {(n !== undefined || value.caption) && (
               <figcaption className="mt-2.5 flex items-baseline gap-2.5 text-muted">
                 {n !== undefined && (
-                  <span className="font-mono text-[11px] uppercase tracking-[0.1em] whitespace-nowrap flex-shrink-0">
+                  <span className="flex-shrink-0 whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.1em]">
                     Fig. {String(n).padStart(2, '0')}
                   </span>
                 )}
@@ -155,19 +146,19 @@ export function PortableTextRenderer({
       // `code` (the marks.code above) stays on the Forest --code-bg, unchanged.
       code: ({ value }: { value: { language?: string; code: string } }) => (
         <pre
-          className="relative rounded-sm p-4 pt-7 text-[14.5px] leading-relaxed overflow-x-auto my-6"
+          className="relative my-6 overflow-x-auto rounded-sm p-4 pt-7 text-[14.5px] leading-relaxed"
           style={{ background: sonokaiBg, color: sonokaiFg }}
         >
           {value.language && (
             <span
-              className="absolute top-1.5 right-3 font-mono text-[10.5px] uppercase tracking-[0.1em]"
+              className="absolute right-3 top-1.5 font-mono text-[10.5px] uppercase tracking-[0.1em]"
               style={{ color: sonokaiDim }}
             >
               {value.language}
             </span>
           )}
           <SyntaxHighlighter
-            language={value.language || 'text'}
+            language={value.language ?? 'text'}
             style={sonokai}
             wrapLongLines
             customStyle={{ background: 'transparent', padding: 0, margin: 0 }}
@@ -185,17 +176,27 @@ export function PortableTextRenderer({
         const ratio = value.width && value.height ? `${(value.height / value.width) * 100}%` : '56.25%'
         // paddingBottom is dynamic (computed per-embed aspect ratio), so it stays inline.
         return (
-          <div className="my-6 relative" style={{ paddingBottom: ratio }}>
-            <iframe src={value.link_to_html} className="absolute inset-0 w-full h-full" allowFullScreen />
+          <div
+            className="relative my-6"
+            style={{ paddingBottom: ratio }}
+          >
+            <iframe
+              src={value.link_to_html}
+              className="absolute inset-0 h-full w-full"
+              allowFullScreen
+            />
           </div>
         )
-      },
-    },
+      }
+    }
   }
 
   return (
     <div className={compact ? 'text-[15px] leading-[1.6]' : 'text-[16px] leading-[1.7]'}>
-      <PortableText components={components} value={value} />
+      <PortableText
+        components={components}
+        value={value}
+      />
     </div>
   )
 }
