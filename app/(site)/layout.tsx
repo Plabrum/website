@@ -1,17 +1,17 @@
 import Providers from 'components/ContextProviders'
-import Sidebar from 'components/site/Sidebar'
 import Footer from 'components/site/Footer'
+import SiteSidebar from 'components/site/SiteSidebar'
 import React from 'react'
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <Providers>
-      <div className="max-sm:flex-col max-sm:gap-10 max-sm:px-5 max-sm:pb-[72px] max-sm:pt-10 mx-auto flex max-w-wide gap-16 px-7 pb-28 pt-[72px]">
-        <Sidebar />
-        <div className="flex min-w-0 max-w-measure flex-1 flex-col">
-          <main>{children}</main>
-          <Footer />
-        </div>
+      {/* Content column is centered in the viewport; SiteSidebar floats the nav
+          into the left gutter on desktop and becomes a drawer on mobile. */}
+      <div className="relative mx-auto max-w-measure px-5 pb-[72px] pt-16 md:px-7 md:pt-[72px]">
+        <SiteSidebar />
+        <main>{children}</main>
+        <Footer />
       </div>
     </Providers>
   )

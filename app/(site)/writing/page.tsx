@@ -46,11 +46,18 @@ export default async function WritingIndex() {
   }))
 
   return (
-    <div className="mx-auto max-w-measure">
-      <h2 className="mb-[18px] mt-14 font-sans text-xs font-semibold uppercase tracking-[0.12em] text-muted">
-        Writing
-      </h2>
-      {items.length === 0 ? <p className="text-muted">Nothing here yet.</p> : <WritingFilter items={items} />}
+    <div className="mx-auto mt-14 max-w-measure">
+      {items.length === 0 ? (
+        <>
+          <h2 className="mb-[18px] font-sans text-xs font-semibold uppercase tracking-[0.12em] text-muted">Writing</h2>
+          <p className="text-muted">Nothing here yet.</p>
+        </>
+      ) : (
+        <WritingFilter
+          items={items}
+          heading="Writing"
+        />
+      )}
     </div>
   )
 }
