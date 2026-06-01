@@ -16,15 +16,36 @@ export default defineType({
     defineField({
       name: 'bio',
       title: 'Bio',
-      description: 'Short sentence shown next to the avatar on the home page (e.g. role + location).',
+      description: 'One-line tagline (role + location). Used for page metadata and as a fallback intro.',
       type: 'string',
       validation: (rule) => rule.required().max(140),
     }),
     defineField({
-      name: 'hero_photo',
-      title: 'Hero Photo',
-      type: 'image',
-      options: { hotspot: true },
+      name: 'intro',
+      title: 'Intro',
+      description: 'First-person prose introduction shown at the top of the home page. A few short paragraphs.',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          styles: [{ title: 'Normal', value: 'normal' }],
+          lists: [],
+          marks: {
+            decorators: [
+              { title: 'Emphasis', value: 'em' },
+              { title: 'Strong', value: 'strong' },
+            ],
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [{ name: 'href', type: 'string', title: 'URL' }],
+              },
+            ],
+          },
+        },
+      ],
     }),
     defineField({
       name: 'linkedinUrl',

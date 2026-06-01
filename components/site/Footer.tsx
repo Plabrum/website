@@ -1,5 +1,7 @@
 import { defineQuery } from 'next-sanity'
+import Link from 'next/link'
 import { client } from 'lib/sanity.client'
+import ThemeSwitch from '../general/ThemeSwitch'
 
 const siteSettingsQuery = defineQuery(`*[_type == "siteSettings"][0]{ linkedinUrl, githubUrl }`)
 
@@ -10,9 +12,9 @@ export default async function Footer() {
   })
   const linkClass = 'text-muted no-underline hover:text-accent transition-colors'
   return (
-    <footer className="mt-24 pt-[18px] border-t border-rule text-muted text-[13px] flex justify-between font-sans">
+    <footer className="mt-24 pt-[18px] text-muted text-[13px] flex justify-between items-center font-sans">
       <span>© {year} Phil Labrum</span>
-      <span>
+      <span className="flex items-center gap-1">
         {settings?.githubUrl && (
           <>
             <a href={settings?.githubUrl} target="_blank" rel="noreferrer noopener" className={linkClass}>GitHub</a>
@@ -25,7 +27,11 @@ export default async function Footer() {
             {' · '}
           </>
         )}
+        <Link href="/contact" className={linkClass}>Contact</Link>
+        {' · '}
         <a href="/feed.xml" className={linkClass}>RSS</a>
+        {' · '}
+        <ThemeSwitch />
       </span>
     </footer>
   )

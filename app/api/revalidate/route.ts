@@ -3,8 +3,7 @@ import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook'
 import type { NextRequest } from 'next/server'
 
 const KNOWN_TYPES = new Set([
-  'post',
-  'project',
+  'entry',
   'experience',
   'education',
   'siteSettings',

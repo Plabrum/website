@@ -2,7 +2,11 @@
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["@playwright/mcp@latest", "--output-dir", ".playwright-mcp"]
+      "args": [
+        "@playwright/mcp@latest",
+        "--output-dir",
+        "/Users/phil/repos/website/.playwright-mcp"
+      ]
     }
   }
 }

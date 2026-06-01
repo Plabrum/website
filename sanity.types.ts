@@ -12,8 +12,6 @@
  * ---------------------------------------------------------------------------------
  */
 
-export declare const internalGroqTypeReferenceTo: unique symbol
-
 // Source: schema.json
 export type SiteSettings = {
   _id: string
@@ -21,6 +19,26 @@ export type SiteSettings = {
   _createdAt: string
   _updatedAt: string
   _rev: string
+  name?: string
+  bio?: string
+  intro?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
   linkedinUrl?: string
   githubUrl?: string
 }
@@ -65,169 +83,6 @@ export type Tag = {
   color?: number
 }
 
-export type About = {
-  _id: string
-  _type: 'about'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  name?: string
-  job_title?: string
-  meta_description?: string
-  taglines?: Array<string>
-  hero_photo?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  about_photo?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  desc_title?: string
-  description?: BlockContent
-}
-
-export type BlockContent = Array<
-  | {
-      children?: Array<{
-        marks?: Array<string>
-        text?: string
-        _type: 'span'
-        _key: string
-      }>
-      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote'
-      listItem?: 'bullet' | 'number'
-      markDefs?: Array<{
-        href?: string
-        _type: 'link'
-        _key: string
-      }>
-      level?: number
-      _type: 'block'
-      _key: string
-    }
-  | ({
-      _key: string
-    } & Latex)
-  | ({
-      _key: string
-    } & PullQuote)
-  | ({
-      _key: string
-    } & Sidenote)
-  | ({
-      _key: string
-    } & Code)
-  | {
-      asset?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-      }
-      media?: unknown
-      hotspot?: SanityImageHotspot
-      crop?: SanityImageCrop
-      _type: 'image'
-      _key: string
-    }
-  | ({
-      _key: string
-    } & External)
->
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
-}
-
-export type Project = {
-  _id: string
-  _type: 'project'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title?: string
-  slug?: Slug
-  pin?: boolean
-  meta_description?: string
-  blurb?: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-    listItem?: 'bullet' | 'number'
-    markDefs?: Array<{
-      href?: string
-      _type: 'link'
-      _key: string
-    }>
-    level?: number
-    _type: 'block'
-    _key: string
-  }>
-  duration?: Duration
-  repo_url?: string
-  demo_url?: string
-  description?: BlockContent
-  technologies?: Array<{
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    _key: string
-    [internalGroqTypeReferenceTo]?: 'tech'
-  }>
-  tags?: Array<{
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    _key: string
-    [internalGroqTypeReferenceTo]?: 'tag'
-  }>
-}
-
-export type Duration = {
-  _type: 'duration'
-  start?: string
-  end?: string
-}
-
-export type Slug = {
-  _type: 'slug'
-  current?: string
-  source?: string
-}
-
 export type Tech = {
   _id: string
   _type: 'tech'
@@ -249,6 +104,28 @@ export type Tech = {
     _type: 'image'
   }
   tech_page?: string
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x?: number
+  y?: number
+  height?: number
+  width?: number
+}
+
+export type Duration = {
+  _type: 'duration'
+  start?: string
+  end?: string
 }
 
 export type Education = {
@@ -308,6 +185,55 @@ export type Experience = {
   }>
 }
 
+export type BlockContent = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>
+        text?: string
+        _type: 'span'
+        _key: string
+      }>
+      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote'
+      listItem?: 'bullet' | 'number'
+      markDefs?: Array<{
+        href?: string
+        _type: 'link'
+        _key: string
+      }>
+      level?: number
+      _type: 'block'
+      _key: string
+    }
+  | ({
+      _key: string
+    } & Latex)
+  | ({
+      _key: string
+    } & PullQuote)
+  | ({
+      _key: string
+    } & Sidenote)
+  | ({
+      _key: string
+    } & Code)
+  | {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+      _key: string
+    }
+  | ({
+      _key: string
+    } & External)
+>
+
 export type Company = {
   _id: string
   _type: 'company'
@@ -331,18 +257,25 @@ export type Company = {
   company_page?: string
 }
 
-export type Post = {
+export type Entry = {
   _id: string
-  _type: 'post'
+  _type: 'entry'
   _createdAt: string
   _updatedAt: string
   _rev: string
   title?: string
+  type?: 'essay' | 'project'
   slug?: Slug
-  author?: string
   publishedAt?: string
   updatedAt?: string
-  excerpt?: string
+  summary?: string
+  links?: Array<{
+    url?: string
+    caption?: string
+    _type: 'link'
+    _key: string
+  }>
+  body?: BlockContent
   tags?: Array<{
     _ref: string
     _type: 'reference'
@@ -350,7 +283,7 @@ export type Post = {
     _key: string
     [internalGroqTypeReferenceTo]?: 'tag'
   }>
-  mainImage?: {
+  socialImage?: {
     asset?: {
       _ref: string
       _type: 'reference'
@@ -362,7 +295,12 @@ export type Post = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  body?: BlockContent
+}
+
+export type Slug = {
+  _type: 'slug'
+  current?: string
+  source?: string
 }
 
 export type Code = {
@@ -476,18 +414,16 @@ export type AllSanitySchemaTypes =
   | Latex
   | External
   | Tag
-  | About
-  | BlockContent
+  | Tech
   | SanityImageCrop
   | SanityImageHotspot
-  | Project
   | Duration
-  | Slug
-  | Tech
   | Education
   | Experience
+  | BlockContent
   | Company
-  | Post
+  | Entry
+  | Slug
   | Code
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -497,95 +433,11 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint
-
-// Source: app/(site)/essays/[slug]/page.tsx
-// Variable: essayDetailQuery
-// Query: *[_type=="post" && slug.current == $slug][0]{  _id, title, excerpt, publishedAt, updatedAt, body,  "tags": tags[]->{ name },  "tagRefs": tags[]._ref,  "prev": *[_type=="post" && defined(slug.current) && defined(publishedAt) && publishedAt < ^.publishedAt]    | order(publishedAt desc)[0]{ title, "slug": slug.current },  "next": *[_type=="post" && defined(slug.current) && defined(publishedAt) && publishedAt > ^.publishedAt]    | order(publishedAt asc)[0]{ title, "slug": slug.current },  "related": *[_type=="post" && defined(slug.current) && _id != ^._id && count(tags[@._ref in ^.tags[]._ref]) > 0]    | order(publishedAt desc)[0...3]{ title, "slug": slug.current, publishedAt }}
-export type EssayDetailQueryResult = {
-  _id: string
-  title: string | null
-  excerpt: string | null
-  publishedAt: string | null
-  updatedAt: string | null
-  body: BlockContent | null
-  tags: Array<{
-    name: string | null
-  }> | null
-  tagRefs: Array<string> | null
-  prev: {
-    title: string | null
-    slug: string | null
-  } | null
-  next: {
-    title: string | null
-    slug: string | null
-  } | null
-  related: Array<{
-    title: string | null
-    slug: string | null
-    publishedAt: string | null
-  }>
-} | null
-
-// Source: app/(site)/essays/[slug]/page.tsx
-// Variable: essaySlugsQuery
-// Query: *[_type=="post" && defined(slug.current)].slug.current
-export type EssaySlugsQueryResult = Array<string | null>
-
-// Source: app/(site)/essays/[slug]/page.tsx
-// Variable: essayMetaQuery
-// Query: *[_type=="post" && slug.current == $slug][0]{ title, excerpt }
-export type EssayMetaQueryResult = {
-  title: string | null
-  excerpt: string | null
-} | null
-
-// Source: app/(site)/essays/page.tsx
-// Variable: essaysIndexQuery
-// Query: *[_type=="post" && !(_id in path('drafts.**')) && defined(slug.current) && defined(publishedAt)]  | order(publishedAt desc){    title, "slug": slug.current, publishedAt  }
-export type EssaysIndexQueryResult = Array<{
-  title: string | null
-  slug: string | null
-  publishedAt: string | null
-}>
-
-// Source: app/(site)/page.tsx
-// Variable: homeQuery
-// Query: {  "about": *[_type=="siteSettings" && !(_id in path('drafts.**'))][0]{    name, bio, hero_photo  },  "essays": *[_type=="post" && !(_id in path('drafts.**')) && defined(slug.current) && defined(publishedAt)]    | order(publishedAt desc)[0...3]{      title, "slug": slug.current, publishedAt    },  "projects": *[_type=="project" && !(_id in path('drafts.**')) && pin == true]    | order(duration.end desc)[0...3]{      title, "slug": slug.current, blurb, duration    },  "featuredExperience": *[_type=="experience" && !(_id in path('drafts.**')) && featured == true]    | order(duration.start desc){      _id, role, duration, description,      "company": company->{ name, logo_image }    },  "earlierExperience": *[_type=="experience" && !(_id in path('drafts.**')) && featured != true]    | order(duration.start desc){      _id, role, duration,      "company": company->{ name, logo_image }    },  "education": *[_type=="education" && !(_id in path('drafts.**'))]    | order(year_end desc){      _id, school, degree, year_start, year_end,      "company": company->{ name, logo_image }    }}
-export type HomeQueryResult = {
-  about: {
-    name: null
-    bio: null
-    hero_photo: null
-  } | null
-  essays: Array<{
-    title: string | null
-    slug: string | null
-    publishedAt: string | null
-  }>
-  projects: Array<{
-    title: string | null
-    slug: string | null
-    blurb: Array<{
-      children?: Array<{
-        marks?: Array<string>
-        text?: string
-        _type: 'span'
-        _key: string
-      }>
-      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
-      listItem?: 'bullet' | 'number'
-      markDefs?: Array<{
-        href?: string
-        _type: 'link'
-        _key: string
-      }>
-      level?: number
-      _type: 'block'
-      _key: string
-    }> | null
-    duration: Duration | null
-  }>
+export declare const internalGroqTypeReferenceTo: unique symbol
+// Source: app/(site)/experience/page.tsx
+// Variable: experienceQuery
+// Query: {  "featuredExperience": *[_type=="experience" && !(_id in path('drafts.**')) && featured == true]    | order(duration.start desc){      _id, role, duration, description,      "company": company->{ name, logo_image }    },  "earlierExperience": *[_type=="experience" && !(_id in path('drafts.**')) && featured != true]    | order(duration.start desc){      _id, role, duration,      "company": company->{ name, logo_image }    },  "education": *[_type=="education" && !(_id in path('drafts.**'))]    | order(year_end desc){      _id, school, degree, year_start, year_end,      "company": company->{ name, logo_image }    }}
+export type ExperienceQueryResult = {
   featuredExperience: Array<{
     _id: string
     role: string | null
@@ -651,83 +503,108 @@ export type HomeQueryResult = {
   }>
 }
 
-// Source: app/(site)/projects/[slug]/page.tsx
-// Variable: projectDetailQuery
-// Query: *[_type=="project" && (slug.current == $slug || slug.current == $prefixed)][0]{  title, meta_description, blurb, description, duration, repo_url, demo_url}
-export type ProjectDetailQueryResult = {
+// Source: app/(site)/page.tsx
+// Variable: homeQuery
+// Query: {  "about": *[_type=="siteSettings" && !(_id in path('drafts.**'))][0]{    name, bio, intro  }}
+export type HomeQueryResult = {
+  about: {
+    name: string | null
+    bio: string | null
+    intro: Array<{
+      children?: Array<{
+        marks?: Array<string>
+        text?: string
+        _type: 'span'
+        _key: string
+      }>
+      style?: 'normal'
+      listItem?: never
+      markDefs?: Array<{
+        href?: string
+        _type: 'link'
+        _key: string
+      }>
+      level?: number
+      _type: 'block'
+      _key: string
+    }> | null
+  } | null
+}
+
+// Source: app/(site)/writing/[slug]/page.tsx
+// Variable: entryDetailQuery
+// Query: *[_type=="entry" && slug.current == $slug][0]{  _id, title, type, summary, publishedAt, updatedAt, links, body,  "tags": tags[]->{ name },  "prev": *[_type=="entry" && defined(slug.current) && defined(publishedAt) && publishedAt < ^.publishedAt]    | order(publishedAt desc)[0]{ title, "slug": slug.current },  "next": *[_type=="entry" && defined(slug.current) && defined(publishedAt) && publishedAt > ^.publishedAt]    | order(publishedAt asc)[0]{ title, "slug": slug.current },  "related": *[_type=="entry" && defined(slug.current) && _id != ^._id && count(tags[@._ref in ^.tags[]._ref]) > 0]    | order(publishedAt desc)[0...3]{ title, "slug": slug.current, publishedAt }}
+export type EntryDetailQueryResult = {
+  _id: string
   title: string | null
-  meta_description: string | null
-  blurb: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
-    listItem?: 'bullet' | 'number'
-    markDefs?: Array<{
-      href?: string
-      _type: 'link'
-      _key: string
-    }>
-    level?: number
-    _type: 'block'
+  type: 'essay' | 'project' | null
+  summary: string | null
+  publishedAt: string | null
+  updatedAt: string | null
+  links: Array<{
+    url?: string
+    caption?: string
+    _type: 'link'
     _key: string
   }> | null
-  description: BlockContent | null
-  duration: Duration | null
-  repo_url: string | null
-  demo_url: string | null
+  body: BlockContent | null
+  tags: Array<{
+    name: string | null
+  }> | null
+  prev: {
+    title: string | null
+    slug: string | null
+  } | null
+  next: {
+    title: string | null
+    slug: string | null
+  } | null
+  related: Array<{
+    title: string | null
+    slug: string | null
+    publishedAt: string | null
+  }>
 } | null
-
-// Source: app/(site)/projects/[slug]/page.tsx
-// Variable: projectSlugsQuery
-// Query: *[_type=="project" && defined(slug.current)].slug.current
-export type ProjectSlugsQueryResult = Array<string | null>
-
-// Source: app/(site)/projects/[slug]/page.tsx
-// Variable: projectMetaQuery
-// Query: *[_type=="project" && (slug.current == $slug || slug.current == $prefixed)][0]{ title, meta_description }
-export type ProjectMetaQueryResult = {
+// Variable: entrySlugsQuery
+// Query: *[_type=="entry" && defined(slug.current)].slug.current
+export type EntrySlugsQueryResult = Array<string | null>
+// Variable: entryMetaQuery
+// Query: *[_type=="entry" && slug.current == $slug][0]{ title, summary, socialImage }
+export type EntryMetaQueryResult = {
   title: string | null
-  meta_description: string | null
+  summary: string | null
+  socialImage: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
 } | null
 
-// Source: app/(site)/projects/page.tsx
-// Variable: projectsIndexQuery
-// Query: *[_type=="project" && !(_id in path('drafts.**')) && defined(slug.current)]  | order(coalesce(duration.end, duration.start) desc){    title, "slug": slug.current, blurb, duration  }
-export type ProjectsIndexQueryResult = Array<{
+// Source: app/(site)/writing/page.tsx
+// Variable: writingIndexQuery
+// Query: *[_type=="entry" && !(_id in path('drafts.**')) && defined(slug.current) && defined(publishedAt)]  | order(publishedAt desc){    title, "slug": slug.current, type, publishedAt, summary  }
+export type WritingIndexQueryResult = Array<{
   title: string | null
   slug: string | null
-  blurb: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
-    listItem?: 'bullet' | 'number'
-    markDefs?: Array<{
-      href?: string
-      _type: 'link'
-      _key: string
-    }>
-    level?: number
-    _type: 'block'
-    _key: string
-  }> | null
-  duration: Duration | null
+  type: 'essay' | 'project' | null
+  publishedAt: string | null
+  summary: string | null
 }>
 
 // Source: app/feed.xml/route.ts
 // Variable: feedQuery
-// Query: *[_type=="post" && !(_id in path('drafts.**')) && defined(slug.current) && defined(publishedAt)]  | order(publishedAt desc)[0...50]{    title, "slug": slug.current, excerpt, publishedAt, updatedAt, body  }
+// Query: *[_type=="entry" && !(_id in path('drafts.**')) && defined(slug.current) && defined(publishedAt)]  | order(publishedAt desc)[0...50]{    title, "slug": slug.current, summary, publishedAt, updatedAt, body  }
 export type FeedQueryResult = Array<{
   title: string | null
   slug: string | null
-  excerpt: string | null
+  summary: string | null
   publishedAt: string | null
   updatedAt: string | null
   body: BlockContent | null
@@ -745,16 +622,13 @@ export type SiteSettingsQueryResult = {
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type=="post" && slug.current == $slug][0]{\n  _id, title, excerpt, publishedAt, updatedAt, body,\n  "tags": tags[]->{ name },\n  "tagRefs": tags[]._ref,\n  "prev": *[_type=="post" && defined(slug.current) && defined(publishedAt) && publishedAt < ^.publishedAt]\n    | order(publishedAt desc)[0]{ title, "slug": slug.current },\n  "next": *[_type=="post" && defined(slug.current) && defined(publishedAt) && publishedAt > ^.publishedAt]\n    | order(publishedAt asc)[0]{ title, "slug": slug.current },\n  "related": *[_type=="post" && defined(slug.current) && _id != ^._id && count(tags[@._ref in ^.tags[]._ref]) > 0]\n    | order(publishedAt desc)[0...3]{ title, "slug": slug.current, publishedAt }\n}': EssayDetailQueryResult
-    '*[_type=="post" && defined(slug.current)].slug.current': EssaySlugsQueryResult
-    '*[_type=="post" && slug.current == $slug][0]{ title, excerpt }': EssayMetaQueryResult
-    '*[_type=="post" && !(_id in path(\'drafts.**\')) && defined(slug.current) && defined(publishedAt)]\n  | order(publishedAt desc){\n    title, "slug": slug.current, publishedAt\n  }': EssaysIndexQueryResult
-    '{\n  "about": *[_type=="siteSettings" && !(_id in path(\'drafts.**\'))][0]{\n    name, bio, hero_photo\n  },\n  "essays": *[_type=="post" && !(_id in path(\'drafts.**\')) && defined(slug.current) && defined(publishedAt)]\n    | order(publishedAt desc)[0...3]{\n      title, "slug": slug.current, publishedAt\n    },\n  "projects": *[_type=="project" && !(_id in path(\'drafts.**\')) && pin == true]\n    | order(duration.end desc)[0...3]{\n      title, "slug": slug.current, blurb, duration\n    },\n  "featuredExperience": *[_type=="experience" && !(_id in path(\'drafts.**\')) && featured == true]\n    | order(duration.start desc){\n      _id, role, duration, description,\n      "company": company->{ name, logo_image }\n    },\n  "earlierExperience": *[_type=="experience" && !(_id in path(\'drafts.**\')) && featured != true]\n    | order(duration.start desc){\n      _id, role, duration,\n      "company": company->{ name, logo_image }\n    },\n  "education": *[_type=="education" && !(_id in path(\'drafts.**\'))]\n    | order(year_end desc){\n      _id, school, degree, year_start, year_end,\n      "company": company->{ name, logo_image }\n    }\n}': HomeQueryResult
-    '*[_type=="project" && (slug.current == $slug || slug.current == $prefixed)][0]{\n  title, meta_description, blurb, description, duration, repo_url, demo_url\n}': ProjectDetailQueryResult
-    '*[_type=="project" && defined(slug.current)].slug.current': ProjectSlugsQueryResult
-    '*[_type=="project" && (slug.current == $slug || slug.current == $prefixed)][0]{ title, meta_description }': ProjectMetaQueryResult
-    '*[_type=="project" && !(_id in path(\'drafts.**\')) && defined(slug.current)]\n  | order(coalesce(duration.end, duration.start) desc){\n    title, "slug": slug.current, blurb, duration\n  }': ProjectsIndexQueryResult
-    '*[_type=="post" && !(_id in path(\'drafts.**\')) && defined(slug.current) && defined(publishedAt)]\n  | order(publishedAt desc)[0...50]{\n    title, "slug": slug.current, excerpt, publishedAt, updatedAt, body\n  }': FeedQueryResult
+    '{\n  "featuredExperience": *[_type=="experience" && !(_id in path(\'drafts.**\')) && featured == true]\n    | order(duration.start desc){\n      _id, role, duration, description,\n      "company": company->{ name, logo_image }\n    },\n  "earlierExperience": *[_type=="experience" && !(_id in path(\'drafts.**\')) && featured != true]\n    | order(duration.start desc){\n      _id, role, duration,\n      "company": company->{ name, logo_image }\n    },\n  "education": *[_type=="education" && !(_id in path(\'drafts.**\'))]\n    | order(year_end desc){\n      _id, school, degree, year_start, year_end,\n      "company": company->{ name, logo_image }\n    }\n}': ExperienceQueryResult
+    '{\n  "about": *[_type=="siteSettings" && !(_id in path(\'drafts.**\'))][0]{\n    name, bio, intro\n  }\n}': HomeQueryResult
+    '*[_type=="entry" && slug.current == $slug][0]{\n  _id, title, type, summary, publishedAt, updatedAt, links, body,\n  "tags": tags[]->{ name },\n  "prev": *[_type=="entry" && defined(slug.current) && defined(publishedAt) && publishedAt < ^.publishedAt]\n    | order(publishedAt desc)[0]{ title, "slug": slug.current },\n  "next": *[_type=="entry" && defined(slug.current) && defined(publishedAt) && publishedAt > ^.publishedAt]\n    | order(publishedAt asc)[0]{ title, "slug": slug.current },\n  "related": *[_type=="entry" && defined(slug.current) && _id != ^._id && count(tags[@._ref in ^.tags[]._ref]) > 0]\n    | order(publishedAt desc)[0...3]{ title, "slug": slug.current, publishedAt }\n}': EntryDetailQueryResult
+    '*[_type=="entry" && defined(slug.current)].slug.current': EntrySlugsQueryResult
+    '*[_type=="entry" && slug.current == $slug][0]{ title, summary, socialImage }': EntryMetaQueryResult
+    '*[_type=="entry" && !(_id in path(\'drafts.**\')) && defined(slug.current) && defined(publishedAt)]\n  | order(publishedAt desc){\n    title, "slug": slug.current, type, publishedAt, summary\n  }': WritingIndexQueryResult
+    '*[_type=="entry" && !(_id in path(\'drafts.**\')) && defined(slug.current) && defined(publishedAt)]\n  | order(publishedAt desc)[0...50]{\n    title, "slug": slug.current, summary, publishedAt, updatedAt, body\n  }': FeedQueryResult
     '*[_type == "siteSettings"][0]{ linkedinUrl, githubUrl }': SiteSettingsQueryResult
   }
 }

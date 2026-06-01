@@ -1,22 +1,29 @@
 import { defineQuery } from 'next-sanity'
 import { toHTML, PortableTextHtmlComponents } from '@portabletext/to-html'
 import { client, imageBuilder } from 'lib/sanity.client'
+import { theme } from 'lib/theme'
 import type { Image, PortableTextBlock } from 'sanity'
+
+// Feed readers render this HTML in their own document — no globals.css, no CSS
+// vars, no .dark class — so styles must be inline literals. Feeds default to a
+// light surface, so the light palette is correct here. Sourced from lib/theme.ts
+// so the values can't drift from the site's tokens.
+const c = theme.light
 
 export const dynamic = 'force-static'
 
 type Post = {
   title: string
   slug: string
-  excerpt?: string
+  summary?: string
   publishedAt: string
   updatedAt?: string
   body?: PortableTextBlock[]
 }
 
-const feedQuery = defineQuery(`*[_type=="post" && !(_id in path('drafts.**')) && defined(slug.current) && defined(publishedAt)]
+const feedQuery = defineQuery(`*[_type=="entry" && !(_id in path('drafts.**')) && defined(slug.current) && defined(publishedAt)]
   | order(publishedAt desc)[0...50]{
-    title, "slug": slug.current, excerpt, publishedAt, updatedAt, body
+    title, "slug": slug.current, summary, publishedAt, updatedAt, body
   }`)
 
 function siteUrl(): string {
@@ -37,7 +44,7 @@ function escapeXml(s: string): string {
 const components: Partial<PortableTextHtmlComponents> = {
   types: {
     code: ({ value }: { value: { language?: string; code: string } }) =>
-      `<pre style="background:#f4f0e6;border-left:2px solid #a8531f;padding:12px 14px;overflow-x:auto;"><code>${escapeXml(
+      `<pre style="background:${c.codeBg};border-left:2px solid ${c.accentDeep};padding:12px 14px;overflow-x:auto;"><code>${escapeXml(
         value.code,
       )}</code></pre>`,
     pullQuote: ({ value }: { value: { text: string } }) =>
@@ -45,7 +52,7 @@ const components: Partial<PortableTextHtmlComponents> = {
         value.text,
       )}</blockquote>`,
     sidenote: ({ value }: { value: { text: string } }) =>
-      `<aside style="color:#6f6a60;font-size:0.9em;border-left:2px solid #e8e3d8;padding-left:10px;margin:12px 0;">${escapeXml(
+      `<aside style="color:${c.muted};font-size:0.9em;border-left:2px solid ${c.rule};padding-left:10px;margin:12px 0;">${escapeXml(
         value.text,
       )}</aside>`,
     image: ({ value }: { value: Image & { alt?: string; caption?: string } }) => {
@@ -63,13 +70,13 @@ const components: Partial<PortableTextHtmlComponents> = {
 
 export async function GET() {
   const posts = await client.fetch<Post[]>(feedQuery, {}, {
-    next: { tags: ['post'] },
+    next: { tags: ['entry'] },
   })
   const base = siteUrl()
 
   const items = posts
     .map((p) => {
-      const link = `${base}/essays/${p.slug}`
+      const link = `${base}/writing/${p.slug}`
       const html = p.body ? toHTML(p.body, { components }) : ''
       const pub = new Date(p.publishedAt).toUTCString()
       return `<item>
@@ -77,7 +84,7 @@ export async function GET() {
   <link>${link}</link>
   <guid isPermaLink="true">${link}</guid>
   <pubDate>${pub}</pubDate>
-  ${p.excerpt ? `<description>${escapeXml(p.excerpt)}</description>` : ''}
+  ${p.summary ? `<description>${escapeXml(p.summary)}</description>` : ''}
   <content:encoded><![CDATA[${html}]]></content:encoded>
 </item>`
     })

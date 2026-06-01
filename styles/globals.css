@@ -2,33 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Forest palette. These CSS variables are the source the browser uses everywhere
+   on the site. A literal copy lives in lib/theme.ts for the RSS feed (which renders
+   outside this stylesheet, so it can't read these vars) — keep the two in sync. */
 :root {
-  --bg: #fbfaf7;
-  --bg-elev: #f4f0e6;
+  --bg: #faf9f4;
+  --bg-elev: #eef0e9;
   --text: #1a1a1a;
   --text-strong: #0a0a0a;
-  --muted: #6f6a60;
-  --rule: #e8e3d8;
-  --code-bg: #f4f0e6;
-  --accent: #a8531f;
-  --accent-hover: #7e3d15;
-  --accent-deep: #a8531f;
+  --muted: #6a6c62;
+  --rule: #e4e6dc;
+  --code-bg: #eef0e9;
+  --accent: #2f5141;
+  --accent-hover: #213a2f;
+  --accent-deep: #2f5141;
 
   --measure: 660px;
   --measure-wide: 1040px;
 }
 
 .dark {
-  --bg: #171410;
-  --bg-elev: #1e1a14;
-  --text: #f2ead8;
-  --text-strong: #fbf5e6;
-  --muted: #8a8170;
-  --rule: #2b251c;
-  --code-bg: #1a160f;
-  --accent: #d9a05b;
-  --accent-hover: #e8b878;
-  --accent-deep: #b8662a;
+  --bg: #14140f;
+  --bg-elev: #1b1c15;
+  --text: #eee9d6;
+  --text-strong: #f7f3e3;
+  --muted: #87856f;
+  --rule: #282a1f;
+  --code-bg: #17170f;
+  --accent: #7ba98a;
+  --accent-hover: #95bfa1;
+  --accent-deep: #5a8468;
 }
 
 html,

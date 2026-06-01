@@ -2,24 +2,23 @@
 
 import { PortableText, PortableTextComponents } from '@portabletext/react'
 import { PortableTextBlock } from 'sanity'
-import { createContext, useMemo } from 'react'
+import { useMemo } from 'react'
 import SanityImage from '../general/SanityImage'
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import { gruvboxDark, gruvboxLight } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
-import { useTheme } from 'next-themes'
+import { sonokai, sonokaiBg, sonokaiFg, sonokaiDim } from 'lib/sonokai'
 import Latex from 'react-latex-next'
 import 'katex/dist/katex.min.css'
 
-const H2NumberContext = createContext<Map<string, number>>(new Map())
-
-function useH2Numbers(value: PortableTextBlock[] | undefined) {
+// Number inline images so figcaptions can carry a "Fig. NN" plate label —
+// the catalog device that reinforces the project-page-as-caption intent.
+function useFigureNumbers(value: PortableTextBlock[] | undefined) {
   return useMemo(() => {
     const map = new Map<string, number>()
     if (!value) return map
     let n = 0
     for (const block of value) {
-      const b = block as { _type?: string; _key?: string; style?: string }
-      if (b._type === 'block' && b.style === 'h2' && b._key) {
+      const b = block as { _type?: string; _key?: string }
+      if (b._type === 'image' && b._key) {
         n += 1
         map.set(b._key, n)
       }
@@ -38,62 +37,47 @@ function slugifyChildren(children: React.ReactNode): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 }
 
-const leadClass =
-  'mb-[22px] first-letter:float-left first-letter:font-serif first-letter:text-[4.4em] first-letter:font-semibold first-letter:leading-[0.9] first-letter:pr-2.5 first-letter:pt-1.5 first-letter:text-accent-deep'
-
 export function PortableTextRenderer({
   value,
-  lead = true,
+  compact = false,
 }: {
   value: PortableTextBlock[]
-  lead?: boolean
+  compact?: boolean
 }) {
-  const { resolvedTheme } = useTheme()
-  const h2Numbers = useH2Numbers(value)
-
-  // Mark the first plain-text paragraph long enough to hold the drop cap as the lead.
-  // Short opening paragraphs (e.g. "Overview:") would let the floated cap spill into
-  // the next paragraph and wrap its text awkwardly.
-  const leadKey = useMemo(() => {
-    if (!lead) return undefined
-    for (const b of value || []) {
-      const block = b as {
-        _type?: string
-        style?: string
-        _key?: string
-        children?: Array<{ text?: string }>
-      }
-      if (block._type !== 'block' || (block.style && block.style !== 'normal')) continue
-      const text = (block.children || []).map((c) => c.text || '').join('').trim()
-      if (text.length >= 180) return block._key
-    }
-    return undefined
-  }, [value, lead])
+  const figureNumbers = useFigureNumbers(value)
 
   const components: PortableTextComponents = {
     block: {
-      normal: ({ children, value: v }) => {
-        const isLead = (v as { _key?: string })?._key === leadKey
-        return <p className={isLead ? leadClass : 'mb-[22px]'}>{children}</p>
-      },
-      h2: ({ children, value: v }) => {
-        const key = (v as { _key?: string })?._key
-        const n = key ? h2Numbers.get(key) : undefined
+      normal: ({ children }) => <p className="mb-[22px]">{children}</p>,
+      h2: ({ children }) => {
         const id = slugifyChildren(children)
         return (
           <h2
             id={id}
-            className="font-sans text-[13px] uppercase tracking-[0.12em] font-normal text-text mt-[52px] mb-4"
+            className="font-sans text-[12px] uppercase tracking-[0.14em] font-semibold text-muted mt-[56px] mb-5 pt-4 border-t border-rule"
           >
-            {n !== undefined && <span className="text-accent mr-2 font-semibold">§ {n}</span>}
             {children}
           </h2>
         )
       },
-      h3: ({ children }) => <h3 className="text-xl font-semibold mt-8 mb-3">{children}</h3>,
-      h4: ({ children }) => <h4 className="text-lg font-semibold mt-6 mb-2">{children}</h4>,
+      h3: ({ children }) => {
+        const id = slugifyChildren(children)
+        return (
+          <h3
+            id={id}
+            className="font-serif text-[21px] leading-snug font-semibold text-text-strong mt-10 mb-2.5"
+          >
+            {children}
+          </h3>
+        )
+      },
+      h4: ({ children }) => (
+        <h4 className="font-sans text-[12px] uppercase tracking-[0.1em] font-semibold text-muted mt-7 mb-1.5">
+          {children}
+        </h4>
+      ),
       blockquote: ({ children }) => (
-        <blockquote className="my-8 pl-6 border-l-[3px] border-accent text-text italic text-[19px] opacity-95">
+        <blockquote className="my-8 pl-5 border-l border-rule text-muted italic text-[19px]">
           {children}
         </blockquote>
       ),
@@ -120,8 +104,11 @@ export function PortableTextRenderer({
       strong: ({ children }) => <strong>{children}</strong>,
     },
     types: {
+      // A ruled statement band, not a magazine pull quote: left-aligned serif
+      // set off by top/bottom hairlines — the same border-y grammar as the
+      // section headings, no breakout, no decorative quote glyphs.
       pullQuote: ({ value }: { value: { text: string } }) => (
-        <aside className="font-serif italic text-[26px] leading-[1.35] text-text-strong text-center -mx-10 my-11 py-1.5 relative before:content-['\\201C'] before:block before:text-5xl before:leading-[0.4] before:text-accent before:mb-[18px] before:not-italic after:content-['\\201D'] after:block after:text-5xl after:leading-[0] after:text-accent after:mt-6 after:not-italic max-sm:mx-0 max-sm:text-[22px] max-sm:my-9">
+        <aside className="my-10 border-y border-rule py-7 font-serif italic text-[22px] leading-[1.45] text-text-strong max-sm:my-8 max-sm:py-6 max-sm:text-[20px]">
           {value.text}
         </aside>
       ),
@@ -133,30 +120,55 @@ export function PortableTextRenderer({
           </details>
         </span>
       ),
-      image: ({ value }: { value: { alt?: string; caption?: string; asset?: { _ref: string } } }) => (
-        <figure className="my-6">
-          <SanityImage
-            sanitySrc={value as never}
-            width={1200}
-            height={800}
-            alt={value.alt || ''}
-            className="w-full h-auto"
-          />
-          {value.caption && (
-            <figcaption className="mt-2 text-sm text-muted">{value.caption}</figcaption>
-          )}
-        </figure>
-      ),
+      image: ({
+        value,
+      }: {
+        value: { _key?: string; alt?: string; caption?: string; asset?: { _ref: string } }
+      }) => {
+        const n = value._key ? figureNumbers.get(value._key) : undefined
+        return (
+          <figure className="my-6">
+            <SanityImage
+              sanitySrc={value as never}
+              width={1200}
+              height={800}
+              alt={value.alt || ''}
+              className="w-full h-auto"
+            />
+            {(n !== undefined || value.caption) && (
+              <figcaption className="mt-2.5 flex items-baseline gap-2.5 text-muted">
+                {n !== undefined && (
+                  <span className="font-mono text-[11px] uppercase tracking-[0.1em] whitespace-nowrap flex-shrink-0">
+                    Fig. {String(n).padStart(2, '0')}
+                  </span>
+                )}
+                {value.caption && <span className="text-sm leading-snug">{value.caption}</span>}
+              </figcaption>
+            )}
+          </figure>
+        )
+      },
+      // The fenced code block is an always-dark Sonokai panel, independent of the
+      // site's light/dark mode (Phil's call — it mirrors his editor). The <pre>
+      // carries the Sonokai panel background/foreground; the highlighter's own
+      // background is forced transparent so its tokens sit on the panel. Inline
+      // `code` (the marks.code above) stays on the Forest --code-bg, unchanged.
       code: ({ value }: { value: { language?: string; code: string } }) => (
-        <pre className="relative bg-code-bg border-l-2 border-accent-deep/65 rounded-r-sm p-4 text-[14.5px] leading-relaxed overflow-x-auto my-6 text-text">
+        <pre
+          className="relative rounded-sm p-4 pt-7 text-[14.5px] leading-relaxed overflow-x-auto my-6"
+          style={{ background: sonokaiBg, color: sonokaiFg }}
+        >
           {value.language && (
-            <span className="absolute top-0 right-0 font-mono text-[10.5px] uppercase tracking-[0.1em] text-muted bg-accent/10 px-2 py-[3px] rounded-bl-sm">
+            <span
+              className="absolute top-1.5 right-3 font-mono text-[10.5px] uppercase tracking-[0.1em]"
+              style={{ color: sonokaiDim }}
+            >
               {value.language}
             </span>
           )}
           <SyntaxHighlighter
             language={value.language || 'text'}
-            style={resolvedTheme === 'dark' ? gruvboxDark : gruvboxLight}
+            style={sonokai}
             wrapLongLines
             customStyle={{ background: 'transparent', padding: 0, margin: 0 }}
           >
@@ -182,9 +194,9 @@ export function PortableTextRenderer({
   }
 
   return (
-    <H2NumberContext.Provider value={h2Numbers}>
+    <div className={compact ? 'text-[15px] leading-[1.6]' : 'text-[16px] leading-[1.7]'}>
       <PortableText components={components} value={value} />
-    </H2NumberContext.Provider>
+    </div>
   )
 }
 

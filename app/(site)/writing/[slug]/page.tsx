@@ -1,93 +1,103 @@
 import { defineQuery } from 'next-sanity'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { client } from 'lib/sanity.client'
+import { client, imageBuilder } from 'lib/sanity.client'
 import { formatDate, formatLong } from 'lib/format'
 import PortableTextRenderer from 'components/portable-text'
+import { IndexList } from 'components/site/IndexList'
+import { EntryLinks, type EntryLink } from 'components/site/EntryLinks'
 import type { PortableTextBlock } from 'sanity'
+import type { Image } from 'sanity'
 
 type Props = { params: Promise<{ slug: string }> }
 
-type EssayDetail = {
+type EntryDetail = {
   _id: string
   title: string
-  excerpt?: string
+  type: 'essay' | 'project'
+  summary?: string
   publishedAt: string
   updatedAt?: string
+  links?: EntryLink[]
   body?: PortableTextBlock[]
   tags?: Array<{ name: string }>
-  tagRefs?: string[]
   prev?: { title: string; slug: string } | null
   next?: { title: string; slug: string } | null
   related?: Array<{ title: string; slug: string; publishedAt: string }>
 }
 
-const essayDetailQuery = defineQuery(`*[_type=="post" && slug.current == $slug][0]{
-  _id, title, excerpt, publishedAt, updatedAt, body,
+const entryDetailQuery = defineQuery(`*[_type=="entry" && slug.current == $slug][0]{
+  _id, title, type, summary, publishedAt, updatedAt, links, body,
   "tags": tags[]->{ name },
-  "tagRefs": tags[]._ref,
-  "prev": *[_type=="post" && defined(slug.current) && defined(publishedAt) && publishedAt < ^.publishedAt]
+  "prev": *[_type=="entry" && defined(slug.current) && defined(publishedAt) && publishedAt < ^.publishedAt]
     | order(publishedAt desc)[0]{ title, "slug": slug.current },
-  "next": *[_type=="post" && defined(slug.current) && defined(publishedAt) && publishedAt > ^.publishedAt]
+  "next": *[_type=="entry" && defined(slug.current) && defined(publishedAt) && publishedAt > ^.publishedAt]
     | order(publishedAt asc)[0]{ title, "slug": slug.current },
-  "related": *[_type=="post" && defined(slug.current) && _id != ^._id && count(tags[@._ref in ^.tags[]._ref]) > 0]
+  "related": *[_type=="entry" && defined(slug.current) && _id != ^._id && count(tags[@._ref in ^.tags[]._ref]) > 0]
     | order(publishedAt desc)[0...3]{ title, "slug": slug.current, publishedAt }
 }`)
 
-const essaySlugsQuery = defineQuery(`*[_type=="post" && defined(slug.current)].slug.current`)
+const entrySlugsQuery = defineQuery(`*[_type=="entry" && defined(slug.current)].slug.current`)
 
-const essayMetaQuery = defineQuery(`*[_type=="post" && slug.current == $slug][0]{ title, excerpt }`)
+const entryMetaQuery = defineQuery(`*[_type=="entry" && slug.current == $slug][0]{ title, summary, socialImage }`)
 
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-  const slugs = await client.fetch<string[]>(essaySlugsQuery, {}, {
-    next: { tags: ['post'] },
+  const slugs = await client.fetch<string[]>(entrySlugsQuery, {}, {
+    next: { tags: ['entry'] },
   })
   return slugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params
-  const data = await client.fetch<{ title?: string; excerpt?: string } | null>(
-    essayMetaQuery,
+  const data = await client.fetch<{ title?: string; summary?: string; socialImage?: Image } | null>(
+    entryMetaQuery,
     { slug },
-    { next: { tags: ['post'] } },
+    { next: { tags: ['entry'] } },
   )
   if (!data) return { title: 'Not found' }
+  const ogImage = data.socialImage
+    ? imageBuilder.image(data.socialImage).width(1200).height(630).fit('crop').url()
+    : undefined
   return {
     title: `${data.title} — Phil Labrum`,
-    description: data.excerpt,
+    description: data.summary,
+    openGraph: ogImage
+      ? { title: data.title, description: data.summary, images: [{ url: ogImage }] }
+      : undefined,
   }
 }
 
-export default async function EssayPage({ params }: Props) {
+export default async function EntryPage({ params }: Props) {
   const { slug } = await params
-  const essay = await client.fetch<EssayDetail | null>(
-    essayDetailQuery,
+  const entry = await client.fetch<EntryDetail | null>(
+    entryDetailQuery,
     { slug },
-    { next: { tags: ['post'] } },
+    { next: { tags: ['entry'] } },
   )
-  if (!essay) notFound()
+  if (!entry) notFound()
 
   return (
     <article className="mx-auto max-w-measure relative">
       <header className="mb-9">
         <h1 className="text-[36px] leading-[1.18] m-0 mb-3.5 font-semibold tracking-[-0.01em] text-text-strong max-sm:text-[28px]">
-          {essay.title}
+          {entry.title}
         </h1>
-        <div className="font-sans text-muted text-xs uppercase tracking-[0.08em] mb-3.5">
-          Published {formatLong(essay.publishedAt)}
-          {essay.updatedAt && (
+        <div className="font-sans text-muted text-xs uppercase tracking-[0.08em]">
+          Published {formatLong(entry.publishedAt)}
+          {entry.updatedAt && (
             <>
               {' · '}
-              <span className="text-accent">Updated {formatLong(essay.updatedAt)}</span>
+              <span className="text-accent">Updated {formatLong(entry.updatedAt)}</span>
             </>
           )}
         </div>
-        {essay.tags && essay.tags.length > 0 && (
-          <div className="flex gap-2 flex-wrap mt-1">
-            {essay.tags.map((t) => (
+        <EntryLinks links={entry.links} />
+        {entry.tags && entry.tags.length > 0 && (
+          <div className="flex gap-2 flex-wrap mt-3.5">
+            {entry.tags.map((t) => (
               <span
                 key={t.name}
                 className="font-sans text-[11px] lowercase tracking-[0.03em] text-muted border border-rule rounded-full px-2.5 py-0.5 bg-transparent"
@@ -99,35 +109,35 @@ export default async function EssayPage({ params }: Props) {
         )}
       </header>
 
-      {essay.body && <PortableTextRenderer value={essay.body} />}
+      {entry.body && <PortableTextRenderer value={entry.body} />}
 
-      {(essay.prev || essay.next) && (
+      {(entry.prev || entry.next) && (
         <nav
           className="grid grid-cols-2 gap-7 mt-16 pt-6 border-t border-rule font-sans max-sm:grid-cols-1 max-sm:gap-[18px]"
-          aria-label="Adjacent essays"
+          aria-label="Adjacent entries"
         >
           <div className="flex flex-col gap-1">
-            {essay.prev && (
+            {entry.prev && (
               <>
                 <span className="text-[11px] uppercase tracking-[0.1em] text-muted">← Previous</span>
                 <Link
-                  href={`/essays/${essay.prev.slug}`}
+                  href={`/writing/${entry.prev.slug}`}
                   className="text-text no-underline font-serif text-[17px] hover:text-accent"
                 >
-                  {essay.prev.title}
+                  {entry.prev.title}
                 </Link>
               </>
             )}
           </div>
           <div className="flex flex-col gap-1 text-right max-sm:text-left">
-            {essay.next && (
+            {entry.next && (
               <>
                 <span className="text-[11px] uppercase tracking-[0.1em] text-muted">Next →</span>
                 <Link
-                  href={`/essays/${essay.next.slug}`}
+                  href={`/writing/${entry.next.slug}`}
                   className="text-text no-underline font-serif text-[17px] hover:text-accent"
                 >
-                  {essay.next.title}
+                  {entry.next.title}
                 </Link>
               </>
             )}
@@ -135,35 +145,28 @@ export default async function EssayPage({ params }: Props) {
         </nav>
       )}
 
-      {essay.related && essay.related.length > 0 && (
+      {entry.related && entry.related.length > 0 && (
         <section className="mt-14">
           <h3 className="font-sans text-xs uppercase tracking-[0.12em] text-muted font-semibold m-0 mb-3.5">
             Related
           </h3>
-          <ul className="list-none m-0 p-0 border-t border-rule">
-            {essay.related.map((r) => (
-              <li
-                key={r.slug}
-                className="flex gap-5 py-3 items-baseline border-b border-rule max-sm:flex-wrap max-sm:gap-1.5"
-              >
-                <span className="font-sans text-muted tabular-nums text-[13px] min-w-[100px] flex-shrink-0 max-sm:min-w-0">
-                  {formatDate(r.publishedAt)}
-                </span>
-                <Link href={`/essays/${r.slug}`} className="text-text no-underline text-[17px] hover:text-accent">
-                  {r.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <IndexList
+            items={entry.related.map((r) => ({
+              key: r.slug,
+              href: `/writing/${r.slug}`,
+              meta: formatDate(r.publishedAt),
+              title: r.title,
+            }))}
+          />
         </section>
       )}
 
-      <nav className="mt-16 pt-6 border-t border-rule font-sans" aria-label="Essays">
+      <nav className="mt-16 pt-6 border-t border-rule font-sans" aria-label="Writing">
         <Link
-          href="/essays"
+          href="/writing"
           className="text-[11px] uppercase tracking-[0.1em] text-muted no-underline hover:text-accent"
         >
-          ← All essays
+          ← All writing
         </Link>
       </nav>
     </article>
