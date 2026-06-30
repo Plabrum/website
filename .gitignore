@@ -42,3 +42,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .playwright-mcp
+
+# stray root-level screenshots (assets belong in public/)
+/*.png
+/*.jpg
+/*.jpeg
